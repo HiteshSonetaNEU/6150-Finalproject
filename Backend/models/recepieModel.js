@@ -8,11 +8,9 @@ const recepieSchema = new mongoose.Schema({
   description: String,
   title: String,
   photo: String,
-  chefID: { type: mongoose.Schema.Types.ObjectId, ref: userRef },
-  comments:[{ type: mongoose.Schema.Types.ObjectId, ref: commentRef}]
+  chefID: { type: mongoose.Schema.Types.ObjectId }
 });
 
 const Recepie = mongoose.model("Recepie", recepieSchema);
-module.exports = Recepie;
-module.exports = refString;
+module.exports = {Recepie, refString}
 
