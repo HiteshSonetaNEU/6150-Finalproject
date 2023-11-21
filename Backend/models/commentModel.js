@@ -1,11 +1,14 @@
 const mongoose = require("mongoose");
-const userRef = require("./userModel")
+const { refString: userRef } = require("./userModel");
+
+const refString = "Comment";
 
 const commentSchema = new mongoose.Schema({
-  messge: String,
-  author: { type: mongoose.Schema.Types.ObjectId, ref: userRef}
+  message: { type: String, required: true },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: userRef },
 });
 
-const User = mongoose.model("Comment", commentSchema);
+const Comment = mongoose.model(refString, commentSchema);
 
-module.exports = User;
+module.exports = Comment;
+module.exports = refString;
