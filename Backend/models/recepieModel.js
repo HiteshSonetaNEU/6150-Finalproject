@@ -11,6 +11,6 @@ const recepieSchema = new mongoose.Schema({
   comments:[mongoose.Schema.Types.ObjectId]
 });
 
-const User = mongoose.model(refString, userSchema);
-module.exports = User;
+const Recepie = mongoose.model("Recepie", recepieSchema);
+module.exports = Recepie;
 
