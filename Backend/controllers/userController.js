@@ -19,13 +19,34 @@ exports.login = (req, res, next) => {
 };
 
 exports.register = async (req, res) => {
-  try {
-    // ... (rest of the code remains unchanged)
-  } catch (err) {
-    console.error('Error: ', err);
-    res.status(500).json({ message: 'Internal Server Error' });
-  }
-};
+    try {
+        const { fullName, email, password, role } = req.body;
+    
+        if (!userService.checkFullName(fullName)) {
+          return res.status(400).json({ message: 'Special Characters in full name are not allowed' });
+        }
+    
+        if (!userService.checkEmail(email)) {
+          return res.status(400).json({ message: 'Invalid email, use Northeastern Mail' });
+        }
+    
+        if (!userService.checkPassword(password)) {
+          return res.status(400).json({ message: 'Invalid password, password length should be greater than 8' });
+        }
+    
+        const check = await userService.findUserByEmail(email);
+        if (check) {
+          return res.status(400).json({ message: 'User with the same email already exists' });
+        }
+    
+        await userService.registerUser({ fullName, email, password, role });
+        res.status(201).json({ message: 'User created successfully' });
+      } catch (err) {
+        console.error('Error: ', err);
+        res.status(500).json({ message: 'Internal Server Error' });
+      }
+    };
+
 
 exports.logout = (req, res, next) => {
   req.logout((err) => {
