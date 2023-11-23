@@ -54,15 +54,16 @@ exports.getRecepieById = async (req, res) => {
 //only creator and admin can edit
 exports.updateRecepieById = async (req, res) => {
   try {
+    const recepieId = req.params.id;
+
+  
+    const recepie = await recepieService.getRecepieById(recepieId);
   if (req.user.role==='User'){
     res.status(500).json({ message: 'User is not allowed to edit a recepie' });
   }
   
-      const recepieId = req.params.id;
-
-  
-    const recepie = await recepieService.getRecepieById(recepieId);
-    if (req.user.role==="Chef" && !recepie.chefID.equals(req.user._id)){
+      
+    else if (req.user.role==="Chef" && !recepie.chefID.equals(req.user._id)){
       console.log(recepie.chefID," ",req.user._id)
       res.status(500).json({ message: 'Only recepies Chef or Admin can update a recepie' });
     }
@@ -90,15 +91,19 @@ exports.deleteRecepieById = async (req, res) => {
   if (req.user.role==='User'){
     res.status(500).json({ message: 'User is not allowed to delete a recepie' });
   }
+  else{
+
+  
   const recepieId = req.params.id;
   const recepie = await recepieService.getRecepieById(recepieId);
-  if (req.user.role==="Chef" && recepie.chefID !=req.user._id){
+  if (req.user.role==="Chef" && !recepie.chefID.equals(req.user._id)){
     res.status(500).json({ message: 'Only recepies Chef or Admin can delete a recepie' });
   }
 
   
     await recepieService.deleteRecepieById(recepieId);
     res.status(204).end();
+}
   } catch (error) {
     console.error('Error deleting recipe by ID:', error);
     res.status(500).json({ message: 'Internal Server Error' });
