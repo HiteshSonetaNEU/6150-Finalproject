@@ -7,7 +7,7 @@ const refString = "Comment";
 const commentSchema = new mongoose.Schema({
   recepieId: {type: mongoose.Schema.Types.ObjectId, ref: recepieRef},
   message: { type: String, required: true },
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: userRef },
+  // userId: { type: mongoose.Schema.Types.ObjectId, ref: userRef },
 });
 
 const Comment = mongoose.model(refString, commentSchema);
@@ -15,3 +15,4 @@ const Comment = mongoose.model(refString, commentSchema);
 module.exports = {
   Comment, refString
 }
+

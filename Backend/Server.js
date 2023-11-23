@@ -6,10 +6,13 @@ const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const { User }= require("./models/userModel");
 const app = express();
+
 const mongoose = require("mongoose");
 const routes = require("./routes");
 const commentRoutes = require("./commentRoutes");
 const feedbackRoutes = require("./feedbackRoutes");
+const recepieRoutes = require('./routes/recepieRoutes');
+
 
 const uri =
   "mongodb+srv://sonetah:Welcome123@cluster0.uv0cee1.mongodb.net/?retryWrites=true&w=majority";
@@ -39,6 +42,8 @@ app.use(methodOverride("_method"));
 app.use("/", routes);
 app.use("/comment", commentRoutes);
 app.use("/feedback", feedbackRoutes);
+
+app.use('/recepie', recepieRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

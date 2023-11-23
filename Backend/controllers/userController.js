@@ -58,7 +58,7 @@ exports.logout = (req, res, next) => {
 };
 
 exports.getUser = (req, res) => {
-  res.json({ name: req.user.fullName });
+  res.json({ name: req.user.fullName ,id:req.user._id});
 };
 
 exports.checkAuthenticated = (req, res, next) => {
