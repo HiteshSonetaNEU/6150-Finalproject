@@ -6,7 +6,7 @@ import axios from "axios";
 
 import "../Styles/Login.css";
 
-function Login() {
+function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -15,31 +15,33 @@ function Login() {
   const onLogin = async (e) => {
     e.preventDefault();
 
+    //Comment this when connected with backend
+    // navigate("/home");
+
     try {
-      console.log(email);
-      console.log(password);
-      const response = await fetch("http://localhost:3001/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include", // Include credentials for cross-origin requests
-        body: JSON.stringify({ email, password }),
-      });
+      const requestBody = {
+        fullName: "{ type: String, required: true }",
+        email: email,
+        password: password,
+        role: "",
+        following: "[{ type: mongoose.Schema.Types.ObjectId, ref: refString }]",
+      };
 
-      console.log("response== ", response);
+      const response = await axios.post(
+        "http://localhost:3001/register",
+        requestBody
+      );
 
-      if (response.ok) {
-        console.log("Login successful");
-        // Redirect or perform actions for successful login
-      } else {
-        const errorData = await response.json();
-        console.error("Login failed:", errorData.message);
-        // Handle the error, show a message, etc.
+      if (response.statusText === "OK") {
+        console.log(response.data.message);
+        if (response.data.message === "Login successful") {
+          navigate("/home");
+        } else if (response.data.message === "Invalid credentials") {
+          setErrorMessage("Invalid credentials");
+        }
       }
     } catch (error) {
-      console.error("An unexpected error occurred:", error);
-      // Handle unexpected errors
+      console.log("error");
     }
   };
 
@@ -48,8 +50,8 @@ function Login() {
     onLogin(e);
   };
 
-  const navigateToRegister = () => {
-    navigate("/register");
+  const navigateToLogin = () => {
+    navigate("/login");
   };
 
   return (
@@ -62,15 +64,21 @@ function Login() {
             </div>
             <div className="form-floating mb-3 is-invalid login-container-1">
               <input
+                type="text"
+                className="form-control"
+                id="floatingFullName"
+                placeholder="name@example.com"
+              />
+              <label htmlFor="floatingFullName">Full Name</label>
+            </div>
+            <div className="form-floating mb-3 is-invalid login-container-1">
+              <input
                 type="email"
                 className="form-control"
-                id="floatingInput"
+                id="floatingEmail"
                 placeholder="name@example.com"
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
               />
-              <label htmlFor="floatingInput">Email address</label>
+              <label htmlFor="floatingEmail">Email address</label>
             </div>
             <div className="form-floating mb-3 login-container-2">
               <input
@@ -78,28 +86,37 @@ function Login() {
                 className="form-control"
                 id="floatingPassword"
                 placeholder="Password"
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
               />
               <label htmlFor="floatingPassword">Password</label>
             </div>
+
+            <div className="form-floating mb-3 login-container-2">
+              <input
+                type="password"
+                className="form-control"
+                id="floatingCPassword"
+                placeholder="Confirm Password"
+              />
+              <label htmlFor="floatingCPassword">Confirm Password</label>
+            </div>
+            
             <div className="form-floating mb-3 login-container-3">
               <button
                 type="submit"
                 className="btn btn-success login-container-3-submit-btn"
               >
-                Login
+                Register
               </button>
             </div>
+            {/* Already A user */}
             <div className="form-floating mb-3 login-container-4">
-              <p className="texts">Not a user ?</p>
+              <p className="texts">Already a User ?</p>
               <button
                 type="button"
                 className="btn btn-primary login-container-4-register-btn"
-                onClick={navigateToRegister}
+                onClick={navigateToLogin}
               >
-                Register
+                Login
               </button>
             </div>
           </form>
@@ -109,4 +126,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;
