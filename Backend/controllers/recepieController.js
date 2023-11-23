@@ -24,8 +24,29 @@ exports.createRecepie = async (req, res) => {
 //if its user find all chefs recepies, if a chef display own recepies and following recepies,if admin show all
 exports.getAllRecepies = async (req, res) => {
   try {
-    const recepies = await recepieService.getAllRecepies();
-    res.json(recepies);
+    let resp = [];
+
+    if (req.user.role === "Admin") {
+      const recipes = await recepieService.getAllRecepies();
+      res.json(recipes);
+    } else if (req.user.role === "Chef") {
+      resp = await recepieService.getRecepieByOwner(req.user._id);
+      console.log("resp== ",resp)
+
+      for (let i = 0; i < req.user.following.length; i++) {
+        const temp = await recepieService.getRecepieByOwner(req.user.following[i]);
+        resp = resp.concat(temp);
+      }
+
+      res.json(resp);
+    } else if (req.user.role === "User") {
+      for (let i = 0; i < req.user.following.length; i++) {
+        const temp = await recepieService.getRecepieByOwner(req.user.following[i]);
+        resp = resp.concat(temp);
+      }
+
+      res.json(resp);
+    }
   } catch (error) {
     console.error('Error getting recipes:', error);
     res.status(500).json({ message: 'Internal Server Error' });
@@ -91,9 +112,7 @@ exports.deleteRecepieById = async (req, res) => {
   if (req.user.role==='User'){
     res.status(500).json({ message: 'User is not allowed to delete a recepie' });
   }
-  else{
-
-  
+  else{  
   const recepieId = req.params.id;
   const recepie = await recepieService.getRecepieById(recepieId);
   if (recepie){
