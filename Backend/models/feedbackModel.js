@@ -14,5 +14,4 @@ const feedbackSchema = new mongoose.Schema({
 });
 
 const Feedback = mongoose.model(refString, feedbackSchema);
-module.exports = Feedback;
-module.exports = refString;
+module.exports = { Feedback, refString };

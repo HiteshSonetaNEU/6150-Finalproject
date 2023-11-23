@@ -5,8 +5,6 @@ const session = require("express-session");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const User = require("./models/userModel");
-const cors = require("cors");
-
 const app = express();
 const mongoose = require("mongoose");
 const routes = require("./routes");
@@ -21,11 +19,6 @@ initializePassport(
   (email) => User.findOne({ email }),
   (id) => User.findById(id)
 );
-
-const corsOptions = {
-  origin: "http://localhost:3000", // replace with the actual origin of your frontend
-  credentials: true,
-};
 
 app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: false }));
