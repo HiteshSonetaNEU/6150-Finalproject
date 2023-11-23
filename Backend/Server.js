@@ -8,6 +8,7 @@ const User =require('./models/userModel')
 const app = express();
 const mongoose = require('mongoose');
 const routes = require('./routes');
+const recepieRoutes = require('./routes/recepieRoutes');
 
 const uri = "mongodb+srv://sonetah:Welcome123@cluster0.uv0cee1.mongodb.net/?retryWrites=true&w=majority";
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -33,6 +34,8 @@ app.use(passport.session());
 app.use(methodOverride('_method'));
 
 app.use('/', routes);
+
+app.use('/recepie', recepieRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
