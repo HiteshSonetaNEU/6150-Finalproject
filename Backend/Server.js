@@ -4,7 +4,7 @@ const flash = require("express-flash");
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
-const { User }= require("./models/userModel");
+const { User } = require("./models/userModel");
 const app = express();
 
 const mongoose = require("mongoose");
@@ -42,7 +42,6 @@ app.use(methodOverride("_method"));
 app.use("/", routes);
 app.use("/comment", commentRoutes);
 app.use("/feedback", feedbackRoutes);
-
 app.use('/recepie', recepieRoutes);
 
 const PORT = process.env.PORT || 3000;

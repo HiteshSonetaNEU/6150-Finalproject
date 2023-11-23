@@ -96,12 +96,21 @@ exports.deleteRecepieById = async (req, res) => {
   
   const recepieId = req.params.id;
   const recepie = await recepieService.getRecepieById(recepieId);
+  if (recepie){
+    
+  
   if (req.user.role==="Chef" && !recepie.chefID.equals(req.user._id)){
     res.status(500).json({ message: 'Only recepies Chef or Admin can delete a recepie' });
   }
 
   
     await recepieService.deleteRecepieById(recepieId);
+    res.status(201).json({ message: 'Recepie deleted successfully' });
+    
+} 
+else{
+  res.status(500).json({ message: 'Recepie with given ID doesnot exist' });
+}
     res.status(204).end();
 }
   } catch (error) {
