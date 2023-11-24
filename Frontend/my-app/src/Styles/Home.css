@@ -12,3 +12,10 @@
 .navBar {
     margin-right: 5%;
 }
+
+.recipe-card-list {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
