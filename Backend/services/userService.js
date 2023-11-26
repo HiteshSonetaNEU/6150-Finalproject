@@ -1,5 +1,5 @@
-const bcrypt = require('bcrypt');
-const User = require('../models/userModel');
+const bcrypt = require("bcrypt");
+const { User } = require("../models/userModel");
 
 exports.checkPassword = (password) => {
   return password.length >= 8;
@@ -10,7 +10,7 @@ exports.checkEmail = (email) => {
 };
 
 exports.checkFullName = (fullName) => {
-  return /^[a-zA-Z_]+$/.test(fullName);
+  return /^[a-zA-Z_ ]+$/.test(fullName);
 };
 
 exports.registerUser = async ({ fullName, email, password, role }) => {
