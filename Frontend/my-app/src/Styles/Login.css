@@ -104,3 +104,11 @@
 .alert-small {
   padding: 0;
 }
+
+.btn.btn-success:disabled {
+  background-color: #6c757d;
+  color: #fff;
+  opacity: 0.6;
+  cursor: not-allowed !important;
+  pointer-events: all !important;
+}
