@@ -21,6 +21,7 @@ function Register() {
     useState("");
   const [roleErrorMessage, setRoleErrorMessage] = useState("");
   const [loading, setLoading] = useState(true);
+  const [isRegisterDisabled, setIsRegisterDisabled] = useState(true);
 
   useEffect(() => {
     const checkLoggedInStatus = async () => {
@@ -45,6 +46,29 @@ function Register() {
 
     checkLoggedInStatus();
   }, [navigate]);
+
+  useEffect(() => {
+    setIsRegisterDisabled(
+      emailErrorMessage ||
+        fullNameErrorMessage ||
+        passwordErrorMessage ||
+        confirmPasswordErrorMessage ||
+        !email ||
+        !password ||
+        !fullName ||
+        !confPassword ||
+        !validateConfirmPassword()
+    );
+  }, [
+    emailErrorMessage,
+    fullNameErrorMessage,
+    passwordErrorMessage,
+    confirmPasswordErrorMessage,
+    email,
+    password,
+    fullName,
+    confPassword,
+  ]);
 
   if (loading) {
     return (
@@ -97,7 +121,7 @@ function Register() {
 
   const validateConfirmPassword = (input) => {
     if (
-      document.getElementById("floatingPassword").value !=
+      document.getElementById("floatingPassword").value !==
       document.getElementById("floatingCPassword").value
     ) {
       setConfirmPasswordErrorMessage("Password does not match!");
@@ -233,6 +257,7 @@ function Register() {
                 onChange={(e) => {
                   setPassword(e.target.value);
                   validatePassword(e.target.value);
+                  validateConfirmPassword();
                 }}
               />
               <label htmlFor="floatingPassword">Password</label>
@@ -251,7 +276,7 @@ function Register() {
                 placeholder="Confirm Password"
                 onChange={(e) => {
                   setConfirmPassword(e.target.value);
-                  validateConfirmPassword(e.target.value);
+                  validateConfirmPassword();
                 }}
               />
               <label htmlFor="floatingCPassword">Confirm Password</label>
@@ -315,6 +340,7 @@ function Register() {
               <button
                 type="submit"
                 className="btn btn-success login-container-3-submit-btn"
+                disabled={isRegisterDisabled}
               >
                 Register
               </button>

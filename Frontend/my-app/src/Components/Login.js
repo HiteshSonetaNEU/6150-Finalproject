@@ -13,6 +13,7 @@ function Login() {
   const [loading, setLoading] = useState(true);
   const [emailErrorMessage, setEmailErrorMessage] = useState("");
   const [passwordErrorMessage, setPasswordErrorMessage] = useState("");
+  const [isLoginDisabled, setIsLoginDisabled] = useState(true);
 
   useEffect(() => {
     const checkLoggedInStatus = async () => {
@@ -37,6 +38,12 @@ function Login() {
 
     checkLoggedInStatus();
   }, [navigate]);
+
+  useEffect(() => {
+    setIsLoginDisabled(
+      !email || !password || emailErrorMessage || passwordErrorMessage
+    );
+  }, [email, password, emailErrorMessage, passwordErrorMessage]);
 
   if (loading) {
     return (
@@ -169,6 +176,7 @@ function Login() {
               <button
                 type="submit"
                 className="btn btn-success login-container-3-submit-btn"
+                disabled={isLoginDisabled}
               >
                 Login
               </button>
