@@ -9,10 +9,10 @@ const app = express();
 const cors = require("cors");
 
 const mongoose = require("mongoose");
-const routes = require("./routes");
-const commentRoutes = require("./commentRoutes");
-const feedbackRoutes = require("./feedbackRoutes");
-const recepieRoutes = require('./routes/recepieRoutes');
+const routes = require("./routes/routes");
+const commentRoutes = require("./routes/commentRoutes");
+const feedbackRoutes = require("./routes/feedbackRoutes");
+const recepieRoutes = require("./routes/recepieRoutes");
 
 const corsOptions = {
   origin: "http://localhost:3000", // replace with the actual origin of your frontend
@@ -48,7 +48,7 @@ app.use(methodOverride("_method"));
 app.use("/", routes);
 app.use("/comment", commentRoutes);
 app.use("/feedback", feedbackRoutes);
-app.use('/recepie', recepieRoutes);
+app.use("/recepie", recepieRoutes);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
