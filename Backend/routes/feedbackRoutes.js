@@ -3,13 +3,13 @@ const router = express.Router();
 const {
   checkNotAuthenticated,
   checkAuthenticated,
-} = require("./controllers/userController");
+} = require("../controllers/userController");
 const {
   createFeedback,
   getFeedbacks,
   getFeedbackById,
   deleteFeedback,
-} = require("./controllers/feedbackController");
+} = require("../controllers/feedbackController");
 
 router.post("/create", checkAuthenticated, createFeedback);
 router.get("/get", checkAuthenticated, getFeedbacks);

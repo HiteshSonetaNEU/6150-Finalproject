@@ -9,9 +9,9 @@ const app = express();
 const cors = require("cors");
 
 const mongoose = require("mongoose");
-const routes = require("./routes");
-const commentRoutes = require("./commentRoutes");
-const feedbackRoutes = require("./feedbackRoutes");
+const routes = require("./routes/routes");
+const commentRoutes = require("./routes/commentRoutes");
+const feedbackRoutes = require("./routes/feedbackRoutes");
 const recepieRoutes = require('./routes/recepieRoutes');
 
 const corsOptions = {
@@ -30,7 +30,7 @@ initializePassport(
   (id) => User.findById(id)
 );
 
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(flash());
 app.use(bodyParser.json());

@@ -1,22 +1,22 @@
-const recepieService = require('../services/recepieService');
-const mongoose = require('mongoose');
+const recepieService = require("../services/recepieService");
+const userService = require("../services/userService");
+const mongoose = require("mongoose");
 
 // Controller function to create a new recipe
 exports.createRecepie = async (req, res) => {
   try {
-    if (req.user.role==='User'){
-      res.status(500).json({ message: 'User is not allowed to create a recepie' });
+    if (req.user.role === "User") {
+      res
+        .status(500)
+        .json({ message: "User is not allowed to create a recepie" });
+    } else {
+      req.body.chefID = req.user._id;
+
+      const newRecepie = await recepieService.createRecepie(req.body);
+      res.status(201).json(newRecepie);
     }
-    else{
-      req.body.chefID = req.user._id
-    
-    const newRecepie = await recepieService.createRecepie(req.body);
-    res.status(201).json(newRecepie);
-    }
-    
   } catch (error) {
-    console.error('Error creating recipe:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
@@ -31,43 +31,43 @@ exports.getAllRecepies = async (req, res) => {
       res.json(recipes);
     } else if (req.user.role === "Chef") {
       resp = await recepieService.getRecepieByOwner(req.user._id);
-      console.log("resp== ",resp)
 
       for (let i = 0; i < req.user.following.length; i++) {
-        const temp = await recepieService.getRecepieByOwner(req.user.following[i]);
+        const temp = await recepieService.getRecepieByOwner(
+          req.user.following[i]
+        );
         resp = resp.concat(temp);
       }
 
       res.json(resp);
     } else if (req.user.role === "User") {
       for (let i = 0; i < req.user.following.length; i++) {
-        const temp = await recepieService.getRecepieByOwner(req.user.following[i]);
+        const temp = await recepieService.getRecepieByOwner(
+          req.user.following[i]
+        );
         resp = resp.concat(temp);
       }
 
       res.json(resp);
     }
   } catch (error) {
-    console.error('Error getting recipes:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
 // Controller function to get a recipe by ID
 exports.getRecepieById = async (req, res) => {
   const recepieId = req.params.id;
-
   try {
     const recepie = await recepieService.getRecepieById(recepieId);
 
     if (!recepie) {
-      return res.status(404).json({ message: 'Recipe not found' });
+      return res.status(404).json({ message: "Recipe not found" });
     }
 
     res.json(recepie);
   } catch (error) {
-    console.error('Error getting recipe by ID:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
@@ -77,31 +77,32 @@ exports.updateRecepieById = async (req, res) => {
   try {
     const recepieId = req.params.id;
 
-  
     const recepie = await recepieService.getRecepieById(recepieId);
-  if (req.user.role==='User'){
-    res.status(500).json({ message: 'User is not allowed to edit a recepie' });
-  }
-  
-      
-    else if (req.user.role==="Chef" && !recepie.chefID.equals(req.user._id)){
-      console.log(recepie.chefID," ",req.user._id)
-      res.status(500).json({ message: 'Only recepies Chef or Admin can update a recepie' });
-    }
-    else{
-      const updatedRecepie = await recepieService.updateRecepieById(recepieId, req.body);
+    if (req.user.role === "User") {
+      res
+        .status(500)
+        .json({ message: "User is not allowed to edit a recepie" });
+    } else if (
+      req.user.role === "Chef" &&
+      !recepie.chefID.equals(req.user._id)
+    ) {
+      res
+        .status(500)
+        .json({ message: "Only recepies Chef or Admin can update a recepie" });
+    } else {
+      const updatedRecepie = await recepieService.updateRecepieById(
+        recepieId,
+        req.body
+      );
 
       if (!updatedRecepie) {
-        return res.status(404).json({ message: 'Recipe not found' });
+        return res.status(404).json({ message: "Recipe not found" });
       }
-  
+
       res.json(updatedRecepie);
     }
-
-    
   } catch (error) {
-    console.error('Error updating recipe by ID:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
@@ -109,33 +110,58 @@ exports.updateRecepieById = async (req, res) => {
 //only creator and admin can detele
 exports.deleteRecepieById = async (req, res) => {
   try {
-  if (req.user.role==='User'){
-    res.status(500).json({ message: 'User is not allowed to delete a recepie' });
-  }
-  else{  
-  const recepieId = req.params.id;
-  const recepie = await recepieService.getRecepieById(recepieId);
-  if (recepie){
-    
-  
-  if (req.user.role==="Chef" && !recepie.chefID.equals(req.user._id)){
-    res.status(500).json({ message: 'Only recepies Chef or Admin can delete a recepie' });
-  }
+    if (req.user.role === "User") {
+      res
+        .status(500)
+        .json({ message: "User is not allowed to delete a recepie" });
+    } else {
+      const recepieId = req.params.id;
+      const recepie = await recepieService.getRecepieById(recepieId);
+      if (recepie) {
+        if (req.user.role === "Chef" && !recepie.chefID.equals(req.user._id)) {
+          res
+            .status(500)
+            .json({
+              message: "Only recepies Chef or Admin can delete a recepie",
+            });
+        }
 
-  
-    await recepieService.deleteRecepieById(recepieId);
-    res.status(201).json({ message: 'Recepie deleted successfully' });
-    
-} 
-else{
-  res.status(500).json({ message: 'Recepie with given ID doesnot exist' });
-}
-    res.status(204).end();
-}
+        await recepieService.deleteRecepieById(recepieId);
+        res.status(201).json({ message: "Recepie deleted successfully" });
+      } else {
+        res
+          .status(500)
+          .json({ message: "Recepie with given ID doesnot exist" });
+      }
+      res.status(204).end();
+    }
   } catch (error) {
-    console.error('Error deleting recipe by ID:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
 // You can add more controller functions based on your application requirements
+exports.getChefById = async (req, res) => {
+  try {
+    const recipeId = req.params.id;
+    const recipe = await recepieService.getRecepieById(recipeId);
+
+    if (!recipe) {
+      return res
+        .status(500)
+        .json({ message: "Recepie with given ID does not exist" });
+    }
+
+    const chefId = recipe.chefID;
+    const chef = await userService.findUserById(chefId);
+
+    if (!chef || chef.role != "Chef") {
+      return res
+        .status(500)
+        .json({ message: "Chef with given ID does not exist" });
+    }
+    res.status(200).json(chef);
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
