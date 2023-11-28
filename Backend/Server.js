@@ -12,7 +12,7 @@ const mongoose = require("mongoose");
 const routes = require("./routes/routes");
 const commentRoutes = require("./routes/commentRoutes");
 const feedbackRoutes = require("./routes/feedbackRoutes");
-const recepieRoutes = require('./routes/recepieRoutes');
+const recepieRoutes = require("./routes/recepieRoutes");
 
 const corsOptions = {
   origin: "http://localhost:3000", // replace with the actual origin of your frontend
@@ -30,7 +30,7 @@ initializePassport(
   (id) => User.findById(id)
 );
 
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: false }));
 app.use(flash());
 app.use(bodyParser.json());
@@ -48,7 +48,7 @@ app.use(methodOverride("_method"));
 app.use("/", routes);
 app.use("/comment", commentRoutes);
 app.use("/feedback", feedbackRoutes);
-app.use('/recepie', recepieRoutes);
+app.use("/recepie", recepieRoutes);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
