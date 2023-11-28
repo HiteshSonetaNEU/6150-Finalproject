@@ -27,6 +27,7 @@ function Login() {
         }
       } catch (error) {
         // user is not logged in
+        // console.error("Error checking login status:", error);
         if (error.response.data.message === "Login first") {
         }
       } finally {
@@ -97,12 +98,15 @@ function Login() {
           withCredentials: true,
         }
       );
+      console.log("Login Response:", response);
       if (response) {
         if (response.data.message === "Logged in successfully") {
           navigate("/home");
         }
       }
     } catch (error) {
+      console.error("Error during login:", error);
+
       if (error.response.status === 401) {
         setErrorMessage("Invalid User Id or Password");
       } else if (error.response.status === 400) {
