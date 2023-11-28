@@ -1,4 +1,5 @@
 const { Recepie } = require('../models/recepieModel');
+const { ObjectId } = require('mongodb');
 
 // Function to create a new recipe
 exports.createRecepie = async (data) => {
@@ -45,6 +46,17 @@ exports.updateRecepieById = async (recepieId, data) => {
 exports.deleteRecepieById = async (recepieId) => {
   try {
     await Recepie.findByIdAndDelete(recepieId);
+  } catch (error) {
+    throw error;
+  }
+};
+
+exports.getByChefID = async (chefID) => {
+  try {
+    const objectId = new ObjectId(chefID);
+    const recepie= await Recepie.find({chefID:objectId});
+    console.log("recepie==== ",recepie)
+    return recepie
   } catch (error) {
     throw error;
   }
