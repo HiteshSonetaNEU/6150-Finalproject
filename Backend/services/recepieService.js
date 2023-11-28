@@ -1,10 +1,8 @@
 const { Recepie } = require('../models/recepieModel');
-const mongoose = require('mongoose')
 
 // Function to create a new recipe
 exports.createRecepie = async (data) => {
   try {
-    console.log("data===",data)
     const newRecepie = new Recepie(data);
     await newRecepie.save();
     return newRecepie;
@@ -18,18 +16,6 @@ exports.getAllRecepies = async () => {
   try {
     const recepies = await Recepie.find();
     return recepies;
-  } catch (error) {
-    throw error;
-  }
-};
-
-exports.getRecepieByOwner = async (id) => {
-  try {
-    const ownerId = new mongoose.Types.ObjectId(id);
-    console.log(ownerId)
-    const recipes = await Recepie.find({ chefID: id });
-    console.log(recipes)
-    return recipes;
   } catch (error) {
     throw error;
   }
