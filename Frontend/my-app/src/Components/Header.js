@@ -31,7 +31,11 @@ export default function Header() {
   return (
     <>
       <div className="home-container">
-        <Navbar bg="light" data-bs-theme="light" className="navBar">
+        <Navbar
+          bg="dark"
+          data-bs-theme="dark"
+          className="navBar navbar navbar-expand navbar-dark bg-dark"
+        >
           <Container>
             <Navbar.Brand href="#home">reSSSePes</Navbar.Brand>
             <Nav className="me-auto">

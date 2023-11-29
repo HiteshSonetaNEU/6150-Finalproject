@@ -1,0 +1,74 @@
+.chefContainer {
+  /* border: 1px solid black; */
+  margin: 2%;
+  border-radius: 10px;
+  width: 100%;
+  display: flex;
+  padding: 2% 3%;
+  background-color: #dfdfdf;
+}
+
+.chefHeader {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.chefName {
+  width: 100%;
+}
+
+.chefBody {
+  width: 45%;
+  margin: 0 27.5%;
+}
+
+.chefImage {
+  width: 100px;
+  height: 100%;
+  border-radius: 20vh;
+}
+
+.chefInfoContainer {
+  width: 100%;
+  padding-left: 3%;
+}
+
+.specList {
+  display: flex;
+}
+
+.chefSpec {
+  margin-right: 5px;
+  background-color: grey;
+  color: white;
+  padding: 1px 5px;
+  border-radius: 10px;
+}
+
+.followButton {
+  border-radius: 20vh;
+}
+
+@media screen and (max-width: 850px) {
+  .chefContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .chefHeader {
+    flex-direction: column;
+    margin-bottom: 5px;
+  }
+
+  .chefName {
+    justify-content: center;
+    display: flex;
+  }
+  .specList {
+    flex-direction: column;
+  }
+  .chefSpec {
+    margin-bottom: 5px;
+  }
+}
