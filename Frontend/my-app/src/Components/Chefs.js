@@ -17,7 +17,8 @@ function Chefs() {
   const [chefAll, setChefAll] = useState([]);
   const [followStatusMap, setFollowStatusMap] = useState({});
   const [currentUserFollowing, setCurrentUserFollowing] = useState({});
-  var desc = "This chef is very famous for variety of things";
+  var desc =
+    "Creative chef crafting unforgettable culinary experiences with a passion for flavor, precision, and innovation";
   var chefSpec = ["South Indian", "Tamil", "Veg", "Paneer Tikka", "Idli"];
 
   useEffect(() => {
@@ -54,7 +55,6 @@ function Chefs() {
         });
         setChefAll(response.data);
         // console.log(response.data);
-
         // const initialFollowStatusMap = {};
         // response.data.forEach((chef) => {
         //   initialFollowStatusMap[chef._id] = "Follow";
@@ -112,7 +112,7 @@ function Chefs() {
         }));
       }
       // Handle the response data
-      console.log(response.data.email);
+      // console.log(response.data.email);
     } catch (error) {
       if (error.response.data.error === "User is already following the Chef") {
         // setFollowStatus("Unfollow");
@@ -174,16 +174,19 @@ function Chefs() {
                       {followStatusMap[chef._id]}
                     </Button>
                   </div>
-                  {/* <p> {chef.role}</p> */}
-                  <p>{desc}</p>
+                  <p>{chef.profileDes || desc}</p>
                   <div className="specList">
-                    {chefSpec.map((data, index) => {
-                      return (
-                        <div key={data} className="chefSpec">
-                          {data}
-                        </div>
-                      );
-                    })}
+                    {chef.specialities.length > 0
+                      ? chef.specialities.map((data, index) => (
+                          <div key={data} className="chefSpec">
+                            {data}
+                          </div>
+                        ))
+                      : chefSpec.map((data, index) => (
+                          <div key={data} className="chefSpec">
+                            {data}
+                          </div>
+                        ))}
                   </div>
                 </div>
               </div>

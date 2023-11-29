@@ -58,6 +58,7 @@
 
   .chefHeader {
     flex-direction: column;
+    margin-bottom: 5px;
   }
 
   .chefName {
