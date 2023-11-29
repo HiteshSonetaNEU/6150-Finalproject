@@ -1,5 +1,5 @@
-const bcrypt = require('bcrypt');
-const User = require('../models/userModel');
+const bcrypt = require("bcrypt");
+const { User } = require("../models/userModel");
 
 exports.checkPassword = (password) => {
   return password.length >= 8;
@@ -10,7 +10,7 @@ exports.checkEmail = (email) => {
 };
 
 exports.checkFullName = (fullName) => {
-  return /^[a-zA-Z_]+$/.test(fullName);
+  return /^[a-zA-Z_ ]+$/.test(fullName);
 };
 
 exports.registerUser = async ({ fullName, email, password, role }) => {
@@ -22,3 +22,16 @@ exports.registerUser = async ({ fullName, email, password, role }) => {
 exports.findUserByEmail = (email) => {
   return User.findOne({ email });
 };
+
+exports.getUsers = () => {
+  return User.find();
+}
+
+exports.findUserById = async (id) => {
+  try {
+    const user = await User.findById(id);
+    return user;
+  } catch (error) {
+    throw error;
+  }
+}

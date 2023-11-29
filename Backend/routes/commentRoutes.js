@@ -4,13 +4,13 @@ const router = express.Router();
 const {
   checkNotAuthenticated,
   checkAuthenticated,
-} = require("./controllers/userController");
+} = require("../controllers/userController");
 const {
   createComment,
   getComments,
   getCommentById,
   deleteComment,
-} = require("./controllers/commentController");
+} = require("../controllers/commentController");
 
 router.post("/create/:recepieId", checkAuthenticated, createComment);
 router.get("/get", checkAuthenticated, getComments);

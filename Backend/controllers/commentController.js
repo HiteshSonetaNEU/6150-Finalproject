@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const commentServices = require("../services/commentService");
+const recepieServices = require("../services/recepieService");
 
 async function createComment(req, res) {
   const { message } = req.body;
@@ -7,14 +8,18 @@ async function createComment(req, res) {
   if(!req.params.recepieId) {
     return res.status(500).json({ error: "No reference to recepieId" });
   }
-  const recepieId = req.params.recepieId;
+  const recipe = req.params.recepieId;
+  const recipeExist = !(await recepieServices.getRecepieById(recipe))
+  
+  if(recipeExist) {
+    return res.status(500).json({error: "Recipe doesn't exist"})
+  } 
 
-  console.log();
   try {
     const newComment = await commentServices.createComment(
       message,
       userId,
-      recepieId
+      recipe
     );
     res.status(201).json(newComment);
   } catch (error) {

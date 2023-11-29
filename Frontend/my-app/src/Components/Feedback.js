@@ -3,13 +3,12 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import RecipeCard from "./RecipeCard.js";
 import "../Styles/Home.css";
 
 import Header from "./Header.js";
 import Footer from "./Footer.js";
 
-function Home() {
+function Feedback() {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
@@ -55,10 +54,11 @@ function Home() {
 
   return (
     <>
+      Feedback Page
       <Header />
       <Footer />
     </>
   );
 }
 
-export default Home;
+export default Feedback;
