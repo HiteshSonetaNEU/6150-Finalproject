@@ -67,7 +67,6 @@ export default function Header() {
             Logout
           </Button>
         </Navbar>
-        <div className="home-body-container"></div>
       </div>
     </>
   );
