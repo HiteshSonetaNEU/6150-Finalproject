@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const {refString: userRef} = require("./userModel");
-const {refString: commentRef} = require("./commentModel");
 const refString = "Recepie";
 
 const recepieSchema = new mongoose.Schema({
@@ -8,8 +7,12 @@ const recepieSchema = new mongoose.Schema({
   description: String,
   title: String,
   photo: String,
-  chefID: { type: mongoose.Schema.Types.ObjectId }
+  chefID: { type: mongoose.Schema.Types.ObjectId, ref: userRef }
 });
+
+recepieSchema.methods.toSearchableString = function() {
+  return `${this.title} ${this.description} ${this.ingredients.join(" ")}`.toLowerCase()
+}
 
 const Recepie = mongoose.model("Recepie", recepieSchema);
 module.exports = {Recepie, refString}

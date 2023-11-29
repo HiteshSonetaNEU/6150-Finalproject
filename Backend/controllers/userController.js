@@ -1,5 +1,6 @@
 const passport = require("passport");
 const userService = require("../services/userService");
+const recepieService = require("../services/recepieService");8
 
 exports.login = (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
@@ -84,8 +85,7 @@ exports.getUserById = async (req, res) => {
 
 exports.getChefs = async (req, res) => {
   try {
-    const users = await userService.getUsers();
-    const chefs = users.filter((user) => user.role == "Chef");
+    const chefs = await getAllChefs();
     res.status(200).json(chefs);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -134,6 +134,37 @@ exports.unFollowChef = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+exports.search = async (req, res) => {
+  try {
+    let { query, filter } = req.body;
+    query = query.toLowerCase();
+    const chefs = await getAllChefs();
+    const recipes = await recepieService.getAllRecepies();
+    const searchResult = {
+      Chefs: [],
+      Recipes: []
+    };
+
+    chefs.forEach((chef) => {
+      if (chef.toSearchableString().includes(query)) searchResult.Chefs.push(chef);
+    });
+
+    recipes.forEach((recipe) => {
+      if(recipe.toSearchableString().includes(query)) searchResult.Recipes.push(recipe);
+    })
+
+    return res.status(200).json(searchResult);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+async function getAllChefs() {
+  const users = await userService.getUsers();
+  const chefs = users.filter((user) => user.role == "Chef");
+  return chefs;
+}
 
 async function checkUser(userId) {
   const user = await userService.findUserById(userId);
