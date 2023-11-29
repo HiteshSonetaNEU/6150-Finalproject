@@ -165,3 +165,22 @@ exports.getChefById = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
+exports.getRecepieByChef = async (req,res)=>{
+  try{
+    const chefID = req.params.id;
+    const recipe = await recepieService.getByChefID(chefID);
+
+    if (!recipe) {
+      return res
+        .status(500)
+        .json({ message: "Recepie with given ID does not exist" });
+    }
+    res.status(200).json(recipe);
+
+
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+}

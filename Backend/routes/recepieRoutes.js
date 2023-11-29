@@ -20,4 +20,6 @@ router.delete('/:id', checkAuthenticated,recepieController.deleteRecepieById);
 
 router.get('/getChef/:id', checkAuthenticated, recepieController.getChefById)
 
+router.get('/chef/:id',checkAuthenticated,recepieController.getRecepieByChef)
+
 module.exports = router;
