@@ -13,9 +13,9 @@ exports.checkFullName = (fullName) => {
   return /^[a-zA-Z_ ]+$/.test(fullName);
 };
 
-exports.registerUser = async ({ fullName, email, password, role }) => {
+exports.registerUser = async ({ fullName, email, password, role, profileDes, specialities }) => {
   const hashedPassword = await bcrypt.hash(password, 10);
-  const user = new User({ fullName, email, password: hashedPassword, role });
+  const user = new User({ fullName, email, password: hashedPassword, role, profileDes, specialities });
   await user.save();
 };
 

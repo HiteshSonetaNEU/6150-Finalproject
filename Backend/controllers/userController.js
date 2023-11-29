@@ -23,7 +23,7 @@ exports.login = (req, res, next) => {
 
 exports.register = async (req, res) => {
   try {
-    const { fullName, email, password, role } = req.body;
+    const { fullName, email, password, role, profileDes, specialities } = req.body;
 
     if (!userService.checkFullName(fullName)) {
       return res
@@ -50,10 +50,10 @@ exports.register = async (req, res) => {
         .json({ message: "User with the same email already exists" });
     }
 
-    await userService.registerUser({ fullName, email, password, role });
+    await userService.registerUser({ fullName, email, password, role, profileDes, specialities });
     res.status(201).json({ message: "User created successfully" });
   } catch (err) {
-    res.status(500).json({ message: "Internal Server Error" });
+    res.status(500).json({ message: err.message });
   }
 };
 

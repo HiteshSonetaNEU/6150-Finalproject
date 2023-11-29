@@ -7,9 +7,9 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true },
   password: { type: String, required: true },
   role: { type: String, required: true },
-  profileDes: { type: String },
-  specialities: [{ type: String }],
-  following: [{ type: mongoose.Schema.Types.ObjectId, ref: refString }],
+  profileDes: { type: String},
+  specialities: [{type: String}],
+  following: [{ type: mongoose.Schema.Types.ObjectId, ref: refString }], 
 });
 
 userSchema.methods.toSearchableString = function () {
