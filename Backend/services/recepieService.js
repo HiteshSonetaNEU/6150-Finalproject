@@ -55,7 +55,6 @@ exports.getByChefID = async (chefID) => {
   try {
     const objectId = new ObjectId(chefID);
     const recepie= await Recepie.find({chefID:objectId});
-    console.log("recepie==== ",recepie)
     return recepie
   } catch (error) {
     throw error;
