@@ -98,14 +98,14 @@ function Login() {
           withCredentials: true,
         }
       );
-      console.log("Login Response:", response);
+      // console.log("Login Response:", response);
       if (response) {
         if (response.data.message === "Logged in successfully") {
           navigate("/home");
         }
       }
     } catch (error) {
-      console.error("Error during login:", error);
+      // console.error("Error during login:", error);
 
       if (error.response.status === 401) {
         setErrorMessage("Invalid User Id or Password");

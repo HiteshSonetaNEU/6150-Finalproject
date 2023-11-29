@@ -15,6 +15,8 @@ function Chefs() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [chefAll, setChefAll] = useState([]);
+  const [followStatusMap, setFollowStatusMap] = useState({});
+  const [currentUserFollowing, setCurrentUserFollowing] = useState({});
   var desc = "This chef is very famous for variety of things";
   var chefSpec = ["South Indian", "Tamil", "Veg", "Paneer Tikka", "Idli"];
 
@@ -24,12 +26,13 @@ function Chefs() {
         const response = await axios.get("http://localhost:3001/", {
           withCredentials: true,
         });
-        if (response.data.name) {
-          // user is logged in
+        // console.log(response);
+        if (response.data) {
+          // console.log(response.data.following);
+          setCurrentUserFollowing(response.data.following);
         }
       } catch (error) {
-        console.log(error);
-        // user is not logged in
+        // console.log(error);
         if (error.response.data.message === "Login first") {
           navigate("/login");
         }
@@ -50,21 +53,30 @@ function Chefs() {
           withCredentials: true,
         });
         setChefAll(response.data);
-        // console.log(chefAll);
+        // console.log(response.data);
 
-        // try {
-        //   const response = await axios.get("http://localhost:3001/user/chef/", {
-        //     withCredentials: true,
-        //   });
-        // } catch {
-        // }
+        // const initialFollowStatusMap = {};
+        // response.data.forEach((chef) => {
+        //   initialFollowStatusMap[chef._id] = "Follow";
+        // });
+
+        const initialFollowStatusMap = {};
+        response.data.forEach((chef) => {
+          initialFollowStatusMap[chef._id] = "Follow";
+
+          if (currentUserFollowing.includes(chef._id)) {
+            initialFollowStatusMap[chef._id] = "Unfollow";
+          }
+        });
+
+        setFollowStatusMap(initialFollowStatusMap);
       } catch (error) {
         console.log(error);
       }
     };
 
     GetAllChefs();
-  }, [navigate]);
+  }, [currentUserFollowing]);
 
   if (loading) {
     return (
@@ -80,8 +92,60 @@ function Chefs() {
     );
   }
 
-  const follow = () => {
-    console.log("A");
+  const follow = async (chefId) => {
+    console.log(chefId);
+
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/user/follow/${chefId}`,
+        {
+          withCredentials: true,
+        }
+      );
+      // console.log(response);
+      // console.log("FOLLOW");
+      if (response.data.email) {
+        // setFollowStatus("Unfollow");
+        setFollowStatusMap((prevMap) => ({
+          ...prevMap,
+          [chefId]: "Unfollow",
+        }));
+      }
+      // Handle the response data
+      console.log(response.data.email);
+    } catch (error) {
+      if (error.response.data.error === "User is already following the Chef") {
+        // setFollowStatus("Unfollow");
+      }
+    }
+  };
+
+  const unfollow = async (chefId) => {
+    // console.log(chefId);
+
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/user/unfollow/${chefId}`,
+        {
+          withCredentials: true,
+        }
+      );
+      // console.log("UNFOLLOW");
+      // console.log(response);
+      if (response.data.email) {
+        // setFollowStatus("Unfollow");
+        setFollowStatusMap((prevMap) => ({
+          ...prevMap,
+          [chefId]: "Follow",
+        }));
+      }
+      // Handle the response data
+      // console.log(response.data.email);
+    } catch (error) {
+      if (error.response.data.error === "User is already following the Chef") {
+        // setFollowStatus("Unfollow");
+      }
+    }
   };
 
   return (
@@ -99,9 +163,15 @@ function Chefs() {
                     <Button
                       type="button"
                       className="btn btn-dark followButton"
-                      onClick={follow}
+                      onClick={() => {
+                        if (followStatusMap[chef._id] === "Follow") {
+                          follow(chef._id);
+                        } else {
+                          unfollow(chef._id);
+                        }
+                      }}
                     >
-                      Follow
+                      {followStatusMap[chef._id]}
                     </Button>
                   </div>
                   {/* <p> {chef.role}</p> */}

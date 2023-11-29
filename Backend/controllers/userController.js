@@ -1,6 +1,6 @@
 const passport = require("passport");
 const userService = require("../services/userService");
-const recepieService = require("../services/recepieService");8
+const recepieService = require("../services/recepieService");
 
 exports.login = (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
@@ -67,7 +67,12 @@ exports.logout = (req, res, next) => {
 };
 
 exports.getUser = (req, res) => {
-  res.json({ name: req.user.fullName, id: req.user._id, role: req.user.role });
+  res.json({
+    name: req.user.fullName,
+    id: req.user._id,
+    role: req.user.role,
+    following: req.user.following,
+  });
 };
 
 exports.getUserById = async (req, res) => {
@@ -143,16 +148,18 @@ exports.search = async (req, res) => {
     const recipes = await recepieService.getAllRecepies();
     const searchResult = {
       Chefs: [],
-      Recipes: []
+      Recipes: [],
     };
 
     chefs.forEach((chef) => {
-      if (chef.toSearchableString().includes(query)) searchResult.Chefs.push(chef);
+      if (chef.toSearchableString().includes(query))
+        searchResult.Chefs.push(chef);
     });
 
     recipes.forEach((recipe) => {
-      if(recipe.toSearchableString().includes(query)) searchResult.Recipes.push(recipe);
-    })
+      if (recipe.toSearchableString().includes(query))
+        searchResult.Recipes.push(recipe);
+    });
 
     return res.status(200).json(searchResult);
   } catch (error) {
