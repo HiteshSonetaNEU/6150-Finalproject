@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   role: { type: String, required: true },
   profileDes: { type: String, required: true},
-  specialities: [{type: String, required: true}],
+  specialities: [{type: String}],
   following: [{ type: mongoose.Schema.Types.ObjectId, ref: refString }], 
 });
 
