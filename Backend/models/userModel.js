@@ -7,14 +7,14 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true },
   password: { type: String, required: true },
   role: { type: String, required: true },
-  profileDes: { type: String, required: true},
+  profileDes: { type: String},
   specialities: [{type: String}],
   following: [{ type: mongoose.Schema.Types.ObjectId, ref: refString }], 
 });
 
-userSchema.methods.toSearchableString = function() {
-  return `${this.fullName}  ${this.email} ${this.profileDes} ${this.specialities}`.toLowerCase()
-}
+userSchema.methods.toSearchableString = function () {
+  return `${this.fullName}  ${this.email} ${this.profileDes} ${this.specialities}`.toLowerCase();
+};
 
 const User = mongoose.model(refString, userSchema);
-module.exports = {User, refString}
+module.exports = { User, refString };
