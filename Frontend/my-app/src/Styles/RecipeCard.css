@@ -47,3 +47,11 @@
   display: flex;
   align-items: center;
 }
+
+.cardContainer > img {
+  padding-top: 2vh;
+}
+
+.recipeCardContainer {
+  margin-bottom: 3vh;
+}
