@@ -12,8 +12,8 @@ var RecipeCards = ({recipeData}) => {
     Object.keys(messageX).forEach(function(key) {
         recipeDataX.push(messageX[key]);
     });
-    console.log("recipe data");
-    console.log(recipeDataX);
+    // console.log("recipe data");
+    // console.log(recipeDataX);
 
     return (
         <>
