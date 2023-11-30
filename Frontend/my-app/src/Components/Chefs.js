@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import "../Styles/Chef.css";
-
+import ChefModal from "./ChefModal.js";
 import Header from "./Header.js";
 import Footer from "./Footer.js";
 import Button from "react-bootstrap/esm/Button.js";
@@ -20,6 +20,8 @@ function Chefs() {
   var desc =
     "Creative chef crafting unforgettable culinary experiences with a passion for flavor, precision, and innovation";
   var chefSpec = ["South Indian", "Tamil", "Veg", "Paneer Tikka", "Idli"];
+  const [modalShow, setModalShow] = useState(false);
+  const [selectedChef, setSelectedChef] = useState(null);
 
   useEffect(() => {
     const checkLoggedInStatus = async () => {
@@ -148,6 +150,34 @@ function Chefs() {
     }
   };
 
+  const viewRecepie = async (ChefID, fullName, Desc) => {
+    // console.log(ChefID);
+    // console.log(fullName);
+    // console.log(Desc);
+
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/recepie/chef/${ChefID}`,
+        {
+          withCredentials: true,
+        }
+      );
+
+      console.log(response.data);
+      setSelectedChef({
+        id: ChefID,
+        fullName,
+        profileDes: Desc,
+        recepies: response.data,
+      });
+      setModalShow(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleClose = () => setModalShow(false);
+
   return (
     <>
       <Header />
@@ -155,7 +185,13 @@ function Chefs() {
         <div className="chef-list">
           {chefAll.map((chef, index) => {
             return (
-              <div className="chefContainer" key={chef._id}>
+              <div
+                className="chefContainer"
+                key={chef._id}
+                onClick={() => {
+                  viewRecepie(chef._id, chef.fullName, chef.profileDes);
+                }}
+              >
                 <img className="chefImage" src={chefImage} />
                 <div className="chefInfoContainer">
                   <div className="chefHeader">
@@ -195,6 +231,11 @@ function Chefs() {
         </div>
       </div>
       <Footer />
+      <ChefModal
+        show={modalShow}
+        handleClose={handleClose}
+        chefData={selectedChef}
+      />
     </>
   );
 }

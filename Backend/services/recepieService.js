@@ -1,5 +1,6 @@
 const { Recepie } = require('../models/recepieModel');
 const { ObjectId } = require('mongodb');
+const mongoose = require('mongoose')
 
 // Function to create a new recipe
 exports.createRecepie = async (data) => {
@@ -60,5 +61,18 @@ exports.getByChefID = async (chefID) => {
     throw error;
   }
 };
+
+exports.getRecepieByOwner = async (id) => {
+  try {
+    const ownerId = new mongoose.Types.ObjectId(id);
+    console.log(ownerId)
+    const recipes = await Recepie.find({ chefID: id });
+    console.log(recipes)
+    return recipes;
+  } catch (error) {
+    throw error;
+  }
+};
+
 
 // You can add more functions based on your application requirements
