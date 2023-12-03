@@ -13,7 +13,7 @@ var RecipeCards = () => {
         const response = await axios.get("http://localhost:3001/recepie/get/", {
           withCredentials: true,
         });
-        // console.log(response.data);
+        console.log(response.data);
         setAllRecipes(response.data);
       } catch (error) {
         console.log(error);

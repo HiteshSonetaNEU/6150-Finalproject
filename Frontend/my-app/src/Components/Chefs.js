@@ -186,17 +186,18 @@ function Chefs() {
         <div className="chef-list">
           {chefAll.map((chef, index) => {
             return (
-              <div
-                className="chefContainer"
-                key={chef._id}
-                onClick={() => {
-                  viewRecepie(chef._id, chef.fullName, chef.profileDes);
-                }}
-              >
+              <div className="chefContainer" key={chef._id}>
                 <img className="chefImage" src={chefImage} />
                 <div className="chefInfoContainer">
                   <div className="chefHeader">
-                    <h2 className="chefName">{chef.fullName}</h2>
+                    <h2
+                      className="chefName"
+                      onClick={() => {
+                        viewRecepie(chef._id, chef.fullName, chef.profileDes);
+                      }}
+                    >
+                      {chef.fullName}
+                    </h2>
                     <Button
                       type="button"
                       className="btn btn-dark followButton"

@@ -119,3 +119,11 @@
   position: relative;
   line-height: 1.5em;
 }
+
+.chefName {
+  cursor: pointer;
+}
+
+.chefName:hover {
+  color: blue;
+}
