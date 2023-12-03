@@ -17,9 +17,10 @@ function Chefs() {
   const [chefAll, setChefAll] = useState([]);
   const [followStatusMap, setFollowStatusMap] = useState({});
   const [currentUserFollowing, setCurrentUserFollowing] = useState({});
-  var desc =
-    "Creative chef crafting unforgettable culinary experiences with a passion for flavor, precision, and innovation";
-  var chefSpec = ["South Indian", "Tamil", "Veg", "Paneer Tikka", "Idli"];
+  // var desc = "Creative chef crafting unforgettable culinary experiences with a passion for flavor, precision, and innovation";
+  var desc = "";
+  // var chefSpec = ["South Indian", "Tamil", "Veg", "Paneer Tikka", "Idli"];
+  var chefSpec = [""];
   const [modalShow, setModalShow] = useState(false);
   const [selectedChef, setSelectedChef] = useState(null);
 
