@@ -4,7 +4,7 @@ const refString = "Feedback";
 
 const feedbackSchema = new mongoose.Schema({
   fullName: { type: String },
-  email: { type: String },
+  email: { type: String, required: true },
   Address: { type: String },
   city: { type: String },
   state: { type: String },
