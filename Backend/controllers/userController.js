@@ -2,7 +2,7 @@ const passport = require("passport");
 const userService = require("../services/userService");
 const recepieService = require("../services/recepieService");
 
-exports.login = (req, res, next) => {
+function login(req, res, next) {
   passport.authenticate("local", (err, user, info) => {
     if (err) {
       return res.status(500).json({ message: "Internal Server Error" });
@@ -21,7 +21,7 @@ exports.login = (req, res, next) => {
   })(req, res, next);
 };
 
-exports.register = async (req, res) => {
+async function register(req, res) {
   try {
     const { fullName, email, password, role, profileDes, specialities } = req.body;
 
@@ -57,7 +57,7 @@ exports.register = async (req, res) => {
   }
 };
 
-exports.logout = (req, res, next) => {
+function logout (req, res, next) {
   req.logout((err) => {
     if (err) {
       return next(err);
@@ -66,7 +66,7 @@ exports.logout = (req, res, next) => {
   });
 };
 
-exports.getUser = (req, res) => {
+function getUser(req, res) {
   res.json({
     name: req.user.fullName,
     id: req.user._id,
@@ -75,7 +75,7 @@ exports.getUser = (req, res) => {
   });
 };
 
-exports.getUserById = async (req, res) => {
+async function getUserById(req, res) {
   const userId = req.params.id;
   try {
     const user = await userService.findUserById(userId);
@@ -88,7 +88,7 @@ exports.getUserById = async (req, res) => {
   }
 };
 
-exports.getChefs = async (req, res) => {
+async function getChefs(req, res) {
   try {
     const chefs = await getAllChefs();
     res.status(200).json(chefs);
@@ -97,7 +97,7 @@ exports.getChefs = async (req, res) => {
   }
 };
 
-exports.followChef = async (req, res) => {
+async function followChef(req, res) {
   try {
     const chefId = req.params.id;
     const chef = await checkChef(chefId);
@@ -119,7 +119,7 @@ exports.followChef = async (req, res) => {
   }
 };
 
-exports.unFollowChef = async (req, res) => {
+async function unFollowChef(req, res) {
   try {
     const chefId = req.params.id;
     const chef = await checkChef(chefId);
@@ -140,7 +140,7 @@ exports.unFollowChef = async (req, res) => {
   }
 };
 
-exports.search = async (req, res) => {
+async function search(req, res) {
   try {
     let { query, filter } = req.body;
     query = query.toLowerCase();
@@ -185,16 +185,31 @@ async function checkChef(chefId) {
 
   return user;
 }
-exports.checkAuthenticated = (req, res, next) => {
+
+function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
   return res.status(400).json({ message: "Login first" });
 };
 
-exports.checkNotAuthenticated = (req, res, next) => {
+function checkNotAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return res.status(400).json({ message: "Logout first" });
   }
   next();
 };
+
+module.exports = {
+  checkNotAuthenticated,
+  checkAuthenticated,
+  search,
+  unFollowChef,
+  followChef,
+  getChefs,
+  getUserById,
+  getUser,
+  login,
+  register,
+  logout
+}

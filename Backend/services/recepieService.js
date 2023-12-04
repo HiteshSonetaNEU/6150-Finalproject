@@ -3,7 +3,7 @@ const { ObjectId } = require('mongodb');
 const mongoose = require('mongoose')
 
 // Function to create a new recipe
-exports.createRecepie = async (data) => {
+async function createRecepie(data) {
   try {
     const newRecepie = new Recepie(data);
     await newRecepie.save();
@@ -14,7 +14,7 @@ exports.createRecepie = async (data) => {
 };
 
 // Function to get all recipes
-exports.getAllRecepies = async () => {
+async function getAllRecepies() {
   try {
     const recepies = await Recepie.find();
     return recepies;
@@ -24,7 +24,7 @@ exports.getAllRecepies = async () => {
 };
 
 // Function to get a recipe by ID
-exports.getRecepieById = async (recepieId) => {
+async function getRecepieById(recepieId) {
   try {
     const recepie = await Recepie.findById(recepieId);
     return recepie;
@@ -34,7 +34,7 @@ exports.getRecepieById = async (recepieId) => {
 };
 
 // Function to update a recipe by ID
-exports.updateRecepieById = async (recepieId, data) => {
+async function updateRecepieById(recepieId, data) {
   try {
     const updatedRecepie = await Recepie.findByIdAndUpdate(recepieId, data, { new: true });
     return updatedRecepie;
@@ -44,7 +44,7 @@ exports.updateRecepieById = async (recepieId, data) => {
 };
 
 // Function to delete a recipe by ID
-exports.deleteRecepieById = async (recepieId) => {
+async function deleteRecepieById(recepieId) { 
   try {
     await Recepie.findByIdAndDelete(recepieId);
   } catch (error) {
@@ -52,7 +52,7 @@ exports.deleteRecepieById = async (recepieId) => {
   }
 };
 
-exports.getByChefID = async (chefID) => {
+async function getByChefID(chefID) {
   try {
     const objectId = new ObjectId(chefID);
     const recepie= await Recepie.find({chefID:objectId});
@@ -62,7 +62,7 @@ exports.getByChefID = async (chefID) => {
   }
 };
 
-exports.getRecepieByOwner = async (id) => {
+async function getRecepieByOwner(id) {
   try {
     const ownerId = new mongoose.Types.ObjectId(id);
     console.log(ownerId)
@@ -76,3 +76,14 @@ exports.getRecepieByOwner = async (id) => {
 
 
 // You can add more functions based on your application requirements
+
+
+module.exports = {
+  createRecepie,
+  getAllRecepies,
+  getRecepieById,
+  updateRecepieById,
+  deleteRecepieById,
+  getByChefID,
+  getRecepieByOwner
+}
