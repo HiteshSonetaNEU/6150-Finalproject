@@ -61,7 +61,6 @@ module.exports = {
   createComment,
   getComments,
   getCommentById,
-  // updateComment,
   deleteComment,
   getCommentsForRecepie
 };
