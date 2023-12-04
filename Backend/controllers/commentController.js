@@ -53,7 +53,7 @@ async function getCommentByRecepie(req,res){
   try{
     const comments = await commentServices.getCommentsForRecepie(req.params.recepieId)
     if (!comments){
-      return res.status(200).json({ message: "Comments not found ror given recepie" });
+      return res.status(200).json({ message: "Comments not found for given recepie" });
     }
     res.status(200).json(comments);
   }
@@ -99,7 +99,7 @@ async function deleteComment(req, res) {
       
       return res
         .status(404)
-        .json({ error: "User is not the rightful owner of the comment" });
+        .json({ error: "User is not the creator of the comment" });
     }
 
     const deletedComment = await commentServices.deleteComment(commentId);

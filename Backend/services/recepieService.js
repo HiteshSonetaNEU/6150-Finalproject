@@ -74,10 +74,6 @@ async function getRecepieByOwner(id) {
   }
 };
 
-
-// You can add more functions based on your application requirements
-
-
 module.exports = {
   createRecepie,
   getAllRecepies,
@@ -87,3 +83,4 @@ module.exports = {
   getByChefID,
   getRecepieByOwner
 }
+
