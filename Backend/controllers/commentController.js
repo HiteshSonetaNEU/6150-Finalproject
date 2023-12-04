@@ -49,6 +49,19 @@ async function getCommentById(req, res) {
   }
 }
 
+async function getCommentByRecepie(req,res){
+  try{
+    const comments = await commentServices.getCommentsForRecepie(req.params.recepieId)
+    if (!comments){
+      return res.status(200).json({ message: "Comments not found ror given recepie" });
+    }
+    res.status(200).json(comments);
+  }
+  catch(error){
+    res.status(500).json({ error: error.message });
+  }
+}
+
 // async function updateComment(req, res) {
 //   const { commentId } = req.params;
 //   const updatedFields = req.body;
@@ -102,4 +115,5 @@ module.exports = {
   getCommentById,
   // updateComment,
   deleteComment,
+  getCommentByRecepie
 };

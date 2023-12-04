@@ -47,10 +47,21 @@ async function deleteComment(commentId) {
   }
 }
 
+async function getCommentsForRecepie(id){
+  try{
+    const recepieId= new mongoose.Types.ObjectId(id)
+    return( await Comment.find({recepieId}))
+  }
+  catch(error){
+    throw error;
+  }
+}
+
 module.exports = {
   createComment,
   getComments,
   getCommentById,
   // updateComment,
   deleteComment,
+  getCommentsForRecepie
 };
