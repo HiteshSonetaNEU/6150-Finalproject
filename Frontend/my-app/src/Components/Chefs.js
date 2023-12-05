@@ -214,17 +214,12 @@ function Chefs() {
                   </div>
                   <p>{chef.profileDes || desc}</p>
                   <div className="specList">
-                    {chef.specialities.length > 0
-                      ? chef.specialities.map((data, index) => (
-                          <div key={data} className="chefSpec">
-                            {data}
-                          </div>
-                        ))
-                      : chefSpec.map((data, index) => (
-                          <div key={data} className="chefSpec">
-                            {data}
-                          </div>
-                        ))}
+                    {chef.specialities.length > 0 &&
+                      chef.specialities.map((data, index) => (
+                        <div key={data} className="chefSpec">
+                          {data}
+                        </div>
+                      ))}
                   </div>
                 </div>
               </div>
