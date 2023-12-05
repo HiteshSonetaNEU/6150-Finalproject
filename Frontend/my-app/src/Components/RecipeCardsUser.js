@@ -1,37 +1,27 @@
 import React from "react";
-import RecipeCard from "./RecipeCard";
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import RecipeCardUser from "./RecipeCardUser";
+import useRecipeManagement from "./useRecipeManagement";
 
-var RecipeCardsUser = ({ userID, userRecipes }) => {
-  const [AllRecipes, setAllRecipes] = useState([]);
+const RecipeCardsUser = ({ userID, userRecipes }) => {
+  const { recipes, deleteRecipe, editRecipe } = useRecipeManagement(userID);
 
-  useEffect(() => {
-    const GetAllRecipes = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:3001/recepie/chef/${userID}`,
-          {
-            withCredentials: true,
-          }
-        );
-        console.log(response.data);
-        setAllRecipes(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    GetAllRecipes();
-  }, [userID, userRecipes]);
+  const handleEditRecipe = (recipeID, editedRecipe) => {
+    // Call your editRecipe function from useRecipeManagement here
+    // Pass recipeID and editedRecipe to the editRecipe function
+    editRecipe(recipeID, editedRecipe);
+  };
 
   return (
     <>
       <div className="cardsContainer">
         <div className="row">
-          {AllRecipes.map((recipe) => (
-            <RecipeCard key={recipe._id} recipe={recipe} />
+          {recipes.map((recipe) => (
+            <RecipeCardUser
+              key={recipe._id}
+              recipe={recipe}
+              onDeleteRecipe={() => deleteRecipe(recipe._id)}
+              onEditRecipe={handleEditRecipe}
+            />
           ))}
         </div>
       </div>

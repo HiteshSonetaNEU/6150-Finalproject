@@ -120,3 +120,8 @@
   display: flex;
   margin: 10% 0;
 }
+
+.btn-delete,
+.btn-edit {
+  margin-left: 10px;
+}

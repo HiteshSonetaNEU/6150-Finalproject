@@ -19,6 +19,6 @@
   display: flex;
 }
 
-.websiteLogo > a {
+.websiteLogo > p {
   color: #dc3545 !important;
 }

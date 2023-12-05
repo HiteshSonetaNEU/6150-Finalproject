@@ -6,6 +6,7 @@ import axios from "axios";
 
 var RecipeCards = () => {
   const [AllRecipes, setAllRecipes] = useState([]);
+  const [isRecipe, setIsRecipe] = useState(false);
 
   useEffect(() => {
     const GetAllRecipes = async () => {
@@ -13,7 +14,9 @@ var RecipeCards = () => {
         const response = await axios.get("http://localhost:3001/recepie/get/", {
           withCredentials: true,
         });
-        console.log(response.data);
+        if (response.data.length !== 0) {
+          setIsRecipe(true);
+        }
         setAllRecipes(response.data);
       } catch (error) {
         console.log(error);
@@ -27,9 +30,17 @@ var RecipeCards = () => {
     <>
       <div className="cardsContainer">
         <div className="row">
-          {AllRecipes.map((recipe) => (
-            <RecipeCard key={recipe._id} recipe={recipe} />
-          ))}
+          {!isRecipe && (
+            <h4>
+              To discover more delicious recipes, consider exploring the
+              profiles of talented chefs. Head over to the chef page, where you
+              can follow your favorite culinary experts.
+            </h4>
+          )}
+          {isRecipe &&
+            AllRecipes.map((recipe) => (
+              <RecipeCard key={recipe._id} recipe={recipe} />
+            ))}
         </div>
       </div>
     </>
