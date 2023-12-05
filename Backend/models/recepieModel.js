@@ -3,10 +3,10 @@ const {refString: userRef} = require("./userModel");
 const refString = "Recepie";
 
 const recepieSchema = new mongoose.Schema({
-  ingredients: [String],
-  description: String,
-  title: String,
-  photo: String,
+  ingredients:[{ type: String}],
+  description: { type: String},
+  title: { type: String, required: true },
+  photo: { type: String},
   chefID: { type: mongoose.Schema.Types.ObjectId, ref: userRef }
 });
 

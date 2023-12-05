@@ -49,6 +49,19 @@ async function getCommentById(req, res) {
   }
 }
 
+async function getCommentByRecepie(req,res){
+  try{
+    const comments = await commentServices.getCommentsForRecepie(req.params.recepieId)
+    if (!comments){
+      return res.status(200).json({ message: "Comments not found for given recepie" });
+    }
+    res.status(200).json(comments);
+  }
+  catch(error){
+    res.status(500).json({ error: error.message });
+  }
+}
+
 // async function updateComment(req, res) {
 //   const { commentId } = req.params;
 //   const updatedFields = req.body;
@@ -86,7 +99,7 @@ async function deleteComment(req, res) {
       
       return res
         .status(404)
-        .json({ error: "User is not the rightful owner of the comment" });
+        .json({ error: "User is not the creator of the comment" });
     }
 
     const deletedComment = await commentServices.deleteComment(commentId);
@@ -102,4 +115,5 @@ module.exports = {
   getCommentById,
   // updateComment,
   deleteComment,
+  getCommentByRecepie
 };
