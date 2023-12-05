@@ -4,15 +4,18 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-var RecipeCards = () => {
+var RecipeCardsUser = ({ userID, userRecipes }) => {
   const [AllRecipes, setAllRecipes] = useState([]);
 
   useEffect(() => {
     const GetAllRecipes = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/recepie/get/", {
-          withCredentials: true,
-        });
+        const response = await axios.get(
+          `http://localhost:3001/recepie/chef/${userID}`,
+          {
+            withCredentials: true,
+          }
+        );
         console.log(response.data);
         setAllRecipes(response.data);
       } catch (error) {
@@ -21,7 +24,7 @@ var RecipeCards = () => {
     };
 
     GetAllRecipes();
-  }, []);
+  }, [userID, userRecipes]);
 
   return (
     <>
@@ -36,4 +39,4 @@ var RecipeCards = () => {
   );
 };
 
-export default RecipeCards;
+export default RecipeCardsUser;
