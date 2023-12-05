@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import imgX from "../Images/Home/bhindi-masala.jpg";
 
 const RecipeModal = ({ show, handleClose, chefData }) => {
-  console.log(chefData);
+  // console.log(chefData);
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>

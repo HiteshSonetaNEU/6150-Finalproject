@@ -85,8 +85,7 @@ export default function Header() {
               href="/home"
               style={{ display: "flex", alignItems: "center" }}
             >
-              RE
-              <a>SSS</a>I<a>P</a>ES
+              reSSSiPes
             </a>
 
             <button
