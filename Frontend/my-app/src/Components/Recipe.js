@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { WithContext as ReactTags } from "react-tag-input";
 import Accordion from "react-bootstrap/Accordion";
-
+import EditRecipeModal from "./EditRecipeModal";
 import "../Styles/Recipe.css";
 
 import Header from "./Header.js";
@@ -22,6 +22,8 @@ function Recipe() {
   const [tagsError, setTagsError] = useState("");
   const [descriptionError, setDescriptionError] = useState("");
   const [userRecipes, setUserRecipes] = useState([]);
+  const [editModalShow, setEditModalShow] = useState(false);
+  const [selectedRecipe, setSelectedRecipe] = useState(null);
 
   const navigate = useNavigate();
 
@@ -35,7 +37,7 @@ function Recipe() {
       title,
       photo,
     };
-    console.log(obj1);
+    // console.log(obj1);
 
     if (validateForm()) {
       try {
@@ -110,6 +112,9 @@ function Recipe() {
           withCredentials: true,
         });
         // console.log(response.data.id);
+        if (response.data.role === "User") {
+          navigate("/home");
+        }
         setUserId(response.data.id);
         if (response.data.name) {
           // user is logged in
@@ -143,6 +148,16 @@ function Recipe() {
       </div>
     );
   }
+
+  const handleEditRecipe = (recipeID, editedRecipe) => {
+    // Implement logic to update the recipe on the server
+    // For simplicity, this example only updates the UI
+    setUserRecipes((prevRecipes) =>
+      prevRecipes.map((recipe) =>
+        recipe._id === recipeID ? { ...recipe, ...editedRecipe } : recipe
+      )
+    );
+  };
 
   return (
     <>
@@ -223,7 +238,12 @@ function Recipe() {
         </Accordion>
         <h2 className="recipeHeadingYour">Your Recipes</h2>
       </div>
-      <RecipeCardsUser userID={userID} userRecipes={userRecipes} />
+      {/* <RecipeCardsUser userID={userID} userRecipes={userRecipes} /> */}
+      <RecipeCardsUser
+        userID={userID}
+        userRecipes={userRecipes}
+        onEditRecipe={handleEditRecipe}
+      />
       <Footer />
     </>
   );
