@@ -3,9 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import "../Styles/Header.css";
+import { useState, useEffect } from "react";
 
 export default function Header() {
   const navigate = useNavigate();
+  const [userRole, setUserRole] = useState("");
+  const [loading, setLoading] = useState(true);
+
   const LogoutButton = async () => {
     try {
       const response = await axios.get("http://localhost:3001/logout", {
@@ -29,6 +33,47 @@ export default function Header() {
     const navbar = document.getElementById("navbarSupportedContent");
     navbar.classList.toggle("show");
   };
+
+  useEffect(() => {
+    const checkLoggedInStatus = async () => {
+      try {
+        const response = await axios.get("http://localhost:3001/", {
+          withCredentials: true,
+        });
+        // console.log(response.data.role);
+        setUserRole(response.data.role);
+        if (response.data.name) {
+          // user is logged in
+        }
+      } catch (error) {
+        console.log(error);
+        // user is not logged in
+        if (error.response.data.message === "Login first") {
+          navigate("/login");
+        }
+      } finally {
+        setTimeout(() => {
+          setLoading(false);
+        }, 300);
+      }
+    };
+
+    checkLoggedInStatus();
+  }, [navigate]);
+
+  if (loading) {
+    return (
+      <div className="d-flex justify-content-center align-items-center vh-100">
+        <div
+          className="spinner-border text-primary"
+          role="status"
+          style={{ width: "4rem", height: "4rem" }}
+        >
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -75,11 +120,13 @@ export default function Header() {
                     Chefs
                   </a>
                 </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="/recipe">
-                    Recipe
-                  </a>
-                </li>
+                {(userRole === "Chef" || userRole === "Admin") && (
+                  <li className="nav-item">
+                    <a className="nav-link" href="/recipe">
+                      Recipe
+                    </a>
+                  </li>
+                )}
                 <li className="nav-item">
                   <a className="nav-link" href="/feedback">
                     Feedback

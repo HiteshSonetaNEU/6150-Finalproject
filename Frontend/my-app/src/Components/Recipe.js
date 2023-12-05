@@ -35,7 +35,7 @@ function Recipe() {
       title,
       photo,
     };
-    console.log(obj1);
+    // console.log(obj1);
 
     if (validateForm()) {
       try {
@@ -110,6 +110,9 @@ function Recipe() {
           withCredentials: true,
         });
         // console.log(response.data.id);
+        if (response.data.role === "User") {
+          navigate("/home");
+        }
         setUserId(response.data.id);
         if (response.data.name) {
           // user is logged in
