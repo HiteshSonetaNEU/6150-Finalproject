@@ -7,7 +7,7 @@ const UserFeedback = ({feedback}) => {
     <>
         <div className="list-group">
             <a className="list-group-item list-group-item-action">
-                <div className="d-flex w-100 justify-content-between">
+                <div className="d-flex w-100 justify-content-between userFeedbackHeader">
                     <h5 className="mb-1">{feedback.fullName}</h5>
                     <small><b>{feedback.email}</b></small>
                 </div>
