@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-var RecipeCards = () => {
+var RecipeCards = ({ userID }) => {
   const [AllRecipes, setAllRecipes] = useState([]);
   const [isRecipe, setIsRecipe] = useState(false);
 
@@ -39,7 +39,7 @@ var RecipeCards = () => {
           )}
           {isRecipe &&
             AllRecipes.map((recipe) => (
-              <RecipeCard key={recipe._id} recipe={recipe} />
+              <RecipeCard key={recipe._id} recipe={recipe} userID={userID} />
             ))}
         </div>
       </div>
