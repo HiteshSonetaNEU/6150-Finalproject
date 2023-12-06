@@ -14,6 +14,7 @@ function Home() {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+  const [currentUserId, setCurrentUserID] = useState("");
 
   useEffect(() => {
     const checkLoggedInStatus = async () => {
@@ -21,9 +22,7 @@ function Home() {
         const response = await axios.get("http://localhost:3001/", {
           withCredentials: true,
         });
-        if (response.data.name) {
-          // user is logged in
-        }
+        setCurrentUserID(response.data.id);
       } catch (error) {
         console.log(error);
         // user is not logged in
@@ -58,7 +57,7 @@ function Home() {
     <>
       <Header />
       <RecipeCarousel />
-      <RecipeCards />
+      <RecipeCards userID={currentUserId} />
       <Footer />
     </>
   );

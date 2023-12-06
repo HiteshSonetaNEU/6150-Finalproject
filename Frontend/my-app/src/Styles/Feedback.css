@@ -121,3 +121,22 @@ input[type=range]:focus::-ms-fill-upper {
 .form-range-on-change {
   color: blue;
 }
+
+.allFeedbacksHeader {
+  justify-content: center;
+  display: flex;
+  margin: 5% 0;
+  text-decoration: underline;
+}
+
+.allUserFeedbacksContainer {
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+@media only screen and (max-width: 600px) {
+  .allUserFeedbacksContainer {
+    margin-left: 1%;
+    margin-right: 1%;
+  }
+}

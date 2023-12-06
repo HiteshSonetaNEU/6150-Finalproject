@@ -49,10 +49,7 @@ const useRecipeManagement = (userID) => {
           withCredentials: true,
         }
       );
-      console.log("HO GAYAAA");
-      console.log(response);
-      if (response.data.message === "Recepie updated successfully") {
-        // If update is successful, fetch recipes again to refresh the list
+      if (response.statusText === "OK") {
         fetchRecipes();
       }
     } catch (error) {
