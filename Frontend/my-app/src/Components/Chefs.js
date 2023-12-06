@@ -17,9 +17,10 @@ function Chefs() {
   const [chefAll, setChefAll] = useState([]);
   const [followStatusMap, setFollowStatusMap] = useState({});
   const [currentUserFollowing, setCurrentUserFollowing] = useState({});
-  var desc =
-    "Creative chef crafting unforgettable culinary experiences with a passion for flavor, precision, and innovation";
-  var chefSpec = ["South Indian", "Tamil", "Veg", "Paneer Tikka", "Idli"];
+  // var desc = "Creative chef crafting unforgettable culinary experiences with a passion for flavor, precision, and innovation";
+  var desc = "";
+  // var chefSpec = ["South Indian", "Tamil", "Veg", "Paneer Tikka", "Idli"];
+  var chefSpec = [""];
   const [modalShow, setModalShow] = useState(false);
   const [selectedChef, setSelectedChef] = useState(null);
 
@@ -185,17 +186,18 @@ function Chefs() {
         <div className="chef-list">
           {chefAll.map((chef, index) => {
             return (
-              <div
-                className="chefContainer"
-                key={chef._id}
-                onClick={() => {
-                  viewRecepie(chef._id, chef.fullName, chef.profileDes);
-                }}
-              >
+              <div className="chefContainer" key={chef._id}>
                 <img className="chefImage" src={chefImage} />
                 <div className="chefInfoContainer">
                   <div className="chefHeader">
-                    <h2 className="chefName">{chef.fullName}</h2>
+                    <h2
+                      className="chefName"
+                      onClick={() => {
+                        viewRecepie(chef._id, chef.fullName, chef.profileDes);
+                      }}
+                    >
+                      {chef.fullName}
+                    </h2>
                     <Button
                       type="button"
                       className="btn btn-dark followButton"
@@ -212,17 +214,12 @@ function Chefs() {
                   </div>
                   <p>{chef.profileDes || desc}</p>
                   <div className="specList">
-                    {chef.specialities.length > 0
-                      ? chef.specialities.map((data, index) => (
-                          <div key={data} className="chefSpec">
-                            {data}
-                          </div>
-                        ))
-                      : chefSpec.map((data, index) => (
-                          <div key={data} className="chefSpec">
-                            {data}
-                          </div>
-                        ))}
+                    {chef.specialities.length > 0 &&
+                      chef.specialities.map((data, index) => (
+                        <div key={data} className="chefSpec">
+                          {data}
+                        </div>
+                      ))}
                   </div>
                 </div>
               </div>

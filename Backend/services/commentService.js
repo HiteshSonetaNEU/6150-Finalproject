@@ -1,7 +1,7 @@
-const { Comment } = require('../models/commentModel');
+const { Comment } = require("../models/commentModel");
+const mongoose = require("mongoose");
 
 async function createComment(message, userId, recepieId) {
-
   try {
     const comment = new Comment({ message, userId, recepieId });
     const savedComment = await comment.save();
@@ -47,12 +47,11 @@ async function deleteComment(commentId) {
   }
 }
 
-async function getCommentsForRecepie(id){
-  try{
-    const recepieId= new mongoose.Types.ObjectId(id)
-    return( await Comment.find({recepieId}))
-  }
-  catch(error){
+async function getCommentsForRecepie(id) {
+  try {
+    const recepieId = new mongoose.Types.ObjectId(id);
+    return await Comment.find({ recepieId });
+  } catch (error) {
     throw error;
   }
 }
@@ -62,5 +61,5 @@ module.exports = {
   getComments,
   getCommentById,
   deleteComment,
-  getCommentsForRecepie
+  getCommentsForRecepie,
 };
