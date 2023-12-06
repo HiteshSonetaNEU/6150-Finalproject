@@ -1,10 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import imgX from "../Images/Home/bhindi-masala.jpg";
-
-const RecipeModal = ({ show, handleClose, chefData }) => {
-  // console.log(chefData);
+import axios from "axios";
+ 
+const RecipeModal = ({
+  show,
+  handleClose,
+  chefData,
+  comments,
+  setComments,
+  userID,
+}) => {
+  const [newComment, setNewComment] = useState("");
+ 
+  // console.log("COMMENTS");
+  // console.log(comments.length);
+ 
+  const handleAddComment = async () => {
+    try {
+      const response = await axios.post(
+        `http://localhost:3001/comment/create/${chefData._id}`,
+        {
+          message: newComment,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+      setComments([...comments, response.data]);
+      setNewComment("");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // console.log(userID);
+ 
+  const handleDeleteComment = async (commentID) => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:3001/comment/${commentID}`,
+        {
+          withCredentials: true,
+        }
+      );
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+ 
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -30,6 +75,38 @@ const RecipeModal = ({ show, handleClose, chefData }) => {
                   </div>
                 ))}
             </div>
+            <h5>Comments:</h5>
+            {comments.length > 0 ? (
+              <ul>
+                {comments.map((comment) => (
+                  <li key={comment._id}>
+                    {comment.message}
+                    {userID === comment.userId && (
+                      <Button
+                        variant="danger"
+                        onClick={() => handleDeleteComment(comment._id)}
+                      >
+                        Delete
+                      </Button>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>No comments available.</p>
+            )}
+ 
+            <div>
+              <input
+                type="text"
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+                placeholder="Add a comment..."
+              />
+              <Button variant="primary" onClick={handleAddComment}>
+                Add Comment
+              </Button>
+            </div>
           </>
         ) : (
           <p>No recipe details available.</p>
@@ -43,5 +120,5 @@ const RecipeModal = ({ show, handleClose, chefData }) => {
     </Modal>
   );
 };
-
+ 
 export default RecipeModal;
