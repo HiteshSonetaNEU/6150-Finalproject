@@ -74,9 +74,9 @@ function Feedback() {
       }
       );
       if(response){
-        console.log(response);
+        // console.log(response);
         if(response.status == 201){
-          console.log("Feedback created in database successfully");
+          // console.log("Feedback created in database successfully");
           alert("Feedback submitted");
           window.location.reload(true);
         }
@@ -85,7 +85,7 @@ function Feedback() {
       }
 
     } catch (error) {
-      console.log("Error in submitting the feedback!");
+      // console.log("Error in submitting the feedback!");
       console.log(error);
     }
   };
@@ -93,18 +93,18 @@ function Feedback() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if(validateForm()){
-      console.log('Form validation passed');
+      // console.log('Form validation passed');
       onSubmitFeedback(e);
     }
     else{
-      console.log('Form validation failed');
+      // console.log('Form validation failed');
     }
   };
 
   useEffect( () => {
     const GetAllFeedbacks = async () => {
       try {
-        console.log(userRole);
+        // console.log(userRole);
         // if(userRole === "Admin"){
           const response = await axios.get("http://localhost:3001/feedback/get", {
             withCredentials: true,
@@ -120,15 +120,15 @@ function Feedback() {
     };
     GetAllFeedbacks();
   }, [
-    fullNameErrorMessage,
-    emailErrorMessage,
-    addressErrorMessage,
-    cityErrorMessage,
-    stateErrorMessage,
-    zipErrorMessage,
-    ratingErrorMessage,
-    commentsErrorMessage,
-    allFeedbacks,
+    // fullNameErrorMessage,
+    // emailErrorMessage,
+    // addressErrorMessage,
+    // cityErrorMessage,
+    // stateErrorMessage,
+    // zipErrorMessage,
+    // ratingErrorMessage,
+    // commentsErrorMessage,
+    // allFeedbacks,
   ]
   );
 
@@ -204,13 +204,13 @@ function Feedback() {
   };
 
   const updateRating = (value) => {
-    console.log("updateRating called: "+ value);
+    // console.log("updateRating called: "+ value);
     validateRating(value);
     setRating(value);
   };
   
   const validateRating = (input) => {
-    console.log(input);
+    // console.log(input);
     if(!input){
       setRatingErrorMessage("Rating cannot be missed");
       return false;
