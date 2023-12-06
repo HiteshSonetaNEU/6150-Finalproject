@@ -2,14 +2,29 @@ import React, { useState } from "react";
 import "../Styles/RecipeCard.css";
 import imgX from "../Images/Home/bhindi-masala.jpg";
 import RecipeModal from "./RecipeModal";
-
-const RecipeCard = ({ recipe }) => {
+import axios from "axios";
+ 
+const RecipeCard = ({ recipe, userID }) => {
   const [modalShow, setModalShow] = useState(false);
-
-  const handleViewClick = () => {
+  const [comments, setComments] = useState([]);
+ 
+  const handleViewClick = async ({ recipeID }) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/comment/get/${recipeID}`,
+        {
+          withCredentials: true,
+        }
+      );
+      // console.log(response);
+      setComments(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+ 
     setModalShow(true);
   };
-
+ 
   return (
     <>
       <div className="col-sm-3 recipeCardContainer">
@@ -23,7 +38,7 @@ const RecipeCard = ({ recipe }) => {
               data-bs-toggle="modal"
               data-bs-target={"#modal" + recipe._id}
               className="btn btn-dark"
-              onClick={handleViewClick}
+              onClick={() => handleViewClick({ recipeID: recipe._id })}
             >
               View
             </button>
@@ -35,10 +50,13 @@ const RecipeCard = ({ recipe }) => {
           show={modalShow}
           handleClose={() => setModalShow(false)}
           chefData={recipe}
+          comments={comments}
+          setComments={setComments}
+          userID={userID}
         />
       )}
     </>
   );
 };
-
+ 
 export default RecipeCard;

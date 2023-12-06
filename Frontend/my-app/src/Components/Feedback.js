@@ -6,6 +6,7 @@ import "../Styles/Feedback.css";
 
 import Header from "./Header.js";
 import Footer from "./Footer.js";
+import UserFeedback from "./UserFeedback.js";
 // import VerticalModalPopup from "./VerticalModalPopup.js";
 
 function Feedback() {
@@ -34,6 +35,8 @@ function Feedback() {
     color: `rgb(${255 - rangeValueForColor * 25}, ${rangeValueForColor * 25 - 90}, 0)`,
   };
   // const [popupModalShow, setPopupModalShow] = React.useState(false);
+  const [userRole, setUserRole] = useState("");
+  const [allFeedbacks, setAllFeedbacks] = useState([]);
 
   // function showPopup({popupData}) {
   //   return <VerticalModalPopup data={popupData} show={popupModalShow} onHide={() => setPopupModalShow(false)} />;
@@ -99,7 +102,23 @@ function Feedback() {
   };
 
   useEffect( () => {
-
+    const GetAllFeedbacks = async () => {
+      try {
+        console.log(userRole);
+        // if(userRole === "Admin"){
+          const response = await axios.get("http://localhost:3001/feedback/get", {
+            withCredentials: true,
+          });
+          if(response.data){
+            setAllFeedbacks(response.data);
+          }
+          // console.log("allFeedbacks - " + allFeedbacks[5].comment);
+        // }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    GetAllFeedbacks();
   }, [
     fullNameErrorMessage,
     emailErrorMessage,
@@ -109,6 +128,7 @@ function Feedback() {
     zipErrorMessage,
     ratingErrorMessage,
     commentsErrorMessage,
+    allFeedbacks,
   ]
   );
 
@@ -251,6 +271,8 @@ function Feedback() {
         });
         if (response.data.name) {
           // user is logged in
+          setUserRole(response.data.role);
+          // console.log(response.data.role);
         }
       } catch (error) {
         console.log(error);
@@ -285,6 +307,9 @@ function Feedback() {
   return (
     <>
       <Header />
+      {
+        (userRole !== "Admin") ? 
+        (
       <div className="feedback-form-body">
         <form className="row g-3 feedbackForm" onSubmit={handleSubmit}>
           <div className="col-md-12">
@@ -413,6 +438,21 @@ function Feedback() {
           </div>
         </form>
       </div>
+        )
+        :
+        (
+          <div>
+            <h2 className="allFeedbacksHeader">All Feedbacks</h2>
+              <div className="allUserFeedbacksContainer">
+                {
+                  allFeedbacks.map((feedback) => (
+                    <UserFeedback key={feedback._id} feedback={feedback} />
+                  ))
+                }
+              </div>
+          </div>
+        )
+      }
       <Footer />
     </>
   );
