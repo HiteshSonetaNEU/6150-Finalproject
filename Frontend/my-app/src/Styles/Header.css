@@ -22,3 +22,8 @@
 .websiteLogo > p {
   color: #dc3545 !important;
 }
+
+.activePage {
+  text-decoration: underline red 0.15rem;
+  text-underline-offset: 0.5em;
+}
