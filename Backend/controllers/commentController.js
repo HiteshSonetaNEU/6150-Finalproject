@@ -86,12 +86,11 @@ async function deleteComment(req, res) {
     }
 
     const checkAccessibility = (userId) => {
-      console.log(userId)
-      return comment.userId == userId 
+      return comment.userId.toString() === userId.toString()
     };
 
-    console.log(req.user.role != "Admin");
-    console.log(checkAccessibility(req.user._id))
+    //console.log(req.user.role != "Admin");
+    //console.log(checkAccessibility(req.user._id))
     if (
       req.user.role != "Admin" &&
       !checkAccessibility(req.user._id)
