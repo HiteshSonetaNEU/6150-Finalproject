@@ -29,12 +29,17 @@ const EditRecipeModal = ({ show, handleClose, chefData, onEditRecipe }) => {
   };
 
   const handleAddition = (tagText) => {
-    setEditedRecipe((prevRecipe) => {
-      return {
-        ...prevRecipe,
-        ingredients: [...prevRecipe.ingredients, tagText],
-      };
-    });
+    // Check if the tagText already exists in ingredients
+    const tagExists = editedRecipe.ingredients.includes(tagText);
+
+    if (!tagExists) {
+      setEditedRecipe((prevRecipe) => {
+        return {
+          ...prevRecipe,
+          ingredients: [...prevRecipe.ingredients, tagText],
+        };
+      });
+    }
   };
 
   const handleInputChange = (e) => {
