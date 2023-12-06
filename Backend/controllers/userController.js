@@ -75,9 +75,30 @@ function getUser(req, res) {
   });
 };
 
+async function updateUser(req, res) {
+  try{
+    const userId = req.user._id;
+    const data = req.body;
+    console.log(data)
+    
+    if(data.role || data.following) {
+      return res.status(400).json({ message: "Cannot set the specified attribute(s)" });
+    }
+    
+    const updatedUser = await userService.updateUser(userId, data);
+
+    res.status(200).json(updatedUser)
+  } catch(error) {
+    res.status(500).json({ error: error.message });
+  }
+  
+
+}
+
 async function getUserById(req, res) {
-  const userId = req.params.id;
+  
   try {
+    const userId = req.params.id;
     const user = await userService.findUserById(userId);
     if (!user) {
       return res.status(404).json({ error: "User not found" });
@@ -211,5 +232,6 @@ module.exports = {
   getUser,
   login,
   register,
-  logout
+  logout,
+  updateUser
 }

@@ -12,9 +12,10 @@
   font-weight: bold;
 }
 
-.form-control {
+/* .form-control {
   margin-bottom: 15px;
-}
+} */
+/* Vishvesh - Commented due to the search button bottom margin not set properly */
 
 .formErrors {
   color: red;
