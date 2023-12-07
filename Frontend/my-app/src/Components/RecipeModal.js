@@ -11,6 +11,7 @@ const RecipeModal = ({
   comments,
   setComments,
   userID,
+  currentUserRole,
 }) => {
   const [newComment, setNewComment] = useState("");
 
@@ -95,7 +96,8 @@ const RecipeModal = ({
                 {comments.map((comment) => (
                   <li key={comment._id}>
                     {comment.message}
-                    {userID === comment.userId && (
+                    {(userID === comment.userId ||
+                      currentUserRole === "Admin") && (
                       <Button
                         variant="danger"
                         onClick={() => handleDeleteComment(comment._id)}
