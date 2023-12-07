@@ -4,6 +4,7 @@
 
 .passwordContainer {
   padding: 15px 0;
+  margin: 10px 0;
 }
 
 .editProfileContainer {
@@ -25,4 +26,13 @@
   .editProfileContainer {
     width: 80%;
   }
+}
+
+.roleField {
+  margin-top: 5%;
+  margin-bottom: 0%;
+}
+
+.roleLabelText {
+  color: blue;
 }

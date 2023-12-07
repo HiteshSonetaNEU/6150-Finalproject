@@ -177,6 +177,7 @@ function Recipe() {
                       id="inputTitle"
                       value={title}
                       onChange={(e) => setTitle(e.target.value)}
+                      placeholder="Recipe name"
                     />
                     <span className="formErrors">{titleError}</span>
                   </div>
@@ -190,6 +191,7 @@ function Recipe() {
                       id="inputDescription"
                       value={description}
                       onChange={(e) => setDescription(e.target.value)}
+                      placeholder="Recipe description"
                     ></textarea>
                     <span className="formErrors">{descriptionError}</span>
                   </div>
@@ -204,6 +206,7 @@ function Recipe() {
                         setTags(tags.filter((tag, index) => index !== i))
                       }
                       handleAddition={(tag) => setTags([...tags, tag])}
+                      placeholder="Please enter your ingredients"
                     />
                     <span className="formErrors">{tagsError}</span>
                   </div>

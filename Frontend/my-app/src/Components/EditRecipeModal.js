@@ -89,21 +89,27 @@ const EditRecipeModal = ({ show, handleClose, chefData, onEditRecipe }) => {
       </Modal.Header>
       <Modal.Body>
         <form className="editRecipeModalContainer">
-          <label className="modaltitlelabel">Title</label>
+          <label className="modaltitlelabel"><b>Title</b></label>
           <input
             type="text"
             name="title"
             value={editedRecipe.title}
             onChange={handleInputChange}
+            placeholder="Recipe name"
+            className="titleTextInput"
           />
-          <label className="modaltitlelabel">Recipe</label>
+          <label className="modaltitlelabel"><b>Recipe</b></label>
           <textarea
             name="description"
             value={editedRecipe.description}
             onChange={handleInputChange}
+            placeholder="Recipe description"
+            className="descTextAreaInput"
           ></textarea>
           <label className="modaltitlelabel IngredientsModal">
+            <b>
             Ingredients
+            </b>
           </label>
           <ReactTags
             key={editedRecipe.ingredients.length} // Add a key prop
@@ -114,6 +120,7 @@ const EditRecipeModal = ({ show, handleClose, chefData, onEditRecipe }) => {
             handleDelete={handleDelete}
             handleAddition={(tag) => handleAddition(tag.text)}
             handleInputChange={handleTagsChange}
+            placeholder="Please enter your ingredients"
           />
         </form>
       </Modal.Body>
