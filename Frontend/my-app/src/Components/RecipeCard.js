@@ -3,11 +3,11 @@ import "../Styles/RecipeCard.css";
 import imgX from "../Images/Home/bhindi-masala.jpg";
 import RecipeModal from "./RecipeModal";
 import axios from "axios";
- 
-const RecipeCard = ({ recipe, userID }) => {
+
+const RecipeCard = ({ recipe, userID, currentUserRole }) => {
   const [modalShow, setModalShow] = useState(false);
   const [comments, setComments] = useState([]);
- 
+
   const handleViewClick = async ({ recipeID }) => {
     try {
       const response = await axios.get(
@@ -21,10 +21,10 @@ const RecipeCard = ({ recipe, userID }) => {
     } catch (error) {
       console.log(error);
     }
- 
+
     setModalShow(true);
   };
- 
+
   return (
     <>
       <div className="col-sm-3 recipeCardContainer">
@@ -53,10 +53,11 @@ const RecipeCard = ({ recipe, userID }) => {
           comments={comments}
           setComments={setComments}
           userID={userID}
+          currentUserRole={currentUserRole}
         />
       )}
     </>
   );
 };
- 
+
 export default RecipeCard;
