@@ -3,7 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import imgX from "../Images/Home/bhindi-masala.jpg";
 import axios from "axios";
- 
+
 const RecipeModal = ({
   show,
   handleClose,
@@ -13,10 +13,10 @@ const RecipeModal = ({
   userID,
 }) => {
   const [newComment, setNewComment] = useState("");
- 
+
   // console.log("COMMENTS");
   // console.log(comments.length);
- 
+
   const handleAddComment = async () => {
     try {
       const response = await axios.post(
@@ -35,7 +35,7 @@ const RecipeModal = ({
     }
   };
   // console.log(userID);
- 
+
   const handleDeleteComment = async (commentID) => {
     try {
       const response = await axios.delete(
@@ -44,12 +44,26 @@ const RecipeModal = ({
           withCredentials: true,
         }
       );
-      console.log(response);
+      // console.log(response);
+      if (response.status === 200) {
+        const deletedCommentIndex = comments.findIndex(
+          (comment) => comment._id === commentID
+        );
+
+        if (deletedCommentIndex !== -1) {
+          const updatedComments = [
+            ...comments.slice(0, deletedCommentIndex),
+            ...comments.slice(deletedCommentIndex + 1),
+          ];
+
+          setComments(updatedComments);
+        }
+      }
     } catch (error) {
       console.log(error);
     }
   };
- 
+
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -95,7 +109,7 @@ const RecipeModal = ({
             ) : (
               <p>No comments available.</p>
             )}
- 
+
             <div>
               <input
                 type="text"
@@ -120,5 +134,5 @@ const RecipeModal = ({
     </Modal>
   );
 };
- 
+
 export default RecipeModal;
