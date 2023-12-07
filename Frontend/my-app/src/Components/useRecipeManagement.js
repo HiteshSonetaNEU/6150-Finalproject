@@ -6,16 +6,35 @@ const useRecipeManagement = (userID) => {
 
   const fetchRecipes = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:3001/recepie/chef/${userID}`,
-        {
-          withCredentials: true,
+      const response = await axios.get(`http://localhost:3001/`, {
+        withCredentials: true,
+      });
+      if (response.data.role === "Admin") {
+        try {
+          const response = await axios.get(
+            `http://localhost:3001/recepie/get`,
+            {
+              withCredentials: true,
+            }
+          );
+          setRecipes(response.data);
+        } catch (error) {
+          console.log(error);
         }
-      );
-      setRecipes(response.data);
-    } catch (error) {
-      console.log(error);
-    }
+      } else {
+        try {
+          const response = await axios.get(
+            `http://localhost:3001/recepie/chef/${userID}`,
+            {
+              withCredentials: true,
+            }
+          );
+          setRecipes(response.data);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    } catch {}
   };
 
   useEffect(() => {
