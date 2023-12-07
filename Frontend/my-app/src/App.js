@@ -14,6 +14,7 @@ import Contact from "./Components/Contact";
 import Feedback from "./Components/Feedback";
 import EditProfile from "./Components/EditProfile";
 import Recipe from "./Components/Recipe";
+import Upload from "./Components/Upload";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/feedback" element={<Feedback />} />
         <Route path="/editProfile" element={<EditProfile />} />
         <Route path="/recipe" element={<Recipe />} />
+        <Route path="/upload" element={<Upload />} />
       </Routes>
     </Router>
   );

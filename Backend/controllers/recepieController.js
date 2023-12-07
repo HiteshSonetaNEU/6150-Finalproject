@@ -2,6 +2,9 @@ const recepieService = require("../services/recepieService");
 const userService = require("../services/userService");
 const mongoose = require("mongoose");
 
+
+// const upload = multer({ storage: storage });
+
 // Controller function to create a new recipe
 async function createRecepie(req, res) {
   try {
@@ -76,6 +79,14 @@ async function getRecepieById(req, res) {
 async function updateRecepieById(req, res) {
   try {
     const recepieId = req.params.id;
+    var jj={}
+    if (req.body){
+      jj={...jj,...req.body}
+    }
+    if (req.file){
+      jj={...jj,photo: req.file.filename,
+        path: req.file.path}
+    }
 
     const recepie = await recepieService.getRecepieById(recepieId);
     if (req.user.role === "User") {
@@ -92,7 +103,7 @@ async function updateRecepieById(req, res) {
     } else {
       const updatedRecepie = await recepieService.updateRecepieById(
         recepieId,
-        req.body
+        jj
       );
 
       if (!updatedRecepie) {
@@ -105,6 +116,8 @@ async function updateRecepieById(req, res) {
     res.status(500).json({ message: error.message  });
   }
 };
+
+
 
 // Controller function to delete a recipe by ID
 //only creator and admin can detele
@@ -192,7 +205,7 @@ module.exports = {
   updateRecepieById,
   deleteRecepieById,
   getChefById,
-  getRecepieByChef,
+  getRecepieByChef
 
 }
 
