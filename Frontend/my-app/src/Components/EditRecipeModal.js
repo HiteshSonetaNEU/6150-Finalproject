@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { WithContext as ReactTags } from "react-tag-input";
+import "../Styles/EditRecipeModal.css";
 
 const EditRecipeModal = ({ show, handleClose, chefData, onEditRecipe }) => {
   const [editedRecipe, setEditedRecipe] = useState({
@@ -87,21 +88,23 @@ const EditRecipeModal = ({ show, handleClose, chefData, onEditRecipe }) => {
         <Modal.Title>Edit Recipe</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <form>
-          <label>Title</label>
+        <form className="editRecipeModalContainer">
+          <label className="modaltitlelabel">Title</label>
           <input
             type="text"
             name="title"
             value={editedRecipe.title}
             onChange={handleInputChange}
           />
-          <label>Description</label>
+          <label className="modaltitlelabel">Recipe</label>
           <textarea
             name="description"
             value={editedRecipe.description}
             onChange={handleInputChange}
           ></textarea>
-          <label>Ingredients</label>
+          <label className="modaltitlelabel IngredientsModal">
+            Ingredients
+          </label>
           <ReactTags
             key={editedRecipe.ingredients.length} // Add a key prop
             tags={editedRecipe.ingredients.map((ingredient, index) => ({
@@ -118,7 +121,7 @@ const EditRecipeModal = ({ show, handleClose, chefData, onEditRecipe }) => {
         <Button variant="secondary" onClick={handleClose}>
           Close
         </Button>
-        <Button variant="primary" onClick={handleSubmitEdit}>
+        <Button variant="primary btn-dark" onClick={handleSubmitEdit}>
           Save Changes
         </Button>
       </Modal.Footer>

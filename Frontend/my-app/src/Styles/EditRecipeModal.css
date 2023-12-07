@@ -1,0 +1,24 @@
+.editRecipeModalContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.editRecipeModalContainer > .modaltitlelabel {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.tag-wrapper {
+  border-radius: 5px;
+  padding: 7px 0;
+  background: red;
+  margin-right: 5px;
+  padding-left: 4px;
+  background-color: grey;
+  color: white;
+}
+
+.ReactTags__remove {
+  border-radius: 5px;
+  border: 0;
+}
