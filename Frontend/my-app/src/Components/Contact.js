@@ -208,10 +208,10 @@ function Contact() {
         <p className="profDesc">
           <b>
             <a
-              href="mailto:soneta.h@northeastern.edu"
+              href="mailto:v.chawla@northeastern.edu"
               className="profDescEmail"
             >
-              soneta.h@northeastern.edu
+              v.chawla@northeastern.edu
             </a>
           </b>
         </p>

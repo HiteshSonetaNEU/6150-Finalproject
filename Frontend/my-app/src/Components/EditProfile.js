@@ -156,9 +156,15 @@ function EditProfile() {
       <div className="container editProfileContainer">
         <h2>Edit Profile</h2>
 
+        <div className="mb-3 roleField">
+            <label htmlFor="existingRole" className="form-label">
+              Role: <i className="roleLabelText">{data.role}</i>
+            </label>
+        </div>
+
         <form className="passwordContainer">
           <div className="mb-3">
-            <label htmlFor="newPassword" className="form-label">
+            <label htmlFor="newPassword" className="form-label" placeholder="Enter new password">
               New Password
             </label>
             <input
@@ -182,7 +188,7 @@ function EditProfile() {
 
         <form>
           <div className="mb-3">
-            <label htmlFor="name" className="form-label">
+            <label htmlFor="name" className="form-label" placeholder="Enter your Full Name">
               Name
             </label>
             <input
@@ -196,7 +202,7 @@ function EditProfile() {
           </div>
 
           <div className="mb-3">
-            <label htmlFor="profileDes" className="form-label">
+            <label htmlFor="profileDes" className="form-label" placeholder="Share something about yourself">
               Profile Description
             </label>
             <input
@@ -219,6 +225,7 @@ function EditProfile() {
               handleDelete={handleSpecialitiesDelete}
               handleAddition={(tag) => handleSpecialitiesAddition(tag.text)}
               handleInputChange={handleSpecialitiesChange}
+              placeholder="Enter your specialities"
             />
           </div>
 
