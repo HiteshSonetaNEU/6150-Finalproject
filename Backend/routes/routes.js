@@ -12,6 +12,7 @@ const {
   checkAuthenticated,
   checkNotAuthenticated,
   search,
+  updateUser,
 } = require("../controllers/userController");
 
 router.post("/login", checkNotAuthenticated, login);
@@ -23,5 +24,5 @@ router.get("/user/unfollow/:id", checkAuthenticated, unFollowChef);
 router.get("/user/chef/", checkAuthenticated, getChefs);
 router.get("/user/search", checkAuthenticated, search);
 router.get("/user/:id", checkAuthenticated, getUserById);
-
+router.post("/user/update", checkAuthenticated, updateUser);
 module.exports = router;
