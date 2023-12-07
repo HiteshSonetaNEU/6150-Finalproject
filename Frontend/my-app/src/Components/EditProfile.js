@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { WithContext as ReactTags } from "react-tag-input";
 
-import "../Styles/Home.css";
+import "../Styles/EditProfile.css";
 
 import Header from "./Header.js";
 import Footer from "./Footer.js";
@@ -153,11 +153,10 @@ function EditProfile() {
     <>
       <Header />
 
-      <div className="container mt-5">
+      <div className="container editProfileContainer">
         <h2>Edit Profile</h2>
 
-        {/* Password Change Section */}
-        <form>
+        <form className="passwordContainer">
           <div className="mb-3">
             <label htmlFor="newPassword" className="form-label">
               New Password
@@ -174,14 +173,13 @@ function EditProfile() {
 
           <button
             type="button"
-            className="btn btn-primary"
+            className="btn btn-dark"
             onClick={handlePasswordSave}
           >
             Change Password
           </button>
         </form>
 
-        {/* Profile Edit Section */}
         <form>
           <div className="mb-3">
             <label htmlFor="name" className="form-label">
@@ -226,7 +224,7 @@ function EditProfile() {
 
           <button
             type="button"
-            className="btn btn-primary"
+            className="btn btn-dark"
             onClick={handleProfileSave}
           >
             Save Profile
