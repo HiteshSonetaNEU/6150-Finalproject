@@ -30,14 +30,13 @@ function Recipe() {
   const onSubmitRecipe = async (e) => {
     e.preventDefault();
     let ingredients = tags.map((tag) => tag.text);
-    // console.log(ingredients);
+
     let obj1 = {
       ingredients,
       description,
       title,
       photo,
     };
-    // console.log(obj1);
 
     if (validateForm()) {
       try {
@@ -51,15 +50,16 @@ function Recipe() {
             withCredentials: true,
           }
         );
-        // console.log(response);
+
+        setUserRecipes(response.data);
+
         if (response.status === 201) {
-          console.log(response.data);
-          setUserRecipes(response.data);
           alert("Recipe submitted");
           setTags([]);
           setDescription("");
           setTitle("");
           setPhoto("");
+          window.location.reload();
         } else {
           console.error(
             "Error in creating the recipe. Server responded with:",
@@ -150,8 +150,6 @@ function Recipe() {
   }
 
   const handleEditRecipe = (recipeID, editedRecipe) => {
-    // Implement logic to update the recipe on the server
-    // For simplicity, this example only updates the UI
     setUserRecipes((prevRecipes) =>
       prevRecipes.map((recipe) =>
         recipe._id === recipeID ? { ...recipe, ...editedRecipe } : recipe
@@ -238,7 +236,6 @@ function Recipe() {
         </Accordion>
         <h2 className="recipeHeadingYour">Your Recipes</h2>
       </div>
-      {/* <RecipeCardsUser userID={userID} userRecipes={userRecipes} /> */}
       <RecipeCardsUser
         userID={userID}
         userRecipes={userRecipes}

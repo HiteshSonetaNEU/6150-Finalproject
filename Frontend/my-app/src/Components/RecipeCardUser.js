@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../Styles/RecipeCard.css";
 import imgX from "../Images/Home/bhindi-masala.jpg";
-import RecipeModal from "./RecipeModal";
+import RecipeModalUser from "./RecipeModalUser";
 import EditRecipeModal from "./EditRecipeModal";
 
 const RecipeCardUser = ({ recipe, onDeleteRecipe, onEditRecipe }) => {
@@ -51,7 +51,7 @@ const RecipeCardUser = ({ recipe, onDeleteRecipe, onEditRecipe }) => {
         </div>
       </div>
       {viewModalShow && (
-        <RecipeModal
+        <RecipeModalUser
           show={viewModalShow}
           handleClose={() => setViewModalShow(false)}
           chefData={recipe}

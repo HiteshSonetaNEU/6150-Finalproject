@@ -21,8 +21,7 @@ function EditProfile() {
         const response = await axios.get("http://localhost:3001/", {
           withCredentials: true,
         });
-        console.log(response.data);
-        if (response.data.name) {
+        if (response.statusText === "OK") {
           setData(response.data);
           setSpecialities(
             response.data.specialities.map((speciality, index) => ({
@@ -86,13 +85,19 @@ function EditProfile() {
   };
 
   const handlePasswordSave = async () => {
-    console.log(newPassword);
+    // console.log(newPassword);
     try {
-      const response = await axios.post("http://localhost:3001/user/update", {
-        password: newPassword,
-      });
-      console.log(response.data);
-      alert("Password had been changed");
+      const response = await axios.post(
+        "http://localhost:3001/user/update",
+        {
+          password: newPassword,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+      // console.log(response.data);
+      alert("Password changed Successfully");
       setNewPassword("");
     } catch (error) {
       console.error(error);
@@ -106,15 +111,27 @@ function EditProfile() {
 
   const handleProfileSave = async () => {
     try {
-      const response = await axios.post("http://localhost:3001/user/update", {
-        fullName: data.fullName,
-        profileDes: data.profileDes,
-        specialities: specialities.map((tag) => tag.text),
-      });
-      console.log("AAAA");
-      console.log(response.data);
+      console.log(data.name);
+      console.log(data.profileDes);
+      console.log(specialities.map((tag) => tag.text));
+
+      const response = await axios.post(
+        "http://localhost:3001/user/update",
+        {
+          fullName: data.name,
+          profileDes: data.profileDes,
+          specialities: specialities.map((tag) => tag.text),
+        },
+        {
+          withCredentials: true,
+        }
+      );
+      // console.log("response = ", response);
+      if (response.statusText === "OK") {
+        alert("Profile changes successfully");
+      }
     } catch (error) {
-      console.error(error);
+      console.error("error ", error);
     }
   };
 
