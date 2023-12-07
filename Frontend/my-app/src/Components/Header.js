@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 
 import "../Styles/Header.css";
@@ -9,6 +9,7 @@ export default function Header() {
   const navigate = useNavigate();
   const [userRole, setUserRole] = useState("");
   const [loading, setLoading] = useState(true);
+  const location = useLocation();
 
   const LogoutButton = async () => {
     try {
@@ -75,6 +76,9 @@ export default function Header() {
     );
   }
 
+  // Function to determine if a link should be marked as active
+  const isLinkActive = (path) => location.pathname === path;
+
   return (
     <>
       <header className="header-container">
@@ -107,37 +111,60 @@ export default function Header() {
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
                   <a
-                    className="nav-link active"
-                    aria-current="page"
+                    className={`nav-link 
+                      ${
+                        isLinkActive("/home") ? "active activePage" : ""
+                      }`
+                    }
                     href="/home"
                   >
                     Home
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/chefs">
+                  <a className={`nav-link 
+                      ${
+                        isLinkActive("/chefs") ? "active activePage" : ""
+                      }`
+                    } href="/chefs">
                     Chefs
                   </a>
                 </li>
                 {(userRole === "Chef" || userRole === "Admin") && (
                   <li className="nav-item">
-                    <a className="nav-link" href="/recipe">
+                    <a className={`nav-link 
+                      ${
+                        isLinkActive("/recipe") ? "active activePage" : ""
+                      }`
+                    } href="/recipe">
                       Recipe
                     </a>
                   </li>
                 )}
                 <li className="nav-item">
-                  <a className="nav-link" href="/feedback">
+                  <a className={`nav-link 
+                      ${
+                        isLinkActive("/feedback") ? "active activePage" : ""
+                      }`
+                    } href="/feedback">
                     Feedback
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/editProfile">
+                  <a className={`nav-link 
+                      ${
+                        isLinkActive("/editProfile") ? "active activePage" : ""
+                      }`
+                    } href="/editProfile">
                     Edit Profile
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/contact">
+                  <a className={`nav-link 
+                      ${
+                        isLinkActive("/contact") ? "active activePage" : ""
+                      }`
+                    } href="/contact">
                     Contact Us
                   </a>
                 </li>
