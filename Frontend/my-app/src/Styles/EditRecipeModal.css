@@ -1,0 +1,9 @@
+.editRecipeModalContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.editRecipeModalContainer > .modaltitlelabel {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
