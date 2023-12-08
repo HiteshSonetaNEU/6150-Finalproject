@@ -40,6 +40,9 @@ console.log("image=== ",image)
           Upload Image
         </Button>
       </Form>
+      <div>
+      <img src="http://localhost:3001/api/images/image-1701999782892.png" alt="Your Image" />
+    </div>
     </div>
   );
 }
