@@ -5,6 +5,13 @@ import imgX from "../Images/Home/bhindi-masala.jpg";
 
 const RecipeModalUser = ({ show, handleClose, chefData }) => {
   console.log(chefData);
+  console.log(chefData.photo);
+
+  var recipeImage = "http://localhost:3001/api/images/" + chefData.photo;
+  if (chefData.photo === undefined) {
+    recipeImage = imgX;
+  }
+
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -17,7 +24,7 @@ const RecipeModalUser = ({ show, handleClose, chefData }) => {
           <>
             <img
               className="modalImageRecipe"
-              src={imgX}
+              src={recipeImage}
               alt={chefData.title}
               style={{ maxWidth: "100%", padding: "0 27.5%" }}
             />

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { WithContext as ReactTags } from "react-tag-input";
+import Upload from "./Upload";
 import "../Styles/EditRecipeModal.css";
 
 const EditRecipeModal = ({ show, handleClose, chefData, onEditRecipe }) => {
@@ -9,7 +10,6 @@ const EditRecipeModal = ({ show, handleClose, chefData, onEditRecipe }) => {
     title: chefData.title || "",
     description: chefData.description || "",
     ingredients: chefData.ingredients || [],
-    photo: chefData.photo || "",
   });
 
   useEffect(() => {
@@ -17,7 +17,6 @@ const EditRecipeModal = ({ show, handleClose, chefData, onEditRecipe }) => {
       title: chefData.title || "",
       description: chefData.description || "",
       ingredients: chefData.ingredients || [],
-      photo: chefData.photo || "",
     });
   }, [chefData]);
 
@@ -30,7 +29,6 @@ const EditRecipeModal = ({ show, handleClose, chefData, onEditRecipe }) => {
   };
 
   const handleAddition = (tagText) => {
-    // Check if the tagText already exists in ingredients
     const tagExists = editedRecipe.ingredients.includes(tagText);
 
     if (!tagExists) {
@@ -82,6 +80,8 @@ const EditRecipeModal = ({ show, handleClose, chefData, onEditRecipe }) => {
     return true;
   };
 
+  console.log(chefData._id);
+
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -89,7 +89,10 @@ const EditRecipeModal = ({ show, handleClose, chefData, onEditRecipe }) => {
       </Modal.Header>
       <Modal.Body>
         <form className="editRecipeModalContainer">
-          <label className="modaltitlelabel"><b>Title</b></label>
+          <label className="modaltitlelabel">
+            <b>Title</b>
+            ""{" "}
+          </label>
           <input
             type="text"
             name="title"
@@ -98,7 +101,9 @@ const EditRecipeModal = ({ show, handleClose, chefData, onEditRecipe }) => {
             placeholder="Recipe name"
             className="titleTextInput"
           />
-          <label className="modaltitlelabel"><b>Recipe</b></label>
+          <label className="modaltitlelabel">
+            <b>Recipe</b>
+          </label>
           <textarea
             name="description"
             value={editedRecipe.description}
@@ -107,9 +112,7 @@ const EditRecipeModal = ({ show, handleClose, chefData, onEditRecipe }) => {
             className="descTextAreaInput"
           ></textarea>
           <label className="modaltitlelabel IngredientsModal">
-            <b>
-            Ingredients
-            </b>
+            <b>Ingredients</b>
           </label>
           <ReactTags
             key={editedRecipe.ingredients.length} // Add a key prop
@@ -122,6 +125,7 @@ const EditRecipeModal = ({ show, handleClose, chefData, onEditRecipe }) => {
             handleInputChange={handleTagsChange}
             placeholder="Please enter your ingredients"
           />
+          <Upload recipeId={chefData._id} />
         </form>
       </Modal.Body>
       <Modal.Footer>

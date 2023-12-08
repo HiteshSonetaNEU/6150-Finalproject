@@ -129,3 +129,11 @@
 .btn-edit {
   margin-left: 10px;
 }
+
+.commentsHeader {
+  margin-top: 20px;
+}
+
+.commentDeleteButton {
+  margin-left: 20px;
+}
