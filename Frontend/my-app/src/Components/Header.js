@@ -10,6 +10,7 @@ export default function Header() {
   const [userRole, setUserRole] = useState("");
   const [loading, setLoading] = useState(true);
   const location = useLocation();
+  const [searchVal, setSearchVal] = useState("");
 
   const LogoutButton = async () => {
     try {
@@ -79,6 +80,20 @@ export default function Header() {
   // Function to determine if a link should be marked as active
   const isLinkActive = (path) => location.pathname === path;
 
+  const onInputChange = (event) => {
+    event.preventDefault();
+
+    setSearchVal(event.target.value)
+  }
+
+  const onSearchClicked = (event) => {
+    event.preventDefault();
+
+    if(!searchVal) return;
+
+    // navigate(`/search/${searchVal}`);
+    navigate("/search")
+  }
   return (
     <>
       <header className="header-container">
@@ -168,6 +183,15 @@ export default function Header() {
                     Contact Us
                   </a>
                 </li>
+                <li className="nav-item">
+                  <a className={`nav-link 
+                      ${
+                        isLinkActive("/search") ? "active activePage" : ""
+                      }`
+                    } href="/search">
+                    Search
+                  </a>
+                </li>
               </ul>
               <form className="d-flex">
                 <input
@@ -175,8 +199,9 @@ export default function Header() {
                   type="search"
                   placeholder="Search"
                   aria-label="Search"
+                  onInput={onInputChange}
                 />
-                <button className="btn btn-outline-success" type="submit">
+                <button className="btn btn-outline-success" type="submit" onClick={onSearchClicked}>
                   Search
                 </button>
               </form>
