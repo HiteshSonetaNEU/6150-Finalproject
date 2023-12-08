@@ -23,6 +23,7 @@ function EditProfile() {
         });
         if (response.statusText === "OK") {
           setData(response.data);
+          // console.log(response.data)
           setSpecialities(
             response.data.specialities.map((speciality, index) => ({
               id: index.toString(),
@@ -154,11 +155,17 @@ function EditProfile() {
       <Header />
 
       <div className="container editProfileContainer">
-        <h2>Edit Profile</h2>
+        <h2 className="editProfileHeader">Edit Profile</h2>
 
-        <div className="mb-3 roleField">
-            <label htmlFor="existingRole" className="form-label">
+        
+        <div className="mb-3 emailAndRoleField">
+            <label htmlFor="existingEmailAndRole" className="form-label">
+              <p>
+              Email: <i className="emailLabelText">{data.email}</i>
+              </p>
+              <p className="rolePara">
               Role: <i className="roleLabelText">{data.role}</i>
+              </p>
             </label>
         </div>
 
@@ -186,7 +193,7 @@ function EditProfile() {
           </button>
         </form>
 
-        <form>
+        <form className="saveProfileForm">
           <div className="mb-3">
             <label htmlFor="name" className="form-label" placeholder="Enter your Full Name">
               Name
