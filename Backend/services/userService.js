@@ -57,12 +57,12 @@ async function updateUser(userId, data) {
       data.password = await bcrypt.hash(data.password, 10);
     }
 
-    const updatedRecepie = await User.findByIdAndUpdate(
+    const updatedUser = await User.findByIdAndUpdate(
       { _id: userId },
       { $set: data },
       { new: true }
     );
-    return updatedRecepie;
+    return updatedUser;
   } catch (error) {
     throw error;
   }

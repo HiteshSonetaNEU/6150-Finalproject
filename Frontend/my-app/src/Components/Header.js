@@ -1,6 +1,8 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
+import '@popperjs/core';
+import { NavDropdown } from 'react-bootstrap';
 
 import "../Styles/Header.css";
 import { useState, useEffect } from "react";
@@ -10,6 +12,8 @@ export default function Header() {
   const [userRole, setUserRole] = useState("");
   const [loading, setLoading] = useState(true);
   const location = useLocation();
+  const [userName, setUserName] = useState("");
+  const [searchVal, setSearchVal] = useState("");
 
   const LogoutButton = async () => {
     try {
@@ -43,6 +47,7 @@ export default function Header() {
         });
         // console.log(response.data.role);
         setUserRole(response.data.role);
+        setUserName(response.data.name);
         if (response.data.name) {
           // user is logged in
         }
@@ -78,7 +83,22 @@ export default function Header() {
 
   // Function to determine if a link should be marked as active
   const isLinkActive = (path) => location.pathname === path;
+  // console.log(userRole, userName);
 
+  const onInputChange = (event) => {
+    event.preventDefault();
+
+    setSearchVal(event.target.value)
+  }
+
+  const onSearchClicked = (event) => {
+    event.preventDefault();
+
+    if(!searchVal) return;
+
+    // navigate(`/search/${searchVal}`);
+    navigate("/search")
+  }
   return (
     <>
       <header className="header-container">
@@ -168,6 +188,15 @@ export default function Header() {
                     Contact Us
                   </a>
                 </li>
+                <li className="nav-item">
+                  <a className={`nav-link 
+                      ${
+                        isLinkActive("/search") ? "active activePage" : ""
+                      }`
+                    } href="/search">
+                    Search
+                  </a>
+                </li>
               </ul>
               <form className="d-flex">
                 <input
@@ -175,11 +204,19 @@ export default function Header() {
                   type="search"
                   placeholder="Search"
                   aria-label="Search"
+                  onInput={onInputChange}
                 />
-                <button className="btn btn-outline-success" type="submit">
+                <button className="btn btn-outline-success" type="submit" onClick={onSearchClicked}>
                   Search
                 </button>
               </form>
+
+              <NavDropdown title={`${userRole}: ${userName.length > 1 ? userName.substring(0, userName.indexOf(' ')) : userName}`} id="basic-nav-dropdown">
+                <NavDropdown.Item href="#">Action</NavDropdown.Item>
+                <NavDropdown.Item href="#">Another action</NavDropdown.Item>
+                <NavDropdown.Item href="#">Something else here</NavDropdown.Item>
+              </NavDropdown>
+
               <button
                 className="btn btn-danger logout-btn"
                 type="button"

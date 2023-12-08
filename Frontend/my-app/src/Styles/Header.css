@@ -27,3 +27,12 @@
   text-decoration: underline red 0.15rem;
   text-underline-offset: 0.5em;
 }
+
+.profile-btn {
+  color: white;
+  margin-left: 8px;
+}
+
+.profile-btn:hover {
+  color: red;
+}

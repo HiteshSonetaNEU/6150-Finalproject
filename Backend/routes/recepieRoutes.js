@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
   const upload = multer({ storage: storage });
 
 // Create a new recipe
-router.post("/create", checkAuthenticated, recepieController.createRecepie);
+router.post("/create", checkAuthenticated,upload.single('image'), recepieController.createRecepie);
 
 // Get all recipes
 router.get("/get", checkAuthenticated, recepieController.getAllRecepies); // give all my recepies and the chef's recepies which I follow
