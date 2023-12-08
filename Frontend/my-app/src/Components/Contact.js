@@ -13,11 +13,6 @@ import HiteshSonetaImg from "../Images/Contact/hitesh-soneta-photo.jpeg";
 import OmSolankiImg from "../Images/Contact/om-solanki-photo.jpeg";
 import VishveshPanchalImg from "../Images/Contact/vishvesh-panchal-photo.jpg";
 import VrishabShettyImg from "../Images/Contact/vrishab-shetty-photo.jpg";
-import ProfVishalChawlaImg from "../Images/Contact/prof-vishal-chawla-photo.jpg";
-import JayeshTakImg from "../Images/Contact/jayesh-tak-photo.jpeg";
-import SaiSuryaTejaSwamiImg from "../Images/Contact/sai-surya-teja-swami-photo.jpeg";
-import SupriyaTripathiImg from "../Images/Contact/supriya-tripathi-photo.jpeg";
-import AbhishekVenkataImg from "../Images/Contact/abhishek-venkata-photo.jpeg";
 
 function Contact() {
   const [data, setData] = useState([]);
