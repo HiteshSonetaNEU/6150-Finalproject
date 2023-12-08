@@ -13,6 +13,24 @@ export default function Header() {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
   const [userName, setUserName] = useState("");
+  const [searchVal, setSearchVal] = useState("");
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [show, setShow] = useState(false);
+
+  const showDropdown = (e)=>{
+      setShow(!show);
+  }
+  const hideDropdown = e => {
+      setShow(false);
+  }
+
+  const handleMouseEnter = () => {
+    setDropdownOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    setDropdownOpen(false);
+  };
 
   const LogoutButton = async () => {
     try {
@@ -145,6 +163,8 @@ export default function Header() {
                     Feedback
                   </a>
                 </li>
+                {/* <li className="nav-item">
+                  <a className={`nav-link 
                 <li className="nav-item">
                   <a
                     className={`nav-link 
@@ -154,7 +174,7 @@ export default function Header() {
                     href="/editProfile">
                     Edit Profile
                   </a>
-                </li>
+                </li> */}
                 <li className="nav-item">
                   <a
                     className={`nav-link 
@@ -172,6 +192,22 @@ export default function Header() {
                   </a>
                 </li>
               </ul>
+              <form className="d-flex">
+                <input
+                  className="form-control me-2"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                  onInput={onInputChange}
+                />
+                <button className="btn btn-outline-success" type="submit" onClick={onSearchClicked}>
+                  Search
+                </button>
+              </form>
+                    
+              <NavDropdown title={`${userRole}: ${userName.length > 1 ? userName.substring(0, userName.indexOf(' ')) : userName}`} id="basic-nav-dropdown" data-bs-theme="dark" className={isDropdownOpen ? 'custom-dropdown open' : 'custom-dropdown'} show={show} onMouseEnter={() => {showDropdown(); handleMouseEnter();}} onMouseLeave={() => {hideDropdown(); handleMouseLeave();}}>
+                <NavDropdown.Item href="/editProfile" className="dropDownItem-1">Edit Profile</NavDropdown.Item>
+                <NavDropdown.Item onClick={LogoutButton} className="dropDownItem-2">Logout</NavDropdown.Item>
 
               <NavDropdown
                 title={`${userRole}: ${
@@ -187,12 +223,12 @@ export default function Header() {
                 </NavDropdown.Item>
               </NavDropdown>
 
-              <button
+              {/* <button
                 className="btn btn-danger logout-btn"
                 type="button"
                 onClick={LogoutButton}>
                 Logout
-              </button>
+              </button> */}
             </div>
           </div>
         </nav>
