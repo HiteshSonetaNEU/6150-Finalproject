@@ -7,6 +7,7 @@ const recepieSchema = new mongoose.Schema({
   description: { type: String},
   title: { type: String, required: true },
   photo: { type: String},
+  path:{type:String},
   chefID: { type: mongoose.Schema.Types.ObjectId, ref: userRef }
 });
 

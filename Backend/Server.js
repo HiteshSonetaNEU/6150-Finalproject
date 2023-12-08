@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const { User } = require("./models/userModel");
 const app = express();
+const path = require('path');
 const cors = require("cors");
 
 const mongoose = require("mongoose");
@@ -49,6 +50,8 @@ app.use("/", routes);
 app.use("/comment", commentRoutes);
 app.use("/feedback", feedbackRoutes);
 app.use("/recepie", recepieRoutes);
+app.use('/api/images', express.static(path.join(__dirname, 'uploads')));
+
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {

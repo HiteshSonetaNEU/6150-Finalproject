@@ -175,8 +175,8 @@ async function unFollowChef(req, res) {
 
 async function search(req, res) {
   try {
-    let { query, filter } = req.body;
-    query = query.toLowerCase();
+    let query  = req.params.query;
+    query = query.toLowerCase().trim();
     const chefs = await getAllChefs();
     const recipes = await recepieService.getAllRecepies();
     const searchResult = {
@@ -220,7 +220,9 @@ async function checkChef(chefId) {
 }
 
 function checkAuthenticated(req, res, next) {
+  console.log(req.isAuthenticated());
   if (req.isAuthenticated()) {
+    console.log("Inside if");
     return next();
   }
   return res.status(400).json({ message: "Login first" });

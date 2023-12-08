@@ -10,7 +10,7 @@ import Footer from "./Footer.js";
 import Button from "react-bootstrap/esm/Button.js";
 import chefImage from "../Images/profile/image1.jpg";
 
-function Chefs() {
+var Chefs = ({searchChefData}) => {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
@@ -181,58 +181,114 @@ function Chefs() {
 
   return (
     <>
-      <Header />
-      <div className="chefBody">
-        <div className="chef-list">
-          {chefAll.map((chef, index) => {
-            return (
-              <div className="chefContainer" key={chef._id}>
-                <img className="chefImage" src={chefImage} />
-                <div className="chefInfoContainer">
-                  <div className="chefHeader">
-                    <h2
-                      className="chefName"
-                      onClick={() => {
-                        viewRecepie(chef._id, chef.fullName, chef.profileDes);
-                      }}
-                    >
-                      {chef.fullName}
-                    </h2>
-                    <Button
-                      type="button"
-                      className="btn btn-dark followButton"
-                      onClick={() => {
-                        if (followStatusMap[chef._id] === "Follow") {
-                          follow(chef._id);
-                        } else {
-                          unfollow(chef._id);
-                        }
-                      }}
-                    >
-                      {followStatusMap[chef._id]}
-                    </Button>
-                  </div>
-                  <p>{chef.profileDes || desc}</p>
-                  <div className="specList">
-                    {chef.specialities.length > 0 &&
-                      chef.specialities.map((data, index) => (
-                        <div key={data} className="chefSpec">
-                          {data}
-                        </div>
-                      ))}
+      {
+        !searchChefData
+        ?
+        (
+        <div>
+        <Header />
+        <div className="chefBody">
+          <div className="chef-list">
+            {chefAll.map((chef, index) => {
+              return (
+                <div className="chefContainer" key={chef._id}>
+                  <img className="chefImage" src={chefImage} />
+                  <div className="chefInfoContainer">
+                    <div className="chefHeader">
+                      <h2
+                        className="chefName"
+                        onClick={() => {
+                          viewRecepie(chef._id, chef.fullName, chef.profileDes);
+                        }}
+                      >
+                        {chef.fullName}
+                      </h2>
+                      <Button
+                        type="button"
+                        className="btn btn-dark followButton"
+                        onClick={() => {
+                          if (followStatusMap[chef._id] === "Follow") {
+                            follow(chef._id);
+                          } else {
+                            unfollow(chef._id);
+                          }
+                        }}
+                      >
+                        {followStatusMap[chef._id]}
+                      </Button>
+                    </div>
+                    <p>{chef.profileDes || desc}</p>
+                    <div className="specList">
+                      {chef.specialities.length > 0 &&
+                        chef.specialities.map((data, index) => (
+                          <div key={data} className="chefSpec">
+                            {data}
+                          </div>
+                        ))}
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
-      </div>
-      <Footer />
-      <ChefModal
-        show={modalShow}
-        handleClose={handleClose}
-        chefData={selectedChef}
-      />
+        <Footer />
+        <ChefModal
+          show={modalShow}
+          handleClose={handleClose}
+          chefData={selectedChef}
+        />
+        </div>
+        )
+        :
+        (
+        <div className="chefBody">
+          <div className="chef-list">
+            {searchChefData.map((chef, index) => {
+              return (
+                <div className="chefContainer" key={chef._id}>
+                  <img className="chefImage" src={chefImage} />
+                  <div className="chefInfoContainer">
+                    <div className="chefHeader">
+                      <h2
+                        className="chefName"
+                        onClick={() => {
+                          viewRecepie(chef._id, chef.fullName, chef.profileDes);
+                        }}
+                      >
+                        {chef.fullName}
+                      </h2>
+                      <Button
+                        type="button"
+                        className="btn btn-dark followButton"
+                        onClick={() => {
+                          if (followStatusMap[chef._id] === "Follow") {
+                            follow(chef._id);
+                          } else {
+                            unfollow(chef._id);
+                          }
+                        }}
+                      >
+                        {followStatusMap[chef._id]}
+                      </Button>
+                    </div>
+                    <p>{chef.profileDes || desc}</p>
+                    <div className="specList">
+                      {chef.specialities.length > 0 &&
+                        chef.specialities.map((data, index) => (
+                          <div key={data} className="chefSpec">
+                            {data}
+                          </div>
+                        ))}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        )
+      }
     </>
   );
 }
