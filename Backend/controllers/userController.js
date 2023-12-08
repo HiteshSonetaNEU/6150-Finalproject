@@ -77,6 +77,7 @@ function logout(req, res, next) {
 function getUser(req, res) {
   res.json({
     name: req.user.fullName,
+    email: req.user.email,
     id: req.user._id,
     role: req.user.role,
     following: req.user.following,

@@ -15,6 +15,7 @@ import Feedback from "./Components/Feedback";
 import EditProfile from "./Components/EditProfile";
 import Recipe from "./Components/Recipe";
 import Search from "./Components/Search";
+import Upload from "./Components/Upload";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path="/editProfile" element={<EditProfile />} />
         <Route path="/recipe" element={<Recipe />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/upload" element={<Upload />} />
       </Routes>
     </Router>
   );

@@ -2,9 +2,20 @@ const express = require("express");
 const router = express.Router();
 const recepieController = require("../controllers/recepieController");
 const { checkAuthenticated } = require("../controllers/userController");
+const multer = require('multer');
+const path = require('path');
+
+const storage = multer.diskStorage({
+    destination: './uploads/',
+    filename: function (req, file, cb) {
+      cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    },
+  });
+  
+  const upload = multer({ storage: storage });
 
 // Create a new recipe
-router.post("/create", checkAuthenticated, recepieController.createRecepie);
+router.post("/create", checkAuthenticated,upload.single('image'), recepieController.createRecepie);
 
 // Get all recipes
 router.get("/get", checkAuthenticated, recepieController.getAllRecepies); // give all my recepies and the chef's recepies which I follow
@@ -13,7 +24,7 @@ router.get("/get", checkAuthenticated, recepieController.getAllRecepies); // giv
 router.get("/:id", checkAuthenticated, recepieController.getRecepieById);
 
 // Update a recipe by ID
-router.put("/:id", checkAuthenticated, recepieController.updateRecepieById);
+router.put("/:id", checkAuthenticated,upload.single('image'), recepieController.updateRecepieById);
 
 // Delete a recipe by ID
 router.delete("/:id", checkAuthenticated, recepieController.deleteRecepieById);
