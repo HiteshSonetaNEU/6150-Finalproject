@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import axios from "axios";
 
 import "../Styles/Home.css";
@@ -19,14 +19,6 @@ function Search() {
   const [searchResultRecipes, setRecipes] = useState([]);
   const [currentUserId, setCurrentUserID] = useState("");
   const [currentUserRole, setCurrentUserRole] = useState("User");
-
-  // const {query} = useParams();
-
-  // useEffect(() => {
-  //   if(query) {
-  //     setSearchval(query)
-  //   }
-  // }, [query])
 
   useEffect(() => {
     const checkLoggedInStatus = async () => {

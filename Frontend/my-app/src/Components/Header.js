@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
-import '@popperjs/core';
-import { NavDropdown } from 'react-bootstrap';
+import "@popperjs/core";
+import { NavDropdown } from "react-bootstrap";
 
 import "../Styles/Header.css";
 import { useState, useEffect } from "react";
@@ -13,7 +13,6 @@ export default function Header() {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
   const [userName, setUserName] = useState("");
-  const [searchVal, setSearchVal] = useState("");
 
   const LogoutButton = async () => {
     try {
@@ -73,8 +72,7 @@ export default function Header() {
         <div
           className="spinner-border text-primary"
           role="status"
-          style={{ width: "4rem", height: "4rem" }}
-        >
+          style={{ width: "4rem", height: "4rem" }}>
           <span className="visually-hidden">Loading...</span>
         </div>
       </div>
@@ -85,20 +83,7 @@ export default function Header() {
   const isLinkActive = (path) => location.pathname === path;
   // console.log(userRole, userName);
 
-  const onInputChange = (event) => {
-    event.preventDefault();
 
-    setSearchVal(event.target.value)
-  }
-
-  const onSearchClicked = (event) => {
-    event.preventDefault();
-
-    if(!searchVal) return;
-
-    // navigate(`/search/${searchVal}`);
-    navigate("/search")
-  }
   return (
     <>
       <header className="header-container">
@@ -107,8 +92,7 @@ export default function Header() {
             <a
               className="navbar-brand websiteLogo"
               href="/home"
-              style={{ display: "flex", alignItems: "center" }}
-            >
+              style={{ display: "flex", alignItems: "center" }}>
               reSSSiPes
             </a>
 
@@ -120,108 +104,93 @@ export default function Header() {
               aria-controls="navbarSupportedContent"
               aria-expanded="true"
               aria-label="Toggle navigation"
-              onClick={toggleCollapse}
-            >
+              onClick={toggleCollapse}>
               <span className="navbar-toggler-icon"></span>
             </button>
             <div
               className="navbar-collapse collapse show"
-              id="navbarSupportedContent"
-            >
+              id="navbarSupportedContent">
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
                   <a
                     className={`nav-link 
-                      ${
-                        isLinkActive("/home") ? "active activePage" : ""
-                      }`
-                    }
-                    href="/home"
-                  >
+                      ${isLinkActive("/home") ? "active activePage" : ""}`}
+                    href="/home">
                     Home
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className={`nav-link 
-                      ${
-                        isLinkActive("/chefs") ? "active activePage" : ""
-                      }`
-                    } href="/chefs">
+                  <a
+                    className={`nav-link 
+                      ${isLinkActive("/chefs") ? "active activePage" : ""}`}
+                    href="/chefs">
                     Chefs
                   </a>
                 </li>
                 {(userRole === "Chef" || userRole === "Admin") && (
                   <li className="nav-item">
-                    <a className={`nav-link 
-                      ${
-                        isLinkActive("/recipe") ? "active activePage" : ""
-                      }`
-                    } href="/recipe">
+                    <a
+                      className={`nav-link 
+                      ${isLinkActive("/recipe") ? "active activePage" : ""}`}
+                      href="/recipe">
                       Recipe
                     </a>
                   </li>
                 )}
                 <li className="nav-item">
-                  <a className={`nav-link 
-                      ${
-                        isLinkActive("/feedback") ? "active activePage" : ""
-                      }`
-                    } href="/feedback">
+                  <a
+                    className={`nav-link 
+                      ${isLinkActive("/feedback") ? "active activePage" : ""}`}
+                    href="/feedback">
                     Feedback
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className={`nav-link 
+                  <a
+                    className={`nav-link 
                       ${
                         isLinkActive("/editProfile") ? "active activePage" : ""
-                      }`
-                    } href="/editProfile">
+                      }`}
+                    href="/editProfile">
                     Edit Profile
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className={`nav-link 
-                      ${
-                        isLinkActive("/contact") ? "active activePage" : ""
-                      }`
-                    } href="/contact">
+                  <a
+                    className={`nav-link 
+                      ${isLinkActive("/contact") ? "active activePage" : ""}`}
+                    href="/contact">
                     Contact Us
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className={`nav-link 
-                      ${
-                        isLinkActive("/search") ? "active activePage" : ""
-                      }`
-                    } href="/search">
+                  <a
+                    className={`nav-link 
+                      ${isLinkActive("/search") ? "active activePage" : ""}`}
+                    href="/search">
                     Search
                   </a>
                 </li>
               </ul>
-              <form className="d-flex">
-                <input
-                  className="form-control me-2"
-                  type="search"
-                  placeholder="Search"
-                  aria-label="Search"
-                  onInput={onInputChange}
-                />
-                <button className="btn btn-outline-success" type="submit" onClick={onSearchClicked}>
-                  Search
-                </button>
-              </form>
 
-              <NavDropdown title={`${userRole}: ${userName.length > 1 ? userName.substring(0, userName.indexOf(' ')) : userName}`} id="basic-nav-dropdown">
+              <NavDropdown
+                title={`${userRole}: ${
+                  userName.length > 1
+                    ? userName.substring(0, userName.indexOf(" "))
+                    : userName
+                }`}
+                id="basic-nav-dropdown">
                 <NavDropdown.Item href="#">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#">Another action</NavDropdown.Item>
-                <NavDropdown.Item href="#">Something else here</NavDropdown.Item>
+                <NavDropdown.Item href="#">
+                  Something else here
+                </NavDropdown.Item>
               </NavDropdown>
 
               <button
                 className="btn btn-danger logout-btn"
                 type="button"
-                onClick={LogoutButton}
-              >
+                onClick={LogoutButton}>
                 Logout
               </button>
             </div>

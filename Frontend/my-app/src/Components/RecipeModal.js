@@ -106,8 +106,7 @@ const RecipeModal = ({
                       <Button
                         variant="danger"
                         className="commentDeleteButton"
-                        onClick={() => handleDeleteComment(comment._id)}
-                      >
+                        onClick={() => handleDeleteComment(comment._id)}>
                         Delete
                       </Button>
                     )}
@@ -120,6 +119,7 @@ const RecipeModal = ({
 
             <div>
               <input
+                className="commentInputField"
                 type="text"
                 value={newComment}
                 onChange={(e) => setNewComment(e.target.value)}
