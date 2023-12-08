@@ -15,7 +15,6 @@ function Recipe() {
   const [tags, setTags] = useState([]);
   const [description, setDescription] = useState("");
   const [title, setTitle] = useState("");
-  const [photo, setPhoto] = useState("");
   const [loading, setLoading] = useState(true);
   const [userID, setUserId] = useState("");
   const [titleError, setTitleError] = useState("");
@@ -35,7 +34,6 @@ function Recipe() {
       ingredients,
       description,
       title,
-      photo,
     };
 
     if (validateForm()) {
@@ -51,6 +49,8 @@ function Recipe() {
           }
         );
 
+        console.log("Created");
+        console.log(response.data);
         setUserRecipes(response.data);
 
         if (response.status === 201) {
@@ -58,8 +58,11 @@ function Recipe() {
           setTags([]);
           setDescription("");
           setTitle("");
-          setPhoto("");
-          window.location.reload();
+          // window.location.reload();
+          alert("Now click on edit and change the image of the recipe.");
+          document
+            .getElementById("RecipeModalView" + response.data._id)
+            .click();
         } else {
           console.error(
             "Error in creating the recipe. Server responded with:",
@@ -211,7 +214,7 @@ function Recipe() {
                     <span className="formErrors">{tagsError}</span>
                   </div>
 
-                  <div className="col-12">
+                  {/* <div className="col-12">
                     <label htmlFor="inputPhoto" className="form-label">
                       Photo URL
                     </label>
@@ -222,7 +225,7 @@ function Recipe() {
                       value={photo}
                       onChange={(e) => setPhoto(e.target.value)}
                     />
-                  </div>
+                  </div> */}
 
                   <div className="d-grid gap-2 col-6 mx-auto">
                     <button

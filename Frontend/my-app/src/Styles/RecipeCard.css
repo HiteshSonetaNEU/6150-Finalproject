@@ -4,7 +4,8 @@
 
 .card-img-top {
   width: 70%;
-  border-radius: 50%;
+  border-radius: 5%;
+  margin-top: 15px;
 }
 
 .card {
@@ -46,10 +47,6 @@
 .cardContainer {
   display: flex;
   align-items: center;
-}
-
-.cardContainer > img {
-  padding-top: 2vh;
 }
 
 .recipeCardContainer {

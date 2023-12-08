@@ -16,11 +16,18 @@ const RecipeCardUser = ({ recipe, onDeleteRecipe, onEditRecipe }) => {
     setEditModalShow(true);
   };
 
+  console.log(recipe);
+  console.log();
+  var recipeImage = "http://localhost:3001/api/images/" + recipe.photo;
+  if (recipe.photo === undefined) {
+    recipeImage = imgX;
+  }
+
   return (
     <>
       <div className="col-sm-4 recipeCardContainer">
         <div className="card cardContainer">
-          <img src={imgX} className="card-img-top" alt="..." />
+          <img src={recipeImage} className="card-img-top" alt="..." />
           <div className="card-body recipe-card">
             <h5 className="card-title">{recipe.title}</h5>
             <p className="card-text">{recipe.description}</p>
@@ -31,6 +38,7 @@ const RecipeCardUser = ({ recipe, onDeleteRecipe, onEditRecipe }) => {
                 data-bs-target={"#modal" + recipe._id}
                 className="btn btn-dark"
                 onClick={handleViewClick}
+                id={"RecipeModalView" + recipe._id}
               >
                 View
               </button>

@@ -65,6 +65,11 @@ const RecipeModal = ({
     }
   };
 
+  var recipeImage = "http://localhost:3001/api/images/" + chefData.photo;
+  if (chefData.photo === undefined) {
+    recipeImage = imgX;
+  }
+
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -77,7 +82,7 @@ const RecipeModal = ({
           <>
             <img
               className="modalImageRecipe"
-              src={imgX}
+              src={recipeImage}
               alt={chefData.title}
               style={{ maxWidth: "100%", padding: "0 27.5%" }}
             />
@@ -90,18 +95,18 @@ const RecipeModal = ({
                   </div>
                 ))}
             </div>
-            <h5>Comments:</h5>
+            <h5 className="commentsHeader">Comments:</h5>
             {comments.length > 0 ? (
               <ul>
                 {comments.map((comment) => (
-                  <li key={comment._id}>
+                  <li className="commentBodyList" key={comment._id}>
                     {comment.message}
                     {(userID === comment.userId ||
                       currentUserRole === "Admin") && (
                       <Button
                         variant="danger"
-                        onClick={() => handleDeleteComment(comment._id)}
-                      >
+                        className="commentDeleteButton"
+                        onClick={() => handleDeleteComment(comment._id)}>
                         Delete
                       </Button>
                     )}
@@ -114,12 +119,13 @@ const RecipeModal = ({
 
             <div>
               <input
+                className="commentInputField"
                 type="text"
                 value={newComment}
                 onChange={(e) => setNewComment(e.target.value)}
                 placeholder="Add a comment..."
               />
-              <Button variant="primary" onClick={handleAddComment}>
+              <Button variant="primary btn-dark" onClick={handleAddComment}>
                 Add Comment
               </Button>
             </div>

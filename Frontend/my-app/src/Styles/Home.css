@@ -13,3 +13,7 @@
 .cardsContainer {
   margin: 2% 0;
 }
+
+.cardsContainer > div {
+  margin: 1%;
+}
