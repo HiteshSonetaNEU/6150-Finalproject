@@ -85,16 +85,25 @@ function Register() {
   }
 
   const validateFullName = (input) => {
-    const nameRegex = /^[a-zA-Z_ ]{3,}$/;
-    if (!nameRegex.test(input)) {
-      setFullNameErrorMessage(
-        "Enter valid full name with minimum of three characters"
-      );
-      return false;
-    } else {
-      setFullNameErrorMessage("");
-      return true;
+    var regExFullName = /^[A-Za-z ]{3,}$/;
+    var returnVal = false;
+    if (input.trim().length < 1){
+      setFullNameErrorMessage("Full Name should not empty")
+      returnVal = false;
     }
+    else if (input.trim().length < 3){
+      setFullNameErrorMessage("Enter valid Full Name with minimum of three characters");
+      returnVal = false;
+    }
+    else if (!input.trim().match(regExFullName)) {
+      setFullNameErrorMessage("Full Name should contain only letters and spaces");
+      returnVal = false;
+    } 
+    else {
+      setFullNameErrorMessage("");
+      returnVal = true;
+    }
+    return returnVal;
   };
 
   const validateEmail = (input) => {
@@ -110,13 +119,25 @@ function Register() {
   };
 
   const validatePassword = (input) => {
-    if (input.length < 8) {
-      setPasswordErrorMessage("Invalid Password, Minimum 8 Characters");
-      return false;
-    } else {
-      setPasswordErrorMessage("");
-      return true;
+    var returnVal = false;
+    var regExPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (input.trim().length < 1){
+      setPasswordErrorMessage("Password should not be empty!");
+      returnVal = false;
     }
+    else if (input.trim().length < 8){
+      setPasswordErrorMessage("Password should be at least 8 characters long!");
+      returnVal = false;
+    }
+    else if (!input.trim().match(regExPassword)) {
+      setPasswordErrorMessage("Password should contain at least 1 upper case, 1 lower case,1 number, and 1 special character!");
+      returnVal = false;
+    }
+    else {
+      setPasswordErrorMessage("");
+      returnVal = true;
+    }
+    return returnVal;
   };
 
   const validateConfirmPassword = (input) => {
