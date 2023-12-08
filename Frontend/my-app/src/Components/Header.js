@@ -1,6 +1,8 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
+import '@popperjs/core';
+import { NavDropdown } from 'react-bootstrap';
 
 import "../Styles/Header.css";
 import { useState, useEffect } from "react";
@@ -10,6 +12,7 @@ export default function Header() {
   const [userRole, setUserRole] = useState("");
   const [loading, setLoading] = useState(true);
   const location = useLocation();
+  const [userName, setUserName] = useState("");
 
   const LogoutButton = async () => {
     try {
@@ -43,6 +46,7 @@ export default function Header() {
         });
         // console.log(response.data.role);
         setUserRole(response.data.role);
+        setUserName(response.data.name);
         if (response.data.name) {
           // user is logged in
         }
@@ -78,6 +82,7 @@ export default function Header() {
 
   // Function to determine if a link should be marked as active
   const isLinkActive = (path) => location.pathname === path;
+  // console.log(userRole, userName);
 
   return (
     <>
@@ -180,6 +185,13 @@ export default function Header() {
                   Search
                 </button>
               </form>
+
+              <NavDropdown title={`${userRole}: ${userName.length > 1 ? userName.substring(0, userName.indexOf(' ')) : userName}`} id="basic-nav-dropdown">
+                <NavDropdown.Item href="#">Action</NavDropdown.Item>
+                <NavDropdown.Item href="#">Another action</NavDropdown.Item>
+                <NavDropdown.Item href="#">Something else here</NavDropdown.Item>
+              </NavDropdown>
+
               <button
                 className="btn btn-danger logout-btn"
                 type="button"
