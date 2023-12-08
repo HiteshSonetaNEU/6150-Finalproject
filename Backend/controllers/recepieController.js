@@ -13,9 +13,17 @@ async function createRecepie(req, res) {
         .status(500)
         .json({ message: "User is not allowed to create a recepie" });
     } else {
+      var jj={}
+    if (req.body){
+      jj={...jj,...req.body}
+    }
+    if (req.file){
+      jj={...jj,photo: req.file.filename,
+        path: req.file.path}
+    }
       req.body.chefID = req.user._id;
 
-      const newRecepie = await recepieService.createRecepie(req.body);
+      const newRecepie = await recepieService.createRecepie(jj);
       res.status(201).json(newRecepie);
     }
   } catch (error) {
