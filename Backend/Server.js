@@ -8,6 +8,7 @@ const { User } = require("./models/userModel");
 const app = express();
 const path = require('path');
 const cors = require("cors");
+require('dotenv').config();
 
 const mongoose = require("mongoose");
 const routes = require("./routes/routes");
@@ -19,10 +20,7 @@ const corsOptions = {
   origin: "http://localhost:3000", // replace with the actual origin of your frontend
   credentials: true,
 };
-
-const uri =
-  "mongodb+srv://sonetah:Welcome123@cluster0.uv0cee1.mongodb.net/?retryWrites=true&w=majority";
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.mongourl, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const initializePassport = require("./passport-config");
 initializePassport(
