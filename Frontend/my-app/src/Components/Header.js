@@ -17,12 +17,12 @@ export default function Header() {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [show, setShow] = useState(false);
 
-  const showDropdown = (e)=>{
-      setShow(!show);
-  }
-  const hideDropdown = e => {
-      setShow(false);
-  }
+  const showDropdown = (e) => {
+    setShow(!show);
+  };
+  const hideDropdown = (e) => {
+    setShow(false);
+  };
 
   const handleMouseEnter = () => {
     setDropdownOpen(true);
@@ -100,7 +100,6 @@ export default function Header() {
   // Function to determine if a link should be marked as active
   const isLinkActive = (path) => location.pathname === path;
   // console.log(userRole, userName);
-
 
   return (
     <>
@@ -192,22 +191,6 @@ export default function Header() {
                   </a>
                 </li>
               </ul>
-              <form className="d-flex">
-                <input
-                  className="form-control me-2"
-                  type="search"
-                  placeholder="Search"
-                  aria-label="Search"
-                  onInput={onInputChange}
-                />
-                <button className="btn btn-outline-success" type="submit" onClick={onSearchClicked}>
-                  Search
-                </button>
-              </form>
-                    
-              <NavDropdown title={`${userRole}: ${userName.length > 1 ? userName.substring(0, userName.indexOf(' ')) : userName}`} id="basic-nav-dropdown" data-bs-theme="dark" className={isDropdownOpen ? 'custom-dropdown open' : 'custom-dropdown'} show={show} onMouseEnter={() => {showDropdown(); handleMouseEnter();}} onMouseLeave={() => {hideDropdown(); handleMouseLeave();}}>
-                <NavDropdown.Item href="/editProfile" className="dropDownItem-1">Edit Profile</NavDropdown.Item>
-                <NavDropdown.Item onClick={LogoutButton} className="dropDownItem-2">Logout</NavDropdown.Item>
 
               <NavDropdown
                 title={`${userRole}: ${
@@ -215,11 +198,29 @@ export default function Header() {
                     ? userName.substring(0, userName.indexOf(" "))
                     : userName
                 }`}
-                id="basic-nav-dropdown">
-                <NavDropdown.Item href="#">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#">Another action</NavDropdown.Item>
-                <NavDropdown.Item href="#">
-                  Something else here
+                id="basic-nav-dropdown"
+                data-bs-theme="light"
+                className={
+                  isDropdownOpen ? "custom-dropdown open" : "custom-dropdown"
+                }
+                show={show}
+                onMouseEnter={() => {
+                  showDropdown();
+                  handleMouseEnter();
+                }}
+                onMouseLeave={() => {
+                  hideDropdown();
+                  handleMouseLeave();
+                }}>
+                <NavDropdown.Item
+                  href="/editProfile"
+                  className="dropDownItem-1">
+                  Edit Profile
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  onClick={LogoutButton}
+                  className="dropDownItem-2">
+                  Logout
                 </NavDropdown.Item>
               </NavDropdown>
 
