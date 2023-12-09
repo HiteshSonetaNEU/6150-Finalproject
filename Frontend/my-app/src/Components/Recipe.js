@@ -54,12 +54,11 @@ function Recipe() {
         setUserRecipes(response.data);
 
         if (response.status === 201) {
-          alert("Recipe submitted");
+          alert("Recipe submitted, You can change images by clicking on Edit.");
           setTags([]);
           setDescription("");
           setTitle("");
-          // window.location.reload();
-          alert("Now click on edit and change the image of the recipe.");
+          window.location.reload();
           document
             .getElementById("RecipeModalView" + response.data._id)
             .click();
