@@ -4,10 +4,12 @@
 
 •Taught by: Professor Vishal Chawla
 
-•Author: 	Member 1: Hitesh Kamlesh Soneta  
-		Member 2: Omkumar Dhirenbhai Solanki 
-		Member 3: Vishvesh Ashwinbhai Panchal 
-		Member 4: Vrishab Loknath Shetty 
+•Author:
+
+Hitesh Kamlesh Soneta  
+Omkumar Dhirenbhai Solanki 
+Vishvesh Ashwinbhai Panchal 
+Vrishab Loknath Shetty 
 
 •Univeristy: Northeastern Univeristy, Boston
 
