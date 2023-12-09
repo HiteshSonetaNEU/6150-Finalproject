@@ -1,0 +1,8 @@
+.chefSpecAnchor {
+    text-decoration: none;
+    color: white;
+}
+
+.chefSpecAnchor:hover {
+    color: black;
+}
