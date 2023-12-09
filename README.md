@@ -6,10 +6,7 @@
 
 •Author:
 
-Hitesh Kamlesh Soneta
-Omkumar Dhirenbhai Solanki 
-Vishvesh Ashwinbhai Panchal 
-Vrishab Loknath Shetty 
+Hitesh Soneta, Omkumar Solanki, Vishvesh Panchal, Vrishab Shetty 
 
 •Univeristy: Northeastern Univeristy, Boston
 
