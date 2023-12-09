@@ -54,6 +54,4 @@ app.use('/api/images', express.static(path.join(__dirname, 'uploads')));
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-  
-console.log("url== ",process.env.mongourl)
 });
