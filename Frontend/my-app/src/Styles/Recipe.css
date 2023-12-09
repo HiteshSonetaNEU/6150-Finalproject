@@ -1,0 +1,152 @@
+.recipe-form-body {
+  background-color: #dfdfdf;
+}
+
+.recipeForm {
+  max-width: 600px;
+  margin: 0 auto;
+  padding-bottom: 5px;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+/* .form-control {
+  margin-bottom: 15px;
+} */
+/* Vishvesh - Commented due to the search button bottom margin not set properly */
+
+.formErrors {
+  color: red;
+  font-size: 0.8em;
+}
+
+.btn-dark {
+  background-color: #343a40;
+  color: #fff;
+}
+
+.btn-dark:hover {
+  background-color: #1d2124;
+}
+
+.react-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.react-tags .react-tags__tag {
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 4px;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+}
+
+.react-tags .react-tags__tag:hover {
+  cursor: pointer;
+  background-color: #0056b3;
+}
+
+.react-tags .react-tags__remove {
+  cursor: pointer;
+  margin-left: 4px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.formErrors {
+  color: red;
+  font-size: 1em;
+}
+
+.react-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.react-tags .react-tags__tag {
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 4px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.react-tags .react-tags__tag:hover {
+  cursor: pointer;
+  background-color: #0056b3;
+}
+
+.react-tags .react-tags__remove {
+  cursor: pointer;
+  margin-left: 8px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.ReactTags__tagInputField {
+  width: 100%;
+  border-style: outset;
+  border: 1px solid #ced4da;
+  padding: 0.375rem 0.75rem;
+}
+
+.ReactTags__remove {
+  margin-right: 10px;
+  margin-bottom: 10px;
+  margin-left: 5px;
+}
+
+.recipeBodyContainer {
+  margin: 2% 27.5%;
+}
+
+.accordion-body {
+  background: #dfdfdf;
+  padding: 0;
+}
+
+.submitRecipeButton {
+  margin-bottom: 15px;
+}
+
+.recipeHeadingYour {
+  justify-content: center;
+  display: flex;
+  margin: 10% 0;
+}
+
+.btn-delete,
+.btn-edit {
+  margin-left: 10px;
+}
+
+.commentsHeader {
+  margin-top: 20px;
+}
+
+.commentDeleteButton {
+  margin-left: auto;
+}
+
+.commentBodyList {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.commentInputField {
+  margin: 0 25px 25px 0;
+  height: 38px;
+  padding-left: 5px;
+}

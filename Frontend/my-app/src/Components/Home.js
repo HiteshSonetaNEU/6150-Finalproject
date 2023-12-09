@@ -3,16 +3,19 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import RecipeCard from "./RecipeCard.js";
 import "../Styles/Home.css";
 
 import Header from "./Header.js";
 import Footer from "./Footer.js";
+import RecipeCarousel from "./RecipeCarousel.js";
+import RecipeCards from "./RecipeCards.js";
 
 function Home() {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+  const [currentUserId, setCurrentUserID] = useState("");
+  const [currentUserRole, setCurrentUserRole] = useState("User");
 
   useEffect(() => {
     const checkLoggedInStatus = async () => {
@@ -20,9 +23,9 @@ function Home() {
         const response = await axios.get("http://localhost:3001/", {
           withCredentials: true,
         });
-        if (response.data.name) {
-          // user is logged in
-        }
+        // console.log(response.data);
+        setCurrentUserID(response.data.id);
+        setCurrentUserRole(response.data.role);
       } catch (error) {
         console.log(error);
         // user is not logged in
@@ -56,6 +59,8 @@ function Home() {
   return (
     <>
       <Header />
+      <RecipeCarousel />
+      <RecipeCards userID={currentUserId} currentUserRole={currentUserRole} />
       <Footer />
     </>
   );

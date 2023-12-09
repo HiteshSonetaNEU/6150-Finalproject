@@ -1,0 +1,56 @@
+.saveProfileButton {
+  margin-bottom: 20px;
+}
+
+.passwordContainer {
+  padding: 15px 0;
+  margin: 10px 0;
+}
+
+.editProfileContainer {
+  padding: 5%;
+  background: #dfdfdf;
+  width: 40%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  border-radius: 1rem;
+}
+
+@media only screen and (max-width: 1000px) {
+  .editProfileContainer {
+    width: 60%;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .editProfileContainer {
+    width: 80%;
+  }
+}
+
+.emailAndRoleField {
+  margin-top: 5%;
+  margin-bottom: 0%;
+  /* text-align: center; */
+}
+
+.roleLabelText {
+  color: blue;
+}
+
+.emailLabelText {
+  color: blue;
+}
+
+.saveProfileForm {
+  margin-top: 7%;
+}
+
+.rolePara {
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+
+.editProfileHeader {
+  text-align: center;
+}

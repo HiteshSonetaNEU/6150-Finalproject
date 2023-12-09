@@ -1,0 +1,44 @@
+.editRecipeModalContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.editRecipeModalContainer > .modaltitlelabel {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.tag-wrapper {
+  border-radius: 5px;
+  padding: 7px 0;
+  background: red;
+  margin-right: 5px;
+  padding-left: 4px;
+  background-color: grey;
+  color: white;
+}
+
+.ReactTags__remove {
+  border-radius: 5px;
+  border: 0;
+}
+
+.descTextAreaInput {
+  width: 100%;
+  border-style: outset;
+  border: 1px solid #ced4da;
+  padding: 0.375rem 0.75rem;
+}
+
+.titleTextInput {
+  width: 100%;
+  border-style: outset;
+  border: 1px solid #ced4da;
+  padding: 0.375rem 0.75rem;
+}
+
+.imageUploadContainer > div > label,
+.imageUploadContainer > div > input,
+.imageUploadContainer > button {
+  margin-top: 10px;
+}

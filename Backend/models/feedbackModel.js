@@ -3,14 +3,14 @@ const mongoose = require("mongoose");
 const refString = "Feedback";
 
 const feedbackSchema = new mongoose.Schema({
-  fullName: { type: String, required: true },
+  fullName: { type: String },
   email: { type: String, required: true },
-  Address: { type: String, required: true },
-  city: { type: String, required: true },
-  state: { type: String, required: true },
-  zip: { type: Number, required: true },
-  comment: { type: String },
-  rate: { type: Number },
+  Address: { type: String },
+  city: { type: String },
+  state: { type: String },
+  zip: { type: Number },
+  comment: { type: String, required: true },
+  rate: { type: Number, required: true },
 });
 
 const Feedback = mongoose.model(refString, feedbackSchema);

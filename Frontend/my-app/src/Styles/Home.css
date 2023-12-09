@@ -1,21 +1,19 @@
 .home-container {
-    display: flex;
-    flex-direction: column;
-}
-
-.home-body-container {
-    background-image: url('../Images/Home/homeBackground.jpg');
-    background-size: cover;
-    min-height: 100vh;
-}
-
-.navBar {
-    margin-right: 5%;
+  display: flex;
+  flex-direction: column;
 }
 
 .recipe-card-list {
-    display: flex;
-    flex-direction: row;
-    margin-top: 10px;
-    margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.cardsContainer {
+  margin: 2% 0;
+}
+
+.cardsContainer > div {
+  margin: 1%;
 }

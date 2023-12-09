@@ -1,33 +1,47 @@
 const bcrypt = require("bcrypt");
 const { User } = require("../models/userModel");
 
-exports.checkPassword = (password) => {
+function checkPassword(password) {
   return password.length >= 8;
-};
+}
 
-exports.checkEmail = (email) => {
+function checkEmail(email) {
   return /^[a-zA-Z0-9._-]+@northeastern\.edu$/.test(email);
-};
+}
 
-exports.checkFullName = (fullName) => {
+function checkFullName(fullName) {
   return /^[a-zA-Z_ ]+$/.test(fullName);
-};
+}
 
-exports.registerUser = async ({ fullName, email, password, role }) => {
+async function registerUser({
+  fullName,
+  email,
+  password,
+  role,
+  profileDes,
+  specialities,
+}) {
   const hashedPassword = await bcrypt.hash(password, 10);
-  const user = new User({ fullName, email, password: hashedPassword, role });
+  const user = new User({
+    fullName,
+    email,
+    password: hashedPassword,
+    role,
+    profileDes,
+    specialities,
+  });
   await user.save();
-};
+}
 
-exports.findUserByEmail = (email) => {
+function findUserByEmail(email) {
   return User.findOne({ email });
-};
+}
 
-exports.getUsers = () => {
+function getUsers() {
   return User.find();
 }
 
-exports.findUserById = async (id) => {
+async function findUserById(id) {
   try {
     const user = await User.findById(id);
     return user;
@@ -35,3 +49,33 @@ exports.findUserById = async (id) => {
     throw error;
   }
 }
+
+async function updateUser(userId, data) {
+  try {
+
+    if(data.password) {
+      data.password = await bcrypt.hash(data.password, 10);
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      { _id: userId },
+      { $set: data },
+      { new: true }
+    );
+    return updatedUser;
+  } catch (error) {
+    throw error;
+  }
+}
+
+module.exports = {
+  checkEmail,
+  checkFullName,
+  checkPassword,
+  registerUser,
+  findUserByEmail,
+  getUsers,
+  findUserByEmail,
+  findUserById,
+  updateUser
+};

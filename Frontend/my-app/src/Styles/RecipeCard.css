@@ -1,3 +1,89 @@
 .recipe-card-container {
-    margin-left: 10px;
+  margin-left: 10px;
+}
+
+.card-img-top {
+  width: 70%;
+  border-radius: 5%;
+  margin-top: 15px;
+}
+
+.card {
+  padding: 5px;
+}
+
+.card-title {
+  font-family: Satisfy, cursive;
+  text-align: center;
+}
+
+.img {
+  vertical-align: middle;
+  border-style: none;
+}
+
+.card-text {
+  color: rgb(119, 119, 119);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 28px;
+  margin-bottom: 0px;
+  font-family: Roboto, sans-serif;
+  margin-top: 0;
+  max-height: 30vh;
+  overflow: hidden;
+}
+
+.recipe-card {
+  flex: 1 1 auto;
+  padding: 1rem 1rem;
+  max-height: 50vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cardContainer {
+  display: flex;
+  align-items: center;
+}
+
+.recipeCardContainer {
+  margin-bottom: 3vh;
+}
+
+.card {
+  padding: 5px;
+  overflow: hidden; /* Add overflow hidden to contain content */
+}
+
+.recipe-card {
+  flex: 1 1 auto;
+  padding: 1rem 1rem;
+  max-height: 50vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+.card-title {
+  font-family: Satisfy, cursive;
+  text-align: center;
+  margin-bottom: 5px; /* Add margin to separate title from text */
+}
+
+.card-text {
+  max-height: 30vh;
+  text-overflow: ellipsis;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.recipe-card {
+  width: 100%;
 }

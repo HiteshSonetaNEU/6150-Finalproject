@@ -1,0 +1,129 @@
+.chefContainer {
+  /* border: 1px solid black; */
+  margin: 2%;
+  border-radius: 10px;
+  width: 100%;
+  display: flex;
+  padding: 2% 3%;
+  background-color: #dfdfdf;
+}
+
+.chefHeader {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.chefName {
+  width: 100%;
+}
+
+.chefBody {
+  width: 45%;
+  margin: 0 27.5%;
+}
+
+.chefImage {
+  width: 100px;
+  height: 100%;
+  border-radius: 20vh;
+}
+
+.chefInfoContainer {
+  width: 100%;
+  padding-left: 3%;
+}
+
+.specList {
+  display: flex;
+}
+
+.chefSpec {
+  margin-right: 5px;
+  background-color: grey;
+  color: white;
+  padding: 1px 5px;
+  border-radius: 10px;
+}
+
+.followButton {
+  border-radius: 20vh;
+}
+
+@media screen and (max-width: 850px) {
+  .chefContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .chefHeader {
+    flex-direction: column;
+    margin-bottom: 5px;
+  }
+
+  .chefName {
+    justify-content: center;
+    display: flex;
+  }
+  .specList {
+    flex-direction: column;
+  }
+  .chefSpec {
+    margin-bottom: 5px;
+  }
+}
+
+.recipe-container {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2%;
+  margin: 3%;
+  border-radius: 1vh;
+}
+
+.recipe-container > h3,
+.recipe-container > p {
+  font-family: Satisfy, cursive;
+  text-align: center;
+}
+
+.recipe-container > h3 {
+  margin-top: 1%;
+}
+
+.modal-header {
+  font-family: Satisfy, cursive;
+}
+
+.recipe-container > img {
+  width: 40%;
+  border-radius: 1vh;
+}
+
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 55%;
+    margin: 1rem auto;
+  }
+}
+
+.card-text {
+  font-family: Satisfy, cursive;
+}
+
+.recipe-container > p {
+  max-height: 4.5em;
+  overflow: hidden;
+  position: relative;
+  line-height: 1.5em;
+}
+
+.chefName {
+  cursor: pointer;
+}
+
+.chefName:hover {
+  color: blue;
+}

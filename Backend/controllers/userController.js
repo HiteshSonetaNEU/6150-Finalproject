@@ -1,8 +1,8 @@
 const passport = require("passport");
 const userService = require("../services/userService");
-const recepieService = require("../services/recepieService");8
+const recepieService = require("../services/recepieService");
 
-exports.login = (req, res, next) => {
+function login(req, res, next) {
   passport.authenticate("local", (err, user, info) => {
     if (err) {
       return res.status(500).json({ message: "Internal Server Error" });
@@ -19,11 +19,12 @@ exports.login = (req, res, next) => {
         .json({ message: "Logged in successfully", user: req.user.fullName });
     });
   })(req, res, next);
-};
+}
 
-exports.register = async (req, res) => {
+async function register(req, res) {
   try {
-    const { fullName, email, password, role } = req.body;
+    const { fullName, email, password, role, profileDes, specialities } =
+      req.body;
 
     if (!userService.checkFullName(fullName)) {
       return res
@@ -50,29 +51,66 @@ exports.register = async (req, res) => {
         .json({ message: "User with the same email already exists" });
     }
 
-    await userService.registerUser({ fullName, email, password, role });
+    await userService.registerUser({
+      fullName,
+      email,
+      password,
+      role,
+      profileDes,
+      specialities,
+    });
     res.status(201).json({ message: "User created successfully" });
   } catch (err) {
-    res.status(500).json({ message: "Internal Server Error" });
+    res.status(500).json({ message: err.message });
   }
-};
+}
 
-exports.logout = (req, res, next) => {
+function logout(req, res, next) {
   req.logout((err) => {
     if (err) {
       return next(err);
     }
     res.status(201).json({ message: "Logged out Successfully" });
   });
-};
+}
 
-exports.getUser = (req, res) => {
-  res.json({ name: req.user.fullName, id: req.user._id, role: req.user.role });
-};
+function getUser(req, res) {
+  res.json({
+    name: req.user.fullName,
+    email: req.user.email,
+    id: req.user._id,
+    role: req.user.role,
+    following: req.user.following,
+    profileDes: req.user.profileDes,
+    specialities: req.user.specialities,
+  });
+}
 
-exports.getUserById = async (req, res) => {
-  const userId = req.params.id;
+async function updateUser(req, res) {
   try {
+    const userId = req.user._id;
+    const data = req.body;
+    console.log("UPDATE USER");
+    console.log(data);
+
+    if (data.role || data.following) {
+      return res
+        .status(400)
+        .json({ message: "Cannot set the specified attribute(s)" });
+    }
+
+    const updatedUser = await userService.updateUser(userId, data);
+
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.message });
+  }
+}
+
+async function getUserById(req, res) {
+  try {
+    const userId = req.params.id;
     const user = await userService.findUserById(userId);
     if (!user) {
       return res.status(404).json({ error: "User not found" });
@@ -81,18 +119,18 @@ exports.getUserById = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-};
+}
 
-exports.getChefs = async (req, res) => {
+async function getChefs(req, res) {
   try {
     const chefs = await getAllChefs();
     res.status(200).json(chefs);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-};
+}
 
-exports.followChef = async (req, res) => {
+async function followChef(req, res) {
   try {
     const chefId = req.params.id;
     const chef = await checkChef(chefId);
@@ -112,9 +150,9 @@ exports.followChef = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-};
+}
 
-exports.unFollowChef = async (req, res) => {
+async function unFollowChef(req, res) {
   try {
     const chefId = req.params.id;
     const chef = await checkChef(chefId);
@@ -133,32 +171,34 @@ exports.unFollowChef = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-};
+}
 
-exports.search = async (req, res) => {
+async function search(req, res) {
   try {
-    let { query, filter } = req.body;
-    query = query.toLowerCase();
+    let query = req.params.query;
+    query = query.toLowerCase().trim();
     const chefs = await getAllChefs();
     const recipes = await recepieService.getAllRecepies();
     const searchResult = {
       Chefs: [],
-      Recipes: []
+      Recipes: [],
     };
 
     chefs.forEach((chef) => {
-      if (chef.toSearchableString().includes(query)) searchResult.Chefs.push(chef);
+      if (chef.toSearchableString().includes(query))
+        searchResult.Chefs.push(chef);
     });
 
     recipes.forEach((recipe) => {
-      if(recipe.toSearchableString().includes(query)) searchResult.Recipes.push(recipe);
-    })
+      if (recipe.toSearchableString().includes(query))
+        searchResult.Recipes.push(recipe);
+    });
 
     return res.status(200).json(searchResult);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-};
+}
 
 async function getAllChefs() {
   const users = await userService.getUsers();
@@ -178,16 +218,32 @@ async function checkChef(chefId) {
 
   return user;
 }
-exports.checkAuthenticated = (req, res, next) => {
+
+function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
   return res.status(400).json({ message: "Login first" });
-};
+}
 
-exports.checkNotAuthenticated = (req, res, next) => {
+function checkNotAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return res.status(400).json({ message: "Logout first" });
   }
   next();
+}
+
+module.exports = {
+  checkNotAuthenticated,
+  checkAuthenticated,
+  search,
+  unFollowChef,
+  followChef,
+  getChefs,
+  getUserById,
+  getUser,
+  login,
+  register,
+  logout,
+  updateUser,
 };
