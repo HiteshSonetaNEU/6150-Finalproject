@@ -16,6 +16,7 @@ function EditProfile() {
   const [specialities, setSpecialities] = useState([]);
   const [newPasswordErrorMessage, setNewPasswordErrorMessage] = useState("");
   const [fullNameErrorMessage, setFullNameErrorMessage] = useState("");
+  const [userRole, setUserRole] = useState("User");
 
   useEffect(() => {
     const checkLoggedInStatus = async () => {
@@ -25,7 +26,7 @@ function EditProfile() {
         });
         if (response.statusText === "OK") {
           setData(response.data);
-          // console.log(response.data)
+          setUserRole(response.data.role)
           setSpecialities(
             response.data.specialities.map((speciality, index) => ({
               id: index.toString(),
@@ -271,7 +272,7 @@ function EditProfile() {
               </div>
             )}
           </div>
-
+          {userRole === "Chef" && 
           <div className="mb-3">
             <label htmlFor="profileDes" className="form-label">
               Profile Description
@@ -286,7 +287,8 @@ function EditProfile() {
               placeholder="Share something about yourself"
             />
           </div>
-
+          }
+          {userRole === "Chef" &&
           <div className="mb-3">
             <label htmlFor="specialities" className="form-label">
               Specialities
@@ -301,6 +303,7 @@ function EditProfile() {
               placeholder="Enter your specialities"
             />
           </div>
+          }
 
           <button
             type="button"
