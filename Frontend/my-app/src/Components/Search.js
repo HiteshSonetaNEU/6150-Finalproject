@@ -150,10 +150,11 @@ function Search() {
             borderColor: "#000000",
           }}
         />
+        <div style={{ display: (searchResultRecipes.length === 0 ? 'block' : 'none') , textAlign: "center", margin: "25px"}}>No Recipes found</div>
         <div className="searchRecipeCards">
           <RecipeCards userID={currentUserId} currentUserRole={currentUserRole} searchRecipeData={searchResultRecipes} />
-          <div style={{ display: (searchResultRecipes.length === 0 ? 'block' : 'none') , textAlign: "center", margin: "25px"}}>No Recipes found</div>
         </div>
+        
       </div>
       <div>
 
