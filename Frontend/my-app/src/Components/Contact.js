@@ -83,7 +83,7 @@ function Contact() {
             />
             <div className="mt-3 teamMemberDescContainer">
               <p className="teamMemberDesc teamMemberDescName">
-                Hitesh Soneta
+                Hitesh Kamlesh Soneta
               </p>
               <p className="teamMemberDesc">
                 <b>
@@ -106,7 +106,7 @@ function Contact() {
             />
             <div className="mt-3 teamMemberDescContainer">
               <p className="teamMemberDesc teamMemberDescName">
-                Omkumar Solanki
+                Omkumar Dhirenbhai Solanki
               </p>
               <p className="teamMemberDesc">
                 <b>
@@ -129,7 +129,7 @@ function Contact() {
             />
             <div className="mt-3 teamMemberDescContainer">
               <p className="teamMemberDesc teamMemberDescName">
-                Vishvesh Panchal
+                Vishvesh Ashwinbhai Panchal
               </p>
               <p className="teamMemberDesc">
                 <b>
@@ -152,7 +152,7 @@ function Contact() {
             />
             <div className="mt-3 teamMemberDescContainer">
               <p className="teamMemberDesc teamMemberDescName">
-                Vrishab Shetty
+                Vrishab Loknath Shetty
               </p>
               <p className="teamMemberDesc">
                 <b>
