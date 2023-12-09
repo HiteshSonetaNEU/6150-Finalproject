@@ -86,7 +86,7 @@ const RecipeModal = ({
               alt={chefData.title}
               style={{ maxWidth: "100%", padding: "0 27.5%" }}
             />
-            <p>{chefData.description}</p>
+            <p style={{ whiteSpace: 'pre-line' }}>{chefData.description}</p>
             <div className="specList">
               {chefData.ingredients.length > 0 &&
                 chefData.ingredients.map((data, index) => (

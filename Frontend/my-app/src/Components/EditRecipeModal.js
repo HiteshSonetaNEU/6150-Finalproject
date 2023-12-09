@@ -91,7 +91,6 @@ const EditRecipeModal = ({ show, handleClose, chefData, onEditRecipe }) => {
         <form className="editRecipeModalContainer">
           <label className="modaltitlelabel">
             <b>Title</b>
-            ""{" "}
           </label>
           <input
             type="text"
