@@ -7,11 +7,8 @@
 •Author:
 
 Hitesh Kamlesh Soneta
-
 Omkumar Dhirenbhai Solanki 
-
 Vishvesh Ashwinbhai Panchal 
-
 Vrishab Loknath Shetty 
 
 •Univeristy: Northeastern Univeristy, Boston
