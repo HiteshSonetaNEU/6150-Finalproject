@@ -59,7 +59,7 @@ Our mission is to inspire and empower you in the kitchen. Whether you're a seaso
 
 
 ## Home Page
-
+Based on the user's role, Home Page will have different accessibility of the pages
 ### Admin
 
 ![AdminHome](./Screenshots/Chef/Chef-Home.png)
@@ -80,7 +80,7 @@ Our mission is to inspire and empower you in the kitchen. Whether you're a seaso
 
 ## Feedback Page
 
-Only Chefs and normal User can submit a feedback form. And Admin can view all the submitted feedbacks.
+Only Chefs and normal Users can submit a feedback form. And Admin can view all the submitted feedbacks.
 
 ### Form
 
@@ -91,6 +91,7 @@ Only Chefs and normal User can submit a feedback form. And Admin can view all th
 ![Feedbacks](./Screenshots/Admin/Admin-Feedback.png)
 
 ## Search
+Search query works on whole database. It will retrive all matched data(i.e Recipes and Chefs).
 
 ### Recipes
 ![Search](./Screenshots/User/User-Search-Recipe.png)
@@ -110,9 +111,11 @@ Only Chefs and normal User can submit a feedback form. And Admin can view all th
 ## Recipe Modal
 
 ### View
+Displays image of the Recipe, Recipe description, Ingredients and Comments.
 ![RecipeView](./Screenshots/User/User-ViewRecipe.png)
 
 ### Add Comment
+Only creator of the comment can delete their comment. And Admin has accesss to delete any comment.
 ![RecipeComment](./Screenshots/User/User-ViewRecipe-Comment.png)
 
 
