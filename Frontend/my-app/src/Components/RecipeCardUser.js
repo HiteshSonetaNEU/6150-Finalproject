@@ -16,8 +16,7 @@ const RecipeCardUser = ({ recipe, onDeleteRecipe, onEditRecipe }) => {
     setEditModalShow(true);
   };
 
-  console.log(recipe);
-  console.log();
+  // console.log(recipe);
   var recipeImage = "http://localhost:3001/api/images/" + recipe.photo;
   if (recipe.photo === undefined) {
     recipeImage = imgX;

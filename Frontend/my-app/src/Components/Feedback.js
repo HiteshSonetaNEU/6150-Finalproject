@@ -86,7 +86,7 @@ function Feedback() {
 
     } catch (error) {
       // console.log("Error in submitting the feedback!");
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -115,7 +115,7 @@ function Feedback() {
           // console.log("allFeedbacks - " + allFeedbacks[5].comment);
         // }
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
     GetAllFeedbacks();
@@ -275,7 +275,7 @@ function Feedback() {
           // console.log(response.data.role);
         }
       } catch (error) {
-        console.log(error);
+        // console.log(error);
         // user is not logged in
         if (error.response.data.message === "Login first") {
           navigate("/login");

@@ -74,7 +74,7 @@ var Chefs = ({searchChefData}) => {
 
         setFollowStatusMap(initialFollowStatusMap);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
 
@@ -96,7 +96,7 @@ var Chefs = ({searchChefData}) => {
   }
 
   const follow = async (chefId) => {
-    console.log(chefId);
+    // console.log(chefId);
 
     try {
       const response = await axios.get(

@@ -27,7 +27,7 @@ function Home() {
         setCurrentUserID(response.data.id);
         setCurrentUserRole(response.data.role);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
         // user is not logged in
         if (error.response.data.message === "Login first") {
           navigate("/login");

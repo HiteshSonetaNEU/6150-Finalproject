@@ -32,7 +32,7 @@ const RecipeModal = ({
       setComments([...comments, response.data]);
       setNewComment("");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
   // console.log(userID);
@@ -61,7 +61,7 @@ const RecipeModal = ({
         }
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 

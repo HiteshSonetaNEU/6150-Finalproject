@@ -19,7 +19,7 @@ const RecipeCard = ({ recipe, userID, currentUserRole }) => {
       // console.log(response);
       setComments(response.data);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
 
     setModalShow(true);

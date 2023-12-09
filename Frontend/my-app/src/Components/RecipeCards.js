@@ -21,7 +21,7 @@ var RecipeCards = ({ userID, currentUserRole, searchRecipeData }) => {
         }
         setAllRecipes(response.data);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
 
