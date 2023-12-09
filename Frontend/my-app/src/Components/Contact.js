@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import GoogleMapMarker from './GoogleMapMarker.js';
 
 import "../Styles/Home.css";
 import "../Styles/Contact.css";
@@ -168,6 +169,21 @@ function Contact() {
             </div>
           </div>
         </div>
+      </div>
+
+      <h1 className="mentorsHeader">FIND US HERE</h1>
+
+      <hr
+        style={{
+          color: "#000000",
+          backgroundColor: "#000000",
+          height: 3,
+          borderColor: "#000000",
+        }}
+      />
+
+      <div id="map">
+        <GoogleMapMarker />
       </div>
       <Footer />
     </>
