@@ -14,6 +14,9 @@ function EditProfile() {
   const [loading, setLoading] = useState(true);
   const [newPassword, setNewPassword] = useState("");
   const [specialities, setSpecialities] = useState([]);
+  const [newPasswordErrorMessage, setNewPasswordErrorMessage] = useState("");
+  const [fullNameErrorMessage, setFullNameErrorMessage] = useState("");
+  const [userRole, setUserRole] = useState("User");
 
   useEffect(() => {
     const checkLoggedInStatus = async () => {
@@ -23,6 +26,7 @@ function EditProfile() {
         });
         if (response.statusText === "OK") {
           setData(response.data);
+          setUserRole(response.data.role)
           setSpecialities(
             response.data.specialities.map((speciality, index) => ({
               id: index.toString(),
@@ -135,6 +139,50 @@ function EditProfile() {
     }
   };
 
+  const validateNewPassword = (input) => {
+    var returnVal = false;
+    var regExPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (input.trim().length < 1){
+      setNewPasswordErrorMessage("New Password should not be empty!");
+      returnVal = false;
+    }
+    else if (input.trim().length < 8){
+      setNewPasswordErrorMessage("New Password should be at least 8 characters long!");
+      returnVal = false;
+    }
+    else if (!input.trim().match(regExPassword)) {
+      setNewPasswordErrorMessage("New Password should contain at least 1 upper case, 1 lower case,1 number, and 1 special character!");
+      returnVal = false;
+    }
+    else {
+      setNewPasswordErrorMessage("");
+      returnVal = true;
+    }
+    return returnVal;
+  };
+
+  const validateFullName = (input) => {
+    var regExFullName = /^[A-Za-z ]{3,}$/;
+    var returnVal = false;
+    if (input.trim().length < 1){
+      setFullNameErrorMessage("Full Name should not empty")
+      returnVal = false;
+    }
+    else if (input.trim().length < 3){
+      setFullNameErrorMessage("Enter valid Full Name with minimum of three characters");
+      returnVal = false;
+    }
+    else if (!input.trim().match(regExFullName)) {
+      setFullNameErrorMessage("Full Name should contain only letters and spaces");
+      returnVal = false;
+    } 
+    else {
+      setFullNameErrorMessage("");
+      returnVal = true;
+    }
+    return returnVal;
+  };
+
   if (loading) {
     return (
       <div className="d-flex justify-content-center align-items-center vh-100">
@@ -154,7 +202,19 @@ function EditProfile() {
       <Header />
 
       <div className="container editProfileContainer">
-        <h2>Edit Profile</h2>
+        <h2 className="editProfileHeader">Edit Profile</h2>
+
+        
+        <div className="mb-3 emailAndRoleField">
+            <label htmlFor="existingEmailAndRole" className="form-label">
+              <p>
+              Email: <i className="emailLabelText">{data.email}</i>
+              </p>
+              <p className="rolePara">
+              Role: <i className="roleLabelText">{data.role}</i>
+              </p>
+            </label>
+        </div>
 
         <form className="passwordContainer">
           <div className="mb-3">
@@ -167,8 +227,17 @@ function EditProfile() {
               id="newPassword"
               name="newPassword"
               value={newPassword}
-              onChange={handleNewPasswordChange}
+              onChange={(e) => {
+                validateNewPassword(e.target.value);
+                handleNewPasswordChange(e);
+              }}
+              placeholder="Enter new password"
             />
+            {newPasswordErrorMessage && (
+                <div className="alert alert-danger alert-small" role="alert">
+                  {newPasswordErrorMessage}
+                </div>
+              )}
           </div>
 
           <button
@@ -180,7 +249,7 @@ function EditProfile() {
           </button>
         </form>
 
-        <form>
+        <form className="saveProfileForm">
           <div className="mb-3">
             <label htmlFor="name" className="form-label">
               Name
@@ -191,10 +260,19 @@ function EditProfile() {
               id="name"
               name="name"
               value={data.name}
-              onChange={handleInputChange}
+              onChange={(e) => {
+                validateFullName(e.target.value);
+                handleInputChange(e);
+              }}
+              placeholder="Enter your Full Name"
             />
+            {fullNameErrorMessage && (
+              <div className="alert alert-danger alert-small" role="alert">
+                {fullNameErrorMessage}
+              </div>
+            )}
           </div>
-
+          {userRole === "Chef" && 
           <div className="mb-3">
             <label htmlFor="profileDes" className="form-label">
               Profile Description
@@ -206,21 +284,26 @@ function EditProfile() {
               name="profileDes"
               value={data.profileDes}
               onChange={handleInputChange}
+              placeholder="Share something about yourself"
             />
           </div>
-
+          }
+          {userRole === "Chef" &&
           <div className="mb-3">
             <label htmlFor="specialities" className="form-label">
               Specialities
             </label>
             <ReactTags
+              autofocus={false}
               key={specialities.length}
               tags={specialities}
               handleDelete={handleSpecialitiesDelete}
               handleAddition={(tag) => handleSpecialitiesAddition(tag.text)}
               handleInputChange={handleSpecialitiesChange}
+              placeholder="Enter your specialities"
             />
           </div>
+          }
 
           <button
             type="button"

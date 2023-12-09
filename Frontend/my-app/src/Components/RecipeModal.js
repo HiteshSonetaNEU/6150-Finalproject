@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import imgX from "../Images/Home/bhindi-masala.jpg";
+import imgX from "../Images/Home/sushi-nigiri-img.jpg";
 import axios from "axios";
+import Tooltip from "react-bootstrap/Tooltip";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+
+import "../Styles/RecipeModal.css";
 
 const RecipeModal = ({
   show,
@@ -65,6 +69,11 @@ const RecipeModal = ({
     }
   };
 
+  var recipeImage = "http://localhost:3001/api/images/" + chefData.photo;
+  if (chefData.photo === undefined) {
+    recipeImage = imgX;
+  }
+
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -77,31 +86,45 @@ const RecipeModal = ({
           <>
             <img
               className="modalImageRecipe"
-              src={imgX}
+              src={recipeImage}
               alt={chefData.title}
               style={{ maxWidth: "100%", padding: "0 27.5%" }}
             />
-            <p>{chefData.description}</p>
+            <p style={{ whiteSpace: 'pre-line' }}>{chefData.description}</p>
             <div className="specList">
               {chefData.ingredients.length > 0 &&
                 chefData.ingredients.map((data, index) => (
                   <div key={data} className="chefSpec">
+                    <OverlayTrigger
+                      key={data}
+                      placement="top"
+                      overlay={<Tooltip id={`tooltip-${index}`}>Click to buy {data} on Amazon</Tooltip>}
+                    >
+                    <a
+                      key={data}
+                      className="chefSpecAnchor"
+                      href={`https://www.amazon.com/s?k=${encodeURIComponent(data)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                     {data}
+                    </a>
+                    </OverlayTrigger>
                   </div>
                 ))}
             </div>
-            <h5>Comments:</h5>
+            <h5 className="commentsHeader">Comments:</h5>
             {comments.length > 0 ? (
               <ul>
                 {comments.map((comment) => (
-                  <li key={comment._id}>
+                  <li className="commentBodyList" key={comment._id}>
                     {comment.message}
                     {(userID === comment.userId ||
                       currentUserRole === "Admin") && (
                       <Button
                         variant="danger"
-                        onClick={() => handleDeleteComment(comment._id)}
-                      >
+                        className="commentDeleteButton"
+                        onClick={() => handleDeleteComment(comment._id)}>
                         Delete
                       </Button>
                     )}
@@ -114,12 +137,13 @@ const RecipeModal = ({
 
             <div>
               <input
+                className="commentInputField"
                 type="text"
                 value={newComment}
                 onChange={(e) => setNewComment(e.target.value)}
                 placeholder="Add a comment..."
               />
-              <Button variant="primary" onClick={handleAddComment}>
+              <Button variant="primary btn-dark" onClick={handleAddComment}>
                 Add Comment
               </Button>
             </div>

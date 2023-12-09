@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../Styles/RecipeCard.css";
-import imgX from "../Images/Home/bhindi-masala.jpg";
+import imgX from "../Images/Home/sushi-nigiri-img.jpg";
 import RecipeModal from "./RecipeModal";
 import axios from "axios";
 
@@ -24,12 +24,21 @@ const RecipeCard = ({ recipe, userID, currentUserRole }) => {
 
     setModalShow(true);
   };
+  // console.log(recipe);
+  // console.log(recipe.photo);
+  // const recipeImage = "http://localhost:3001/api/images/" + recipe.photo;
+
+  var recipeImage = "http://localhost:3001/api/images/" + recipe.photo;
+  if (recipe.photo === undefined) {
+    recipeImage = imgX;
+  }
 
   return (
     <>
       <div className="col-sm-3 recipeCardContainer">
         <div className="card cardContainer">
-          <img src={imgX} className="card-img-top" alt="..." />
+          {/* <img src={imgX} className="card-img-top" alt="..." /> */}
+          <img src={recipeImage} className="card-img-top" alt="Your Image" />
           <div className="card-body recipe-card">
             <h5 className="card-title">{recipe.title}</h5>
             <p className="card-text">{recipe.description}</p>

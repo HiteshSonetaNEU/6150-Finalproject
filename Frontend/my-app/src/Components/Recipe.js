@@ -15,7 +15,6 @@ function Recipe() {
   const [tags, setTags] = useState([]);
   const [description, setDescription] = useState("");
   const [title, setTitle] = useState("");
-  const [photo, setPhoto] = useState("");
   const [loading, setLoading] = useState(true);
   const [userID, setUserId] = useState("");
   const [titleError, setTitleError] = useState("");
@@ -35,7 +34,6 @@ function Recipe() {
       ingredients,
       description,
       title,
-      photo,
     };
 
     if (validateForm()) {
@@ -51,15 +49,19 @@ function Recipe() {
           }
         );
 
+        console.log("Created");
+        console.log(response.data);
         setUserRecipes(response.data);
 
         if (response.status === 201) {
-          alert("Recipe submitted");
+          alert("Recipe submitted, You can change images by clicking on Edit.");
           setTags([]);
           setDescription("");
           setTitle("");
-          setPhoto("");
           window.location.reload();
+          document
+            .getElementById("RecipeModalView" + response.data._id)
+            .click();
         } else {
           console.error(
             "Error in creating the recipe. Server responded with:",
@@ -177,6 +179,7 @@ function Recipe() {
                       id="inputTitle"
                       value={title}
                       onChange={(e) => setTitle(e.target.value)}
+                      placeholder="Recipe name"
                     />
                     <span className="formErrors">{titleError}</span>
                   </div>
@@ -190,6 +193,7 @@ function Recipe() {
                       id="inputDescription"
                       value={description}
                       onChange={(e) => setDescription(e.target.value)}
+                      placeholder="Recipe description"
                     ></textarea>
                     <span className="formErrors">{descriptionError}</span>
                   </div>
@@ -204,11 +208,12 @@ function Recipe() {
                         setTags(tags.filter((tag, index) => index !== i))
                       }
                       handleAddition={(tag) => setTags([...tags, tag])}
+                      placeholder="Please enter your ingredients"
                     />
                     <span className="formErrors">{tagsError}</span>
                   </div>
 
-                  <div className="col-12">
+                  {/* <div className="col-12">
                     <label htmlFor="inputPhoto" className="form-label">
                       Photo URL
                     </label>
@@ -219,7 +224,7 @@ function Recipe() {
                       value={photo}
                       onChange={(e) => setPhoto(e.target.value)}
                     />
-                  </div>
+                  </div> */}
 
                   <div className="d-grid gap-2 col-6 mx-auto">
                     <button

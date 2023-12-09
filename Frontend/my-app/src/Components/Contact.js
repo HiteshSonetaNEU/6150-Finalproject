@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import GoogleMapMarker from './GoogleMapMarker.js';
 
 import "../Styles/Home.css";
 import "../Styles/Contact.css";
@@ -13,11 +14,6 @@ import HiteshSonetaImg from "../Images/Contact/hitesh-soneta-photo.jpeg";
 import OmSolankiImg from "../Images/Contact/om-solanki-photo.jpeg";
 import VishveshPanchalImg from "../Images/Contact/vishvesh-panchal-photo.jpg";
 import VrishabShettyImg from "../Images/Contact/vrishab-shetty-photo.jpg";
-import ProfVishalChawlaImg from "../Images/Contact/prof-vishal-chawla-photo.jpg";
-import JayeshTakImg from "../Images/Contact/jayesh-tak-photo.jpeg";
-import SaiSuryaTejaSwamiImg from "../Images/Contact/sai-surya-teja-swami-photo.jpeg";
-import SupriyaTripathiImg from "../Images/Contact/supriya-tripathi-photo.jpeg";
-import AbhishekVenkataImg from "../Images/Contact/abhishek-venkata-photo.jpeg";
 
 function Contact() {
   const [data, setData] = useState([]);
@@ -88,7 +84,7 @@ function Contact() {
             />
             <div className="mt-3 teamMemberDescContainer">
               <p className="teamMemberDesc teamMemberDescName">
-                Hitesh Kamlesh Soneta
+                Hitesh Soneta
               </p>
               <p className="teamMemberDesc">
                 <b>
@@ -111,7 +107,7 @@ function Contact() {
             />
             <div className="mt-3 teamMemberDescContainer">
               <p className="teamMemberDesc teamMemberDescName">
-                Omkumar Dhirenbhai Solanki
+                Omkumar Solanki
               </p>
               <p className="teamMemberDesc">
                 <b>
@@ -134,7 +130,7 @@ function Contact() {
             />
             <div className="mt-3 teamMemberDescContainer">
               <p className="teamMemberDesc teamMemberDescName">
-                Vishvesh Ashwinbhai Panchal
+                Vishvesh Panchal
               </p>
               <p className="teamMemberDesc">
                 <b>
@@ -157,7 +153,7 @@ function Contact() {
             />
             <div className="mt-3 teamMemberDescContainer">
               <p className="teamMemberDesc teamMemberDescName">
-                Vrishab Loknath Shetty
+                Vrishab Shetty
               </p>
               <p className="teamMemberDesc">
                 <b>
@@ -175,16 +171,7 @@ function Contact() {
         </div>
       </div>
 
-      <hr
-        style={{
-          color: "#000000",
-          backgroundColor: "#000000",
-          height: 0.5,
-          borderColor: "#000000",
-        }}
-      />
-
-      <h1 className="mentorsHeader">MENTORS</h1>
+      <h1 className="mentorsHeader">FIND US HERE</h1>
 
       <hr
         style={{
@@ -192,132 +179,12 @@ function Contact() {
           backgroundColor: "#000000",
           height: 3,
           borderColor: "#000000",
-          marginBottom: "2%",
         }}
       />
 
-      <div className="myy">
-        <img
-          src={ProfVishalChawlaImg}
-          alt={"Professor Image"}
-          className="profImage"
-        />
+      <div id="map">
+        <GoogleMapMarker />
       </div>
-      <div className="profDescContainer">
-        <p className="profDesc profDescName">Professor Vishal Chawla</p>
-        <p className="profDesc">
-          <b>
-            <a
-              href="mailto:soneta.h@northeastern.edu"
-              className="profDescEmail"
-            >
-              soneta.h@northeastern.edu
-            </a>
-          </b>
-        </p>
-      </div>
-
-      <hr
-        style={{
-          color: "#000000",
-          backgroundColor: "#000000",
-          height: 0.5,
-          borderColor: "#000000",
-          marginTop: "2%",
-        }}
-      />
-
-      <div className="container mt-5">
-        <div className="row teamMembersContainer">
-          <div className="col-md-3 mb-4">
-            <img
-              src={JayeshTakImg}
-              alt={"TA Image"}
-              className="img-fluid teamMemberImage"
-            />
-            <div className="mt-3 teamMemberDescContainer">
-              <p className="teamMemberDesc teamMemberDescName">Jayesh Tak</p>
-              <p className="teamMemberDesc">
-                <b>
-                  <a
-                    href="mailto:tak.j@northeastern.edu"
-                    className="teamMemberDescEmail"
-                  >
-                    tak.j@northeastern.edu
-                  </a>
-                </b>
-              </p>
-            </div>
-          </div>
-          <div className="col-md-3 mb-4">
-            <img
-              src={SaiSuryaTejaSwamiImg}
-              alt={"TA Image"}
-              className="img-fluid teamMemberImage"
-            />
-            <div className="mt-3 teamMemberDescContainer">
-              <p className="teamMemberDesc teamMemberDescName">
-                Sai Surya Teja Swami
-              </p>
-              <p className="teamMemberDesc">
-                <b>
-                  <a
-                    href="mailto:swami.s@northeastern.edu"
-                    className="teamMemberDescEmail"
-                  >
-                    swami.s@northeastern.edu
-                  </a>
-                </b>
-              </p>
-            </div>
-          </div>
-          <div className="col-md-3 mb-4">
-            <img
-              src={SupriyaTripathiImg}
-              alt={"TA Image"}
-              className="img-fluid teamMemberImage"
-            />
-            <div className="mt-3 teamMemberDescContainer">
-              <p className="teamMemberDesc teamMemberDescName">
-                Supriya Tripathi
-              </p>
-              <p className="teamMemberDesc">
-                <b>
-                  <a
-                    href="mailto:tripathi.su@northeastern.edu"
-                    className="teamMemberDescEmail"
-                  >
-                    tripathi.su@northeastern.edu
-                  </a>
-                </b>
-              </p>
-            </div>
-          </div>
-          <div className="col-md-3 mb-4">
-            <img
-              src={AbhishekVenkataImg}
-              alt={"TA Image"}
-              className="img-fluid teamMemberImage"
-            />
-            <div className="mt-3 teamMemberDescContainer">
-              <p className="teamMemberDesc teamMemberDescName">
-                Venkata Abhishek Tiruchunapalli
-              </p>
-              <p className="teamMemberDesc">
-                <b>
-                  <a
-                    href="mailto:tiruchunapalli.a@northeastern.edu"
-                    className="teamMemberDescEmail"
-                  >
-                    tiruchunapalli.a@northeastern.edu
-                  </a>
-                </b>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <Footer />
     </>
   );

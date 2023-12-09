@@ -15,6 +15,7 @@ const RecipeCardsUser = ({ userID, userRecipes }) => {
     <>
       <div className="cardsContainer">
         <div className="row">
+          {recipes.length === 0 && <div style={{ textAlign: "center"}}>You have not created any recipes yet!</div>}
           {recipes.map((recipe) => (
             <RecipeCardUser
               key={recipe._id}

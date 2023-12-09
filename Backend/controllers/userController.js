@@ -77,6 +77,7 @@ function logout(req, res, next) {
 function getUser(req, res) {
   res.json({
     name: req.user.fullName,
+    email: req.user.email,
     id: req.user._id,
     role: req.user.role,
     following: req.user.following,
@@ -174,8 +175,8 @@ async function unFollowChef(req, res) {
 
 async function search(req, res) {
   try {
-    let { query, filter } = req.body;
-    query = query.toLowerCase();
+    let query = req.params.query;
+    query = query.toLowerCase().trim();
     const chefs = await getAllChefs();
     const recipes = await recepieService.getAllRecepies();
     const searchResult = {

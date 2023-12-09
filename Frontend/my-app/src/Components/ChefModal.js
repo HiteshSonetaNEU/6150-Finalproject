@@ -4,12 +4,13 @@ import Button from "react-bootstrap/Button";
 
 import "../Styles/Chef.css";
 
-import img from "../Images/Home/bhindi-masala.jpg";
+import imgX from "../Images/Home/sushi-nigiri-img.jpg";
 
 function ChefModal({ show, handleClose, chefData }) {
   if (!chefData) {
     return null;
   }
+
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -21,7 +22,17 @@ function ChefModal({ show, handleClose, chefData }) {
         )}
         {chefData.recepies.map((recipe) => (
           <div key={recipe._id} className="recipe-container">
-            <img src={img} alt={recipe.title} style={{ maxWidth: "100%" }} />
+            {console.log(recipe.photo)}
+            {recipe.photo === undefined && (
+              <img src={imgX} alt={recipe.title} style={{ maxWidth: "100%" }} />
+            )}
+            {recipe.photo !== undefined && (
+              <img
+                src={"http://localhost:3001/api/images/" + recipe.photo}
+                alt={recipe.title}
+                style={{ maxWidth: "100%" }}
+              />
+            )}
             <h3>{recipe.title}</h3>
             <p>{recipe.description}</p>
             <p>
