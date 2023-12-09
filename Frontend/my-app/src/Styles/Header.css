@@ -50,12 +50,12 @@
 .dropDownItem-1 {
   /* color: wheat; */
   color: rgba(255,255,255,.55);
-  text-align: center;
+
 }
 
-.dropDownItem-2 {
-  background-color: red;
-  text-align: center;
+.dropDownItem-2:hover {
+  background-color: maroon;
+  color: wheat;
 }
 
 #basic-nav-dropdown {
@@ -98,6 +98,7 @@
   visibility: hidden;
   transition: opacity 0.3s ease;
   background-color: white;
+  border: 1px solid black;
 }
 
 .custom-dropdown.open .dropdown-menu {
