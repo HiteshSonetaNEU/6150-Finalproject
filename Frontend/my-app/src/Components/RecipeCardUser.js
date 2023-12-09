@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../Styles/RecipeCard.css";
-import imgX from "../Images/Home/bhindi-masala.jpg";
+import imgX from "../Images/Home/sushi-nigiri-img.jpg";
 import RecipeModalUser from "./RecipeModalUser";
 import EditRecipeModal from "./EditRecipeModal";
 
