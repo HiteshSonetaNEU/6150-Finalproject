@@ -201,7 +201,7 @@ function Register() {
         }
       }
     } catch (error) {
-      // console.log(error);
+      console.log(error);
       // console.log(error.response.data.message);
       if (error.response.status === 400) {
         setErrorMessage(error.response.data.message);

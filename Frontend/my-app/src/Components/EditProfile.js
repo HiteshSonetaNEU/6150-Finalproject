@@ -34,7 +34,7 @@ function EditProfile() {
           );
         }
       } catch (error) {
-        // console.log(error);
+        console.log(error);
         if (error.response?.data?.message === "Login first") {
           navigate("/login");
         }
@@ -72,8 +72,8 @@ function EditProfile() {
   };
 
   const handleSpecialitiesChange = (suggestions) => {
-    // console.log("Change");
-    // console.log(suggestions);
+    console.log("Change");
+    console.log(suggestions);
 
     if (Array.isArray(suggestions)) {
       setSpecialities((prevSpecialities) => {
@@ -114,9 +114,9 @@ function EditProfile() {
 
   const handleProfileSave = async () => {
     try {
-      // console.log(data.name);
-      // console.log(data.profileDes);
-      // console.log(specialities.map((tag) => tag.text));
+      console.log(data.name);
+      console.log(data.profileDes);
+      console.log(specialities.map((tag) => tag.text));
 
       const response = await axios.post(
         "http://localhost:3001/user/update",

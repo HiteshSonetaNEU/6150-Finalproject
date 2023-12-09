@@ -26,8 +26,8 @@ function Recipe() {
 
   const navigate = useNavigate();
 
-  const onSubmitRecipe = async () => {
-  
+  const onSubmitRecipe = async (e) => {
+    e.preventDefault();
     let ingredients = tags.map((tag) => tag.text);
 
     let obj1 = {
@@ -49,6 +49,8 @@ function Recipe() {
           }
         );
 
+        console.log("Created");
+        console.log(response.data);
         setUserRecipes(response.data);
 
         if (response.status === 201) {
@@ -57,7 +59,7 @@ function Recipe() {
           setDescription("");
           setTitle("");
           // window.location.reload();
-          // alert("Now click on edit and change the image of the recipe.");
+          alert("Now click on edit and change the image of the recipe.");
           document
             .getElementById("RecipeModalView" + response.data._id)
             .click();
@@ -76,7 +78,7 @@ function Recipe() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmitRecipe();
+    onSubmitRecipe(e);
   };
 
   const validateForm = () => {
@@ -121,7 +123,7 @@ function Recipe() {
           // user is logged in
         }
       } catch (error) {
-        // console.log(error);
+        console.log(error);
         // user is not logged in
         if (error.response.data.message === "Login first") {
           navigate("/login");
@@ -242,6 +244,7 @@ function Recipe() {
       </div>
       <RecipeCardsUser
         userID={userID}
+        userRecipes={userRecipes}
         onEditRecipe={handleEditRecipe}
       />
       <Footer />

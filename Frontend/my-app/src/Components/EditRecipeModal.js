@@ -49,8 +49,8 @@ const EditRecipeModal = ({ show, handleClose, chefData, onEditRecipe }) => {
   };
 
   const handleTagsChange = (suggestions) => {
-    // console.log("Change");
-    // console.log(suggestions);
+    console.log("Change");
+    console.log(suggestions);
     if (Array.isArray(suggestions)) {
       setEditedRecipe((prevRecipe) => {
         const newIngredients = suggestions.map((tag, index) => ({
@@ -80,7 +80,7 @@ const EditRecipeModal = ({ show, handleClose, chefData, onEditRecipe }) => {
     return true;
   };
 
-  // console.log(chefData._id);
+  console.log(chefData._id);
 
   return (
     <Modal show={show} onHide={handleClose}>

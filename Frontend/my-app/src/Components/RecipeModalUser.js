@@ -4,8 +4,8 @@ import Button from "react-bootstrap/Button";
 import imgX from "../Images/Home/bhindi-masala.jpg";
 
 const RecipeModalUser = ({ show, handleClose, chefData }) => {
-  // console.log(chefData);
-  // console.log(chefData.photo);
+  console.log(chefData);
+  console.log(chefData.photo);
 
   var recipeImage = "http://localhost:3001/api/images/" + chefData.photo;
   if (chefData.photo === undefined) {
