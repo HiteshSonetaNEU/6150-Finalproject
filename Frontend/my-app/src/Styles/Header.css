@@ -98,7 +98,6 @@
   visibility: hidden;
   transition: opacity 0.3s ease;
   background-color: white;
-  border: 1px solid black;
 }
 
 .custom-dropdown.open .dropdown-menu {
@@ -113,15 +112,9 @@
   border: 1px solid transparent;
   font-size: 1rem;
   border-radius: 0.25rem;
-  
 }
 
 .dropdown-item:hover {
   border: 1px solid transparent;
   border-radius: 3px;
-}
-
-.dropDownItem-2:hover {
-  background-color: maroon;
-  color: wheat;
 }

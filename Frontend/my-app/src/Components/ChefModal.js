@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 
 import "../Styles/Chef.css";
 
-import imgX from "../Images/Home/bhindi-masala.jpg";
+import imgX from "../Images/Home/sushi-nigiri-img.jpg";
 
 function ChefModal({ show, handleClose, chefData }) {
   if (!chefData) {
