@@ -3,6 +3,10 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import imgX from "../Images/Home/sushi-nigiri-img.jpg";
 import axios from "axios";
+import Tooltip from "react-bootstrap/Tooltip";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+
+import "../Styles/RecipeModal.css";
 
 const RecipeModal = ({
   show,
@@ -91,7 +95,21 @@ const RecipeModal = ({
               {chefData.ingredients.length > 0 &&
                 chefData.ingredients.map((data, index) => (
                   <div key={data} className="chefSpec">
+                    <OverlayTrigger
+                      key={data}
+                      placement="top"
+                      overlay={<Tooltip id={`tooltip-${index}`}>Click to buy {data} on Amazon</Tooltip>}
+                    >
+                    <a
+                      key={data}
+                      className="chefSpecAnchor"
+                      href={`https://www.amazon.com/s?k=${encodeURIComponent(data)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                     {data}
+                    </a>
+                    </OverlayTrigger>
                   </div>
                 ))}
             </div>
