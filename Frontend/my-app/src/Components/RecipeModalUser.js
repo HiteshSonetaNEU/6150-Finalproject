@@ -1,7 +1,7 @@
 import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import imgX from "../Images/Home/bhindi-masala.jpg";
+import imgX from "../Images/Home/sushi-nigiri-img.jpg";
 
 const RecipeModalUser = ({ show, handleClose, chefData }) => {
   console.log(chefData);
@@ -28,7 +28,7 @@ const RecipeModalUser = ({ show, handleClose, chefData }) => {
               alt={chefData.title}
               style={{ maxWidth: "100%", padding: "0 27.5%" }}
             />
-            <p>{chefData.description}</p>
+            <p style={{ whiteSpace: 'pre-line' }}>{chefData.description}</p>
             <div className="specList">
               {chefData.ingredients.length > 0 &&
                 chefData.ingredients.map((data, index) => (
