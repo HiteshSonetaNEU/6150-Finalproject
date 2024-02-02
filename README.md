@@ -5,9 +5,7 @@
 
  - Taught by: Professor Vishal Chawla
 
- - Author:
-
-Hitesh Soneta, Omkumar Solanki, Vishvesh Panchal, Vrishab Shetty 
+ - Author: Hitesh Soneta, Omkumar Solanki, Vishvesh Panchal, Vrishab Shetty 
 
  - Univeristy: Northeastern Univeristy, Boston
 
