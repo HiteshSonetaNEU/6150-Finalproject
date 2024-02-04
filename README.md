@@ -125,8 +125,7 @@ Only creator of the comment can delete their comment. And Admin has accesss to d
 
 
 ## Common Functionality:
-- 	1.	Edit Profile:
-- 	All participants, whether admins, chefs, or users, have the ability to edit their profiles, ensuring a personalized and up-to-date presence on the platform.
+All participants, whether admins, chefs, or users, have the ability to edit their profiles, ensuring a personalized and up-to-date presence on the platform.
 
 # Backend
 
